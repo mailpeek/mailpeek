@@ -1,7 +1,30 @@
 {
   "name": "@mailpeek/preview",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vue.js email preview component — see how emails render in Gmail and Outlook",
+  "license": "MIT",
+  "author": "Aoife Shannon",
+  "homepage": "https://mailpeek.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mailpeek/mailpeek",
+    "directory": "packages/preview"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "email",
+    "email-preview",
+    "email-testing",
+    "html-email",
+    "gmail",
+    "outlook",
+    "responsive",
+    "component",
+    "preview",
+    "mail",
+    "render"
+  ],
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -16,6 +39,9 @@
   },
   "files": [
     "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
   ],
   "scripts": {
     "build": "vite build && vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly --declarationDir dist --noEmit false",
