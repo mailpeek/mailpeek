@@ -4,13 +4,19 @@ export default defineConfig({
   title: 'mailpeek',
   description: 'Vue.js email preview component',
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    ['link', { rel: 'icon', href: '/favicon.ico', sizes: '48x48' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' }],
+    ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' }],
+    ['link', { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' }],
+    ['link', { rel: 'manifest', href: '/site.webmanifest' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'mailpeek' }],
     ['meta', { property: 'og:description', content: 'Vue.js email preview component — see how your emails render before you send them.' }],
     ['meta', { property: 'og:url', content: 'https://mailpeek.dev' }],
+    ['meta', { property: 'og:image', content: 'https://mailpeek.dev/wordmark.png' }],
   ],
   themeConfig: {
+    logo: '/favicon-32x32.png',
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Getting Started', link: '/getting-started' },
@@ -33,7 +39,7 @@ export default defineConfig({
       },
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/aoifeshannon/mailpeek' },
+      { icon: 'github', link: 'https://github.com/mailpeek/mailpeek' },
     ],
     footer: {
       message: 'Released under the MIT License.',
