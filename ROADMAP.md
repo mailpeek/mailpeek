@@ -4,49 +4,52 @@
 
 Ship the open-source preview component to npm with core features.
 
-### Phase 1: Project Scaffolding
-- Monorepo setup (pnpm workspaces)
-- TypeScript config
-- Vite library mode build
-- Vitest setup
-- Package structure for @mailpeek/preview
-- CI: lint + test on push
+### Phase 1: Project Scaffolding ✓
+- [x] Monorepo setup (pnpm workspaces)
+- [x] TypeScript config
+- [x] Vite library mode build
+- [x] Vitest setup
+- [x] Package structure for @mailpeek/preview
+- [ ] CI: lint + test on push
 
-### Phase 2: Core EmailPreview Component
-- `<EmailPreview>` component with html prop
-- Sandboxed iframe rendering via srcdoc
-- Style isolation (email CSS doesn't leak into host app)
-- Basic responsive: fills container width
-- TypeScript types for all props/events
+### Phase 2: Core EmailPreview Component ✓
+- [x] `<EmailPreview>` component with html prop
+- [x] Sandboxed iframe rendering via srcdoc
+- [x] Style isolation (email CSS doesn't leak into host app)
+- [x] Basic responsive: fills container width
+- [x] TypeScript types for all props/events
 
-### Phase 3: Device Preview & Interactivity
-- Mobile (375px) / Desktop (100%) presets
-- Interactive width toggle buttons
-- Smooth width transition animation
-- `resize` event emission
-- Drag handle for custom width (stretch goal)
+### Phase 3: Device Preview & Interactivity ✓
+- [x] Mobile (375px) / Desktop (100%) presets
+- [x] Interactive width toggle buttons
+- [x] Smooth width transition animation
+- [x] `resize` event emission
+- [ ] Drag handle for custom width (stretch goal)
 
-### Phase 4: Email Metadata Extraction
-- Extract `<title>` as subject line
-- Extract preview/preheader text
-- Calculate email size in kb
-- CSS inlining detection (warn if `<style>` blocks found without inline equivalents)
-- Display info bar above/below preview
+### Phase 4: Email Metadata Extraction ✓
+- [x] Extract `<title>` as subject line
+- [x] Extract preview/preheader text
+- [x] Calculate email size in kb
+- [x] CSS inlining detection (warn if `<style>` blocks found without inline equivalents)
+- [x] Display info bar above/below preview
 
-### Phase 5: Documentation & Examples
-- VitePress docs site
-- Getting started guide
-- API reference (auto-generated from types)
-- Example: preview a transactional email
-- Example: preview with mobile/desktop toggle in a dashboard
-- README with demo GIF
+### Phase 5: Documentation & Examples ✓
+- [x] VitePress docs site
+- [x] Getting started guide
+- [x] API reference (auto-generated from types)
+- [x] Example: preview a transactional email
+- [x] Example: preview with mobile/desktop toggle in a dashboard
+- [x] README with demo GIF
+- [x] Live demo page (mailpeek.dev/demo)
 
 ### Phase 6: npm Publish & Launch
 - [x] Package publishing config (files, exports, sideEffects)
 - [x] npm publish @mailpeek/preview
 - [x] GitHub repo public
+- [x] npm README
+- [x] Demo GIF
+- [x] Post: Vue subreddit (r/vuejs)
 - [ ] Create @mailpeek X/Twitter account
-- [ ] Post: Vue subreddit (r/vuejs)
 - [ ] Post: Vue Discord
 - [ ] Post: Hacker News (Show HN)
 - [ ] Post: X/Twitter
