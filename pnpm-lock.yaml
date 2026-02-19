@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@mailpeek/preview':
+        specifier: workspace:*
+        version: link:packages/preview
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.0.0
         version: 6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)

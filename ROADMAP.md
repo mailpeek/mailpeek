@@ -42,11 +42,16 @@ Ship the open-source preview component to npm with core features.
 - README with demo GIF
 
 ### Phase 6: npm Publish & Launch
-- Package publishing config (files, exports, sideEffects)
-- npm publish @mailpeek/preview
-- GitHub repo public
-- Launch posts: Vue subreddit, Vue Discord, Hacker News (Show HN), X/Twitter
-- Submit to awesome-vue, Made with Vue.js
+- [x] Package publishing config (files, exports, sideEffects)
+- [x] npm publish @mailpeek/preview
+- [x] GitHub repo public
+- [ ] Create @mailpeek X/Twitter account
+- [ ] Post: Vue subreddit (r/vuejs)
+- [ ] Post: Vue Discord
+- [ ] Post: Hacker News (Show HN)
+- [ ] Post: X/Twitter
+- [ ] Submit to awesome-vue
+- [ ] Submit to Made with Vue.js
 
 ---
 

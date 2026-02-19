@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import type { PreviewFrameProps } from '../types'
 
 const props = withDefaults(defineProps<PreviewFrameProps>(), {
   width: '600px',
 })
+
+const emit = defineEmits<{ load: [event: Event] }>()
+
+const iframeHeight = ref('600px')
 
 // Wrap the user's HTML with a base style reset so iframe renders
 // consistently regardless of browser defaults
@@ -16,7 +20,7 @@ const srcdoc = computed(() => {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   /* Reset browser default iframe body styles */
-  body { margin: 0; padding: 0; }
+  body { margin: 0; padding: 0; overflow-x: hidden; }
 </style>
 </head>
 <body>
@@ -24,6 +28,17 @@ ${props.html}
 </body>
 </html>`
 })
+
+function onLoad(event: Event) {
+  const iframe = event.target as HTMLIFrameElement
+  try {
+    const height = iframe.contentDocument?.documentElement?.scrollHeight
+    if (height && height > 0) iframeHeight.value = height + 'px'
+  } catch {
+    // ignore
+  }
+  emit('load', event)
+}
 </script>
 
 <template>
@@ -32,9 +47,9 @@ ${props.html}
       :srcdoc="srcdoc"
       sandbox="allow-same-origin"
       frameborder="0"
-      scrolling="auto"
-      style="width: 100%; min-height: 600px; border: none; display: block;"
-      @load="$emit('load', $event)"
+      scrolling="no"
+      :style="{ width: '100%', height: iframeHeight, border: 'none', display: 'block' }"
+      @load="onLoad"
     />
   </div>
 </template>

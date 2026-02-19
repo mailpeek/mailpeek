@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Launchpad — your account is ready</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f4f8;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    /* These properties are stripped by Gmail */
+    .email-wrapper {
+      animation: none;
+      transition: all 0.3s ease;
+    }
+
+    /* border-radius and box-shadow: stripped by Outlook Word engine */
+    .email-card {
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+    }
+
+    .cta-button {
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(14, 165, 160, 0.35);
+      transition: background-color 0.2s ease;
+    }
+
+    .feature-icon {
+      border-radius: 50%;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Flexbox: stripped by Outlook, flex sub-properties stripped by Gmail */
+    .feature-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* Responsive: reduce padding at mobile widths */
+    @media only screen and (max-width: 480px) {
+      .email-pad { padding-left: 24px !important; padding-right: 24px !important; }
+      .email-pad-top { padding: 28px 24px 20px !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preheader text: hidden in email body, shown in inbox preview -->
+  <span class="preheader" style="display: none; max-height: 0; overflow: hidden; mso-hide: all;">
+    Your account is ready. Here's everything you need to get started with Launchpad.
+  </span>
+
+  <!-- Outer wrapper -->
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f0f4f8;">
+    <tr>
+      <td align="center" style="padding: 48px 20px;">
+
+        <!-- Email card -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" class="email-card" style="background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.10); max-width: 600px;">
+
+          <!-- Header -->
+          <tr>
+            <td class="email-pad-top" style="background-color: #0d9488; padding: 36px 48px 32px; border-radius: 12px 12px 0 0; text-align: center;">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center">
+                    <!-- Logo mark placeholder -->
+                    <div style="display: inline-block; width: 48px; height: 48px; background-color: rgba(255,255,255,0.2); border-radius: 10px; margin-bottom: 16px; line-height: 48px; font-size: 24px;">
+                      📦
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center">
+                    <h1 style="color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">Launchpad</h1>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Hero section -->
+          <tr>
+            <td class="email-pad" style="padding: 48px 48px 32px;">
+              <h2 style="color: #0f172a; margin: 0 0 16px; font-size: 24px; font-weight: 700; line-height: 1.3;">
+                Welcome aboard, Sarah! 👋
+              </h2>
+              <p style="color: #475569; margin: 0 0 24px; font-size: 16px; line-height: 1.7;">
+                Your Launchpad account is ready. You're joining thousands of developers who ship faster with better tooling. Here's how to make the most of your first week.
+              </p>
+
+              <!-- CTA button -->
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="background-color: #0d9488; border-radius: 6px; box-shadow: 0 2px 8px rgba(13, 148, 136, 0.35);">
+                    <a href="#" style="display: inline-block; padding: 14px 32px; color: #ffffff; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 6px;">
+                      Get started →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td style="padding: 0 48px;">
+              <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0;" />
+            </td>
+          </tr>
+
+          <!-- Features section -->
+          <tr>
+            <td class="email-pad" style="padding: 32px 48px 24px;">
+              <h3 style="color: #0f172a; margin: 0 0 28px; font-size: 18px; font-weight: 600;">
+                Three things to do first
+              </h3>
+
+              <!-- Feature 1 -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px;">
+                <tr>
+                  <td width="48" valign="top">
+                    <div style="width: 40px; height: 40px; background-color: #f0fdfa; border-radius: 50%; text-align: center; line-height: 40px; font-size: 18px;">
+                      🔧
+                    </div>
+                  </td>
+                  <td style="padding-left: 16px;" valign="top">
+                    <p style="color: #0f172a; margin: 0 0 4px; font-size: 15px; font-weight: 600;">Install the CLI</p>
+                    <p style="color: #64748b; margin: 0; font-size: 14px; line-height: 1.6;">Run <code style="background-color: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #0d9488;">npm install -g launchpad-cli</code> to connect your local environment.</p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Feature 2 -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px;">
+                <tr>
+                  <td width="48" valign="top">
+                    <div style="width: 40px; height: 40px; background-color: #f0fdfa; border-radius: 50%; text-align: center; line-height: 40px; font-size: 18px;">
+                      🚀
+                    </div>
+                  </td>
+                  <td style="padding-left: 16px;" valign="top">
+                    <p style="color: #0f172a; margin: 0 0 4px; font-size: 15px; font-weight: 600;">Deploy your first project</p>
+                    <p style="color: #64748b; margin: 0; font-size: 14px; line-height: 1.6;">Connect your GitHub repo and deploy in under 60 seconds. No config files needed.</p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- Feature 3 -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 8px;">
+                <tr>
+                  <td width="48" valign="top">
+                    <div style="width: 40px; height: 40px; background-color: #f0fdfa; border-radius: 50%; text-align: center; line-height: 40px; font-size: 18px;">
+                      👥
+                    </div>
+                  </td>
+                  <td style="padding-left: 16px;" valign="top">
+                    <p style="color: #0f172a; margin: 0 0 4px; font-size: 15px; font-weight: 600;">Invite your team</p>
+                    <p style="color: #64748b; margin: 0; font-size: 14px; line-height: 1.6;">Add teammates to your workspace. Your plan includes unlimited collaborators.</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td style="padding: 0 48px;">
+              <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 0;" />
+            </td>
+          </tr>
+
+          <!-- Social proof -->
+          <tr>
+            <td class="email-pad" style="padding: 32px 48px;" bgcolor="#f8fafc">
+              <p style="color: #64748b; margin: 0 0 12px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;">
+                What developers are saying
+              </p>
+              <p style="color: #334155; margin: 0 0 12px; font-size: 15px; line-height: 1.7; font-style: italic;">
+                "Launchpad cut our deployment time from 20 minutes to under 2. It's the tool we didn't know we were missing."
+              </p>
+              <p style="color: #64748b; margin: 0; font-size: 13px;">
+                — <strong style="color: #334155;">Marcus Chen</strong>, Lead Engineer at Vercel
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td class="email-pad" style="padding: 32px 48px; border-radius: 0 0 12px 12px; background-color: #f8fafc;">
+              <p style="color: #94a3b8; margin: 0 0 8px; font-size: 13px; line-height: 1.6; text-align: center;">
+                Launchpad · 123 Market St, San Francisco, CA 94105
+              </p>
+              <p style="color: #94a3b8; margin: 0; font-size: 13px; text-align: center;">
+                <a href="#" style="color: #64748b; text-decoration: underline;">Unsubscribe</a>
+                &nbsp;·&nbsp;
+                <a href="#" style="color: #64748b; text-decoration: underline;">Privacy Policy</a>
+                &nbsp;·&nbsp;
+                <a href="#" style="color: #64748b; text-decoration: underline;">View in browser</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

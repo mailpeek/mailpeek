@@ -19,6 +19,7 @@ export default defineConfig({
     logo: '/favicon-32x32.png',
     nav: [
       { text: 'Home', link: '/' },
+      { text: 'Demo', link: '/demo' },
       { text: 'Getting Started', link: '/getting-started' },
       { text: 'API', link: '/api' },
       { text: 'Examples', link: '/examples' },

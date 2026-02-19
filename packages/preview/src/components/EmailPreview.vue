@@ -64,10 +64,11 @@ function onDeviceChange(device: DeviceWidth) {
   emit('device-change', device)
 }
 
+const isMobile = computed(() => props.mobile || activeDevice.value === 'mobile')
+
 // Resolve effective width — mobile prop takes precedence, then device toggle, then props.width
 const effectiveWidth = computed(() => {
-  if (props.mobile) return '375px'
-  if (activeDevice.value === 'mobile') return '375px'
+  if (isMobile.value) return '375px'
   return props.width
 })
 
@@ -147,12 +148,12 @@ function onFrameLoaded(event: Event) {
     <!-- Device-width container constrains the chrome + iframe -->
     <div class="mailpeek-device-container" :style="{ maxWidth: effectiveWidth }">
       <!-- Gmail chrome wrapper -->
-      <GmailChrome v-if="activeClient === 'gmail'" :mobile="props.mobile || activeDevice === 'mobile'">
+      <GmailChrome v-if="activeClient === 'gmail'" :mobile="isMobile">
         <PreviewFrame :html="filteredHtml" :width="'100%'" @load="onFrameLoaded" />
       </GmailChrome>
 
       <!-- Outlook chrome wrapper -->
-      <OutlookChrome v-else-if="activeClient === 'outlook'" :mobile="props.mobile || activeDevice === 'mobile'">
+      <OutlookChrome v-else-if="activeClient === 'outlook'" :mobile="isMobile">
         <PreviewFrame :html="filteredHtml" :width="'100%'" @load="onFrameLoaded" />
       </OutlookChrome>
 
