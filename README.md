@@ -2,6 +2,8 @@
 
 Vue.js email preview component — see how your emails render in Gmail, Outlook, and more.
 
+![mailpeek demo](https://raw.githubusercontent.com/mailpeek/mailpeek/main/demo/mailpeek-demo.gif)
+
 ## Features
 
 - **Email client simulation** — Preview emails as they appear in Gmail and Outlook (with CSS filtering)
