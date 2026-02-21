@@ -7,12 +7,20 @@ Vue.js email preview component — see how your emails render in Gmail, Outlook,
 ## Features
 
 - **Email client simulation** — Preview emails as they appear in Gmail and Outlook (with CSS filtering)
-- **Device responsive preview** — Toggle between mobile (375px), tablet (768px), and desktop views
+- **Dark mode simulation** — See how emails render in each client's dark mode
+- **Device responsive preview** — Toggle between mobile (375px) and desktop views
 - **Email metadata extraction** — Automatically displays subject line, preview text, and file size
 - **File size warnings** — Alerts when emails exceed Gmail's 102KB clipping threshold
 - **Zero dependencies** — Only Vue 3 as a peer dependency
 - **TypeScript support** — Full type definitions included
 - **SSR compatible** — Works with Nuxt 3
+
+## Packages
+
+| Package | Description |
+|---------|-------------|
+| [`@mailpeek/preview`](packages/preview) | Email preview component with client simulation, dark mode, and device toggle |
+| [`@mailpeek/components`](packages/components) | Vue 3 email components (EmailHtml, EmailBody, EmailContainer, EmailText, EmailButton) with SSR render pipeline |
 
 ## Installation
 
@@ -57,7 +65,8 @@ const emailHtml = `
 | `width` | `string` | `'600px'` | CSS width for the preview container |
 | `client` | `'gmail' \| 'outlook' \| 'raw'` | `'gmail'` | Email client to simulate |
 | `mobile` | `boolean` | `false` | Enable mobile chrome variant |
-| `deviceWidth` | `'mobile' \| 'tablet' \| 'desktop'` | `'desktop'` | Device width preset |
+| `deviceWidth` | `'mobile' \| 'desktop'` | `'desktop'` | Device width preset |
+| `darkMode` | `boolean` | `false` | Enable dark mode simulation |
 
 ## Events
 
@@ -65,7 +74,8 @@ const emailHtml = `
 |-------|---------|-------------|
 | `loaded` | `Event` | Fired when the iframe finishes loading |
 | `client-change` | `'gmail' \| 'outlook' \| 'raw'` | Fired when user switches email client |
-| `device-change` | `'mobile' \| 'tablet' \| 'desktop'` | Fired when user changes device preset |
+| `device-change` | `'mobile' \| 'desktop'` | Fired when user changes device preset |
+| `darkmode-change` | `boolean` | Fired when user toggles dark mode |
 
 ## Examples
 
@@ -85,6 +95,22 @@ The component automatically filters CSS properties that aren't supported by each
   <EmailPreview :html="emailHtml" client="raw" />
 </template>
 ```
+
+### Dark Mode Preview
+
+See how your email looks in a client's dark mode:
+
+```vue
+<template>
+  <!-- Gmail dark mode simulation -->
+  <EmailPreview :html="emailHtml" client="gmail" :dark-mode="true" />
+
+  <!-- Outlook dark mode simulation -->
+  <EmailPreview :html="emailHtml" client="outlook" :dark-mode="true" />
+</template>
+```
+
+Users can also toggle dark mode using the sun/moon buttons in the toolbar. Gmail uses full colour inversion while Outlook uses partial inversion, matching real-world client behaviour.
 
 ### Responsive Device Preview
 
@@ -111,6 +137,10 @@ function onClientChange(client: EmailClient) {
 function onDeviceChange(device: DeviceWidth) {
   console.log('Device changed to:', device)
 }
+
+function onDarkModeChange(enabled: boolean) {
+  console.log('Dark mode:', enabled)
+}
 </script>
 
 <template>
@@ -118,6 +148,7 @@ function onDeviceChange(device: DeviceWidth) {
     :html="emailHtml"
     @client-change="onClientChange"
     @device-change="onDeviceChange"
+    @darkmode-change="onDarkModeChange"
   />
 </template>
 ```
@@ -159,6 +190,39 @@ The component automatically extracts and displays:
 - **Subject** — From the `<title>` tag
 - **Preview text** — From preheader elements or first ~100 characters of body text
 - **File size** — Displayed in KB, with warning styling when over 100KB
+
+## @mailpeek/components
+
+Build cross-client email HTML with Vue 3 components:
+
+```bash
+npm install @mailpeek/components
+```
+
+```typescript
+import { render, EmailHtml, EmailBody, EmailContainer, EmailText, EmailButton } from '@mailpeek/components'
+import { defineComponent, h } from 'vue'
+
+const WelcomeEmail = defineComponent({
+  props: { name: String },
+  setup(props) {
+    return () => h(EmailHtml, null, {
+      default: () => h(EmailBody, null, {
+        default: () => h(EmailContainer, null, {
+          default: () => [
+            h(EmailText, null, { default: () => `Hello ${props.name}!` }),
+            h(EmailButton, { href: 'https://example.com' }, { default: () => 'Get Started' }),
+          ]
+        })
+      })
+    })
+  }
+})
+
+const html = await render(WelcomeEmail, { name: 'Aoife' })
+```
+
+Components output email-safe HTML with inline styles and table-based layouts. The `render()` function uses Vue SSR to compile components to a ready-to-send HTML string with proper DOCTYPE.
 
 ## TypeScript
 
