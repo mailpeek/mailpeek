@@ -9,9 +9,11 @@ import { renderToString } from 'vue/server-renderer'
 import type { EmailPreviewProps, EmailPreviewEmits, EmailClient, DeviceWidth } from '../types'
 import { filterHtml } from '../utils/css-filter'
 import { analyzeEmail } from '../utils/html-analysis'
+import { analyzeCompatibility } from '../utils/compatibility'
 import { gmailConfig } from '../clients/gmail'
 import { outlookConfig } from '../clients/outlook'
 import PreviewFrame from './PreviewFrame.vue'
+import CompatibilityDetails from './CompatibilityDetails.vue'
 import GmailChrome from './GmailChrome.vue'
 import OutlookChrome from './OutlookChrome.vue'
 import ClientSwitcher from './ClientSwitcher.vue'
@@ -105,6 +107,20 @@ const filteredHtml = computed(() => {
 // Email metadata computed from resolved HTML (subject, preview text, file size)
 const metadata = computed(() => analyzeEmail(resolvedHtml.value))
 
+// Compatibility report computed — scores HTML against active client's restrictions
+const compatibilityReport = computed(() => {
+  if (activeClient.value === 'raw') return null
+  const config = activeClient.value === 'gmail' ? gmailConfig : outlookConfig
+  return analyzeCompatibility(resolvedHtml.value, config)
+})
+
+// Whether compatibility details panel is open
+const showCompatibilityDetails = ref(false)
+
+function onToggleDetails(open: boolean) {
+  showCompatibilityDetails.value = open
+}
+
 // Render slot content to an HTML string using vue/server-renderer
 async function renderSlotToHtml(): Promise<string> {
   const defaultSlot = slots.default?.()
@@ -166,8 +182,21 @@ function onFrameLoaded(event: Event) {
       </div>
     </div>
 
-    <!-- Metadata header: always visible, not collapsible -->
-    <PreviewHeader :metadata="metadata" :dark-mode="activeDarkMode" />
+    <!-- Metadata header with compatibility score badge -->
+    <PreviewHeader
+      :metadata="metadata"
+      :dark-mode="activeDarkMode"
+      :compatibility="compatibilityReport"
+      @toggle-details="onToggleDetails"
+    />
+
+    <!-- Expandable compatibility details panel -->
+    <CompatibilityDetails
+      v-if="showCompatibilityDetails && compatibilityReport"
+      :report="compatibilityReport"
+      :dark-mode="activeDarkMode"
+      @close="showCompatibilityDetails = false"
+    />
 
     <!-- Device-width container constrains the chrome + iframe -->
     <div class="mailpeek-device-container" :style="{ maxWidth: effectiveWidth }">

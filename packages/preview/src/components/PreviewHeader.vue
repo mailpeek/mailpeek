@@ -1,8 +1,27 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import type { PreviewHeaderProps } from '../types'
 
 const props = withDefaults(defineProps<PreviewHeaderProps>(), {
   darkMode: false,
+  compatibility: null,
+})
+
+const emit = defineEmits<{
+  'toggle-details': [open: boolean]
+}>()
+
+const detailsOpen = ref(false)
+
+function toggleDetails() {
+  detailsOpen.value = !detailsOpen.value
+  emit('toggle-details', detailsOpen.value)
+}
+
+const badgeClass = computed(() => {
+  if (!props.compatibility) return ''
+  const grade = props.compatibility.grade
+  return `preview-header__score--${grade.toLowerCase()}`
 })
 </script>
 
@@ -18,6 +37,16 @@ const props = withDefaults(defineProps<PreviewHeaderProps>(), {
       >
         {{ props.metadata.previewText }}
       </span>
+      <button
+        v-if="compatibility"
+        type="button"
+        class="preview-header__score"
+        :class="badgeClass"
+        :title="`Compatibility: ${compatibility.score}/100 (${compatibility.totalIssues} issues)`"
+        @click="toggleDetails"
+      >
+        {{ compatibility.grade }} {{ compatibility.score }}
+      </button>
       <span
         class="preview-header__file-size"
         :class="{ 'preview-header__file-size--warning': props.metadata.fileSize.isWarning }"
@@ -59,6 +88,47 @@ const props = withDefaults(defineProps<PreviewHeaderProps>(), {
   white-space: nowrap;
 }
 
+.preview-header__score {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.preview-header__score:hover {
+  opacity: 0.85;
+}
+
+.preview-header__score--a {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.preview-header__score--b {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.preview-header__score--c {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.preview-header__score--d {
+  background: #ffedd5;
+  color: #ea580c;
+}
+
+.preview-header__score--f {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
 .preview-header__file-size {
   flex-shrink: 0;
   font-variant-numeric: tabular-nums;
@@ -84,6 +154,26 @@ const props = withDefaults(defineProps<PreviewHeaderProps>(), {
 }
 .preview-header--dark .preview-header__meta {
   color: #9aa0a6;
+}
+.preview-header--dark .preview-header__score--a {
+  background: #14532d;
+  color: #4ade80;
+}
+.preview-header--dark .preview-header__score--b {
+  background: #1e3a5f;
+  color: #60a5fa;
+}
+.preview-header--dark .preview-header__score--c {
+  background: #451a03;
+  color: #fbbf24;
+}
+.preview-header--dark .preview-header__score--d {
+  background: #431407;
+  color: #fb923c;
+}
+.preview-header--dark .preview-header__score--f {
+  background: #451a1a;
+  color: #f87171;
 }
 .preview-header--dark .preview-header__file-size {
   background: #3c4043;

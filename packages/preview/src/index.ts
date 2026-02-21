@@ -11,9 +11,10 @@ export { default as ClientSwitcher } from './components/ClientSwitcher.vue'
 export { default as DeviceToggle } from './components/DeviceToggle.vue'
 export { default as DarkModeToggle } from './components/DarkModeToggle.vue'
 export { default as PreviewHeader } from './components/PreviewHeader.vue'
+export { default as CompatibilityDetails } from './components/CompatibilityDetails.vue'
 
 // TypeScript types
-export type { EmailPreviewProps, PreviewFrameProps, EmailPreviewEmits, EmailClient, DeviceWidth, DeviceToggleProps, DarkModeToggleProps, PreviewHeaderProps, EmailMetadata } from './types'
+export type { EmailPreviewProps, PreviewFrameProps, EmailPreviewEmits, EmailClient, DeviceWidth, DeviceToggleProps, DarkModeToggleProps, PreviewHeaderProps, EmailMetadata, CompatibilityReport, CompatibilityIssue } from './types'
 
 // Client configuration databases
 export { gmailConfig } from './clients/gmail'
@@ -22,6 +23,9 @@ export { outlookConfig } from './clients/outlook'
 // CSS filtering utilities
 export { filterHtml } from './utils/css-filter'
 export type { FilterResult } from './utils/css-filter'
+
+// Compatibility scoring utilities
+export { analyzeCompatibility } from './utils/compatibility'
 
 // Dark mode simulation utilities
 export { getDarkModeConfig, getDarkModeCss } from './utils/dark-mode'

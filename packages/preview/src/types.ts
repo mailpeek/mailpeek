@@ -9,6 +9,9 @@ export type { EmailMetadata } from './utils/html-analysis'
 // Re-export EmailClient from clients/types for public API
 export type { EmailClient } from './clients/types'
 
+// Re-export compatibility types for public API
+export type { CompatibilityReport, CompatibilityIssue } from './utils/compatibility'
+
 // Phase 3: Device width presets
 export type DeviceWidth = 'mobile' | 'desktop'
 
@@ -37,6 +40,8 @@ export interface PreviewHeaderProps {
   metadata: EmailMetadata
   /** Whether dark mode is active */
   darkMode?: boolean
+  /** Compatibility report for the current client */
+  compatibility?: import('./utils/compatibility').CompatibilityReport | null
 }
 
 export interface EmailPreviewProps {
