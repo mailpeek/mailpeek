@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { PreviewFrameProps } from '../types'
+import { getDarkModeCss } from '../utils/dark-mode'
 
 const props = withDefaults(defineProps<PreviewFrameProps>(), {
   width: '600px',
+  darkMode: false,
+  client: 'gmail',
 })
 
 const emit = defineEmits<{ load: [event: Event] }>()
@@ -12,6 +15,8 @@ const iframeHeight = ref('600px')
 
 // Wrap the user's HTML with a base style reset so iframe renders
 // consistently regardless of browser defaults
+const darkModeCss = computed(() => getDarkModeCss(props.client, props.darkMode))
+
 const srcdoc = computed(() => {
   return `<!DOCTYPE html>
 <html>
@@ -21,6 +26,7 @@ const srcdoc = computed(() => {
 <style>
   /* Reset browser default iframe body styles */
   body { margin: 0; padding: 0; overflow-x: hidden; }
+  ${darkModeCss.value}
 </style>
 </head>
 <body>

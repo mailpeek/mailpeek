@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import type { PreviewHeaderProps } from '../types'
 
-const props = defineProps<PreviewHeaderProps>()
+const props = withDefaults(defineProps<PreviewHeaderProps>(), {
+  darkMode: false,
+})
 </script>
 
 <template>
-  <div class="preview-header">
+  <div class="preview-header" :class="{ 'preview-header--dark': darkMode }">
     <div class="preview-header__subject">
       {{ props.metadata.subject ?? 'No subject' }}
     </div>
@@ -70,5 +72,25 @@ const props = defineProps<PreviewHeaderProps>()
   color: #dc2626;
   background: #fef2f2;
   font-weight: 600;
+}
+
+/* Dark mode palette */
+.preview-header--dark {
+  background: #2d2d2d;
+  border-color: #3c4043;
+}
+.preview-header--dark .preview-header__subject {
+  color: #e8eaed;
+}
+.preview-header--dark .preview-header__meta {
+  color: #9aa0a6;
+}
+.preview-header--dark .preview-header__file-size {
+  background: #3c4043;
+  color: #e8eaed;
+}
+.preview-header--dark .preview-header__file-size--warning {
+  color: #f87171;
+  background: #451a1a;
 }
 </style>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-defineProps<{ mobile?: boolean }>()
+defineProps<{ mobile?: boolean; darkMode?: boolean }>()
 </script>
 <template>
-  <div class="gmail-chrome" :class="{ 'gmail-chrome--mobile': mobile }">
+  <div class="gmail-chrome" :class="{ 'gmail-chrome--mobile': mobile, 'gmail-chrome--dark': darkMode }">
     <div class="gmail-toolbar">
       <!-- Abstract toolbar icons suggesting Gmail actions -->
       <div class="gmail-toolbar-icons">
@@ -57,5 +57,21 @@ defineProps<{ mobile?: boolean }>()
 }
 .gmail-chrome--mobile .gmail-body {
   padding: 8px;
+}
+
+/* Dark mode palette */
+.gmail-chrome--dark {
+  background: #1a1a1a;
+  border-color: #3c4043;
+}
+.gmail-chrome--dark .gmail-toolbar {
+  background: #2d2d2d;
+  border-bottom-color: #3c4043;
+}
+.gmail-chrome--dark .gmail-icon {
+  color: #9aa0a6;
+}
+.gmail-chrome--dark .gmail-body {
+  background: #1a1a1a;
 }
 </style>

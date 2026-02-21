@@ -16,6 +16,7 @@ import GmailChrome from './GmailChrome.vue'
 import OutlookChrome from './OutlookChrome.vue'
 import ClientSwitcher from './ClientSwitcher.vue'
 import DeviceToggle from './DeviceToggle.vue'
+import DarkModeToggle from './DarkModeToggle.vue'
 import PreviewHeader from './PreviewHeader.vue'
 
 const props = withDefaults(defineProps<EmailPreviewProps>(), {
@@ -24,6 +25,7 @@ const props = withDefaults(defineProps<EmailPreviewProps>(), {
   client: 'gmail',
   mobile: false,
   deviceWidth: 'desktop',
+  darkMode: false,
 })
 
 const emit = defineEmits<EmailPreviewEmits>()
@@ -62,6 +64,22 @@ watch(() => props.deviceWidth, (newVal) => {
 function onDeviceChange(device: DeviceWidth) {
   activeDevice.value = device
   emit('device-change', device)
+}
+
+// Internal dark mode state (allows toggle to work without two-way binding)
+const activeDarkMode = ref<boolean>(props.darkMode)
+
+// Sync darkMode prop to internal state (same guard pattern)
+watch(() => props.darkMode, (newVal) => {
+  if (newVal !== undefined && newVal !== activeDarkMode.value) {
+    activeDarkMode.value = newVal
+  }
+})
+
+// Handle dark mode toggle from UI
+function onDarkModeChange(enabled: boolean) {
+  activeDarkMode.value = enabled
+  emit('darkmode-change', enabled)
 }
 
 const isMobile = computed(() => props.mobile || activeDevice.value === 'mobile')
@@ -136,29 +154,35 @@ function onFrameLoaded(event: Event) {
         @update:model-value="onClientChange"
       />
 
-      <DeviceToggle
-        :model-value="activeDevice"
-        @update:model-value="onDeviceChange"
-      />
+      <div class="mailpeek-toolbar-right">
+        <DarkModeToggle
+          :model-value="activeDarkMode"
+          @update:model-value="onDarkModeChange"
+        />
+        <DeviceToggle
+          :model-value="activeDevice"
+          @update:model-value="onDeviceChange"
+        />
+      </div>
     </div>
 
     <!-- Metadata header: always visible, not collapsible -->
-    <PreviewHeader :metadata="metadata" />
+    <PreviewHeader :metadata="metadata" :dark-mode="activeDarkMode" />
 
     <!-- Device-width container constrains the chrome + iframe -->
     <div class="mailpeek-device-container" :style="{ maxWidth: effectiveWidth }">
       <!-- Gmail chrome wrapper -->
-      <GmailChrome v-if="activeClient === 'gmail'" :mobile="isMobile">
-        <PreviewFrame :html="filteredHtml" :width="'100%'" @load="onFrameLoaded" />
+      <GmailChrome v-if="activeClient === 'gmail'" :mobile="isMobile" :dark-mode="activeDarkMode">
+        <PreviewFrame :html="filteredHtml" :width="'100%'" :dark-mode="activeDarkMode" :client="activeClient" @load="onFrameLoaded" />
       </GmailChrome>
 
       <!-- Outlook chrome wrapper -->
-      <OutlookChrome v-else-if="activeClient === 'outlook'" :mobile="isMobile">
-        <PreviewFrame :html="filteredHtml" :width="'100%'" @load="onFrameLoaded" />
+      <OutlookChrome v-else-if="activeClient === 'outlook'" :mobile="isMobile" :dark-mode="activeDarkMode">
+        <PreviewFrame :html="filteredHtml" :width="'100%'" :dark-mode="activeDarkMode" :client="activeClient" @load="onFrameLoaded" />
       </OutlookChrome>
 
       <!-- Raw mode (no chrome, no filtering) -->
-      <PreviewFrame v-else :html="resolvedHtml" :width="'100%'" @load="onFrameLoaded" />
+      <PreviewFrame v-else :html="resolvedHtml" :width="'100%'" :dark-mode="activeDarkMode" client="raw" @load="onFrameLoaded" />
     </div>
   </div>
 </template>
@@ -175,6 +199,12 @@ function onFrameLoaded(event: Event) {
   align-items: center;
   margin-bottom: 16px;
   max-width: 900px;
+}
+
+.mailpeek-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .mailpeek-device-container {

@@ -22,9 +22,21 @@ export type DeviceToggleEmits = {
   'update:modelValue': [width: DeviceWidth]
 }
 
+export interface DarkModeToggleProps {
+  /** Whether dark mode is enabled */
+  modelValue: boolean
+}
+
+export type DarkModeToggleEmits = {
+  /** Emitted when user toggles dark mode */
+  'update:modelValue': [enabled: boolean]
+}
+
 export interface PreviewHeaderProps {
   /** Email metadata to display (subject, preview text, file size) */
   metadata: EmailMetadata
+  /** Whether dark mode is active */
+  darkMode?: boolean
 }
 
 export interface EmailPreviewProps {
@@ -38,6 +50,8 @@ export interface EmailPreviewProps {
   mobile?: boolean
   /** Device width preset for the preview iframe (default: 'desktop') */
   deviceWidth?: DeviceWidth
+  /** Enable dark mode simulation (default: false) */
+  darkMode?: boolean
 }
 
 export interface PreviewFrameProps {
@@ -45,6 +59,10 @@ export interface PreviewFrameProps {
   html: string
   /** CSS width for the iframe container */
   width?: string
+  /** Whether dark mode simulation is active */
+  darkMode?: boolean
+  /** The active email client (determines dark mode strategy) */
+  client?: EmailClient
 }
 
 export type EmailPreviewEmits = {
@@ -54,4 +72,6 @@ export type EmailPreviewEmits = {
   'client-change': [client: EmailClient]
   /** Emitted when user changes device width via DeviceToggle */
   'device-change': [width: DeviceWidth]
+  /** Emitted when user toggles dark mode */
+  'darkmode-change': [enabled: boolean]
 }

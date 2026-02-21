@@ -1,8 +1,8 @@
 <script setup lang="ts">
-defineProps<{ mobile?: boolean }>()
+defineProps<{ mobile?: boolean; darkMode?: boolean }>()
 </script>
 <template>
-  <div class="outlook-chrome" :class="{ 'outlook-chrome--mobile': mobile }">
+  <div class="outlook-chrome" :class="{ 'outlook-chrome--mobile': mobile, 'outlook-chrome--dark': darkMode }">
     <div class="outlook-toolbar">
       <!-- Text labels suggesting Outlook actions -->
       <button class="outlook-btn" type="button">Reply</button>
@@ -53,5 +53,22 @@ defineProps<{ mobile?: boolean }>()
 }
 .outlook-chrome--mobile .outlook-body {
   padding: 8px;
+}
+
+/* Dark mode palette */
+.outlook-chrome--dark {
+  background: #1e1e1e;
+  border-color: #3a3a3a;
+}
+.outlook-chrome--dark .outlook-toolbar {
+  background: #2d2d2d;
+  border-bottom-color: #3a3a3a;
+}
+.outlook-chrome--dark .outlook-btn {
+  color: #e0e0e0;
+  border-color: #555555;
+}
+.outlook-chrome--dark .outlook-body {
+  background: #1e1e1e;
 }
 </style>
