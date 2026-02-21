@@ -45,10 +45,8 @@ const badgeClass = computed(() => {
         :title="`Compatibility: ${compatibility.score}/100 (${compatibility.totalIssues} issues) — click for details`"
         @click="toggleDetails"
       >
-        {{ compatibility.grade }} {{ compatibility.score }}
-        <svg class="preview-header__score-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M2.5 3.5l2.5 3 2.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <span>{{ compatibility.grade }} {{ compatibility.score }}</span>
+        <svg class="preview-header__score-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2.5 3.5l2.5 3 2.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <span
         class="preview-header__file-size"
@@ -101,6 +99,12 @@ const badgeClass = computed(() => {
   border: none;
   cursor: pointer;
   transition: opacity 0.15s;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
 }
 
 .preview-header__score:hover {
@@ -109,8 +113,9 @@ const badgeClass = computed(() => {
 
 .preview-header__score-chevron {
   transition: transform 0.2s;
-  margin-left: 2px;
-  vertical-align: middle;
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
 }
 
 .preview-header__score--open .preview-header__score-chevron {
