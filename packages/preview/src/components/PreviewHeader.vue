@@ -41,11 +41,14 @@ const badgeClass = computed(() => {
         v-if="compatibility"
         type="button"
         class="preview-header__score"
-        :class="badgeClass"
-        :title="`Compatibility: ${compatibility.score}/100 (${compatibility.totalIssues} issues)`"
+        :class="[badgeClass, { 'preview-header__score--open': detailsOpen }]"
+        :title="`Compatibility: ${compatibility.score}/100 (${compatibility.totalIssues} issues) — click for details`"
         @click="toggleDetails"
       >
         {{ compatibility.grade }} {{ compatibility.score }}
+        <svg class="preview-header__score-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M2.5 3.5l2.5 3 2.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </button>
       <span
         class="preview-header__file-size"
@@ -102,6 +105,16 @@ const badgeClass = computed(() => {
 
 .preview-header__score:hover {
   opacity: 0.85;
+}
+
+.preview-header__score-chevron {
+  transition: transform 0.2s;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+.preview-header__score--open .preview-header__score-chevron {
+  transform: rotate(180deg);
 }
 
 .preview-header__score--a {

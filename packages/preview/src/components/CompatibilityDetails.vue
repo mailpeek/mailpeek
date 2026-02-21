@@ -43,6 +43,14 @@ const emit = defineEmits<{ close: [] }>()
     <p v-else-if="!report.hasExternalStylesheets && !report.hasAtImport" class="compat-details__empty">
       No compatibility issues detected.
     </p>
+
+    <div class="compat-details__legend">
+      <span class="compat-details__legend-item compat-details__legend-a">A 90-100</span>
+      <span class="compat-details__legend-item compat-details__legend-b">B 75-89</span>
+      <span class="compat-details__legend-item compat-details__legend-c">C 50-74</span>
+      <span class="compat-details__legend-item compat-details__legend-d">D 25-49</span>
+      <span class="compat-details__legend-item compat-details__legend-f">F 0-24</span>
+    </div>
   </div>
 </template>
 
@@ -139,6 +147,27 @@ const emit = defineEmits<{ close: [] }>()
   color: #a1a1aa;
 }
 
+.compat-details__legend {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #e4e4e7;
+}
+
+.compat-details__legend-item {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.compat-details__legend-a { background: #dcfce7; color: #16a34a; }
+.compat-details__legend-b { background: #dbeafe; color: #2563eb; }
+.compat-details__legend-c { background: #fef3c7; color: #d97706; }
+.compat-details__legend-d { background: #ffedd5; color: #ea580c; }
+.compat-details__legend-f { background: #fef2f2; color: #dc2626; }
+
 /* Dark mode */
 .compat-details--dark {
   background: #27272a;
@@ -182,4 +211,14 @@ const emit = defineEmits<{ close: [] }>()
 .compat-details--dark .compat-details__empty {
   color: #71717a;
 }
+
+.compat-details--dark .compat-details__legend {
+  border-top-color: #3c4043;
+}
+
+.compat-details--dark .compat-details__legend-a { background: #14532d; color: #4ade80; }
+.compat-details--dark .compat-details__legend-b { background: #1e3a5f; color: #60a5fa; }
+.compat-details--dark .compat-details__legend-c { background: #451a03; color: #fbbf24; }
+.compat-details--dark .compat-details__legend-d { background: #431407; color: #fb923c; }
+.compat-details--dark .compat-details__legend-f { background: #451a1a; color: #f87171; }
 </style>
