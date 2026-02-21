@@ -184,6 +184,10 @@ function onFrameLoaded(event: Event) {
       <!-- Raw mode (no chrome, no filtering) -->
       <PreviewFrame v-else :html="resolvedHtml" :width="'100%'" :dark-mode="activeDarkMode" client="raw" @load="onFrameLoaded" />
     </div>
+
+    <p v-if="activeDarkMode" class="mailpeek-darkmode-note">
+      Dark mode is simulated — actual rendering may vary slightly between clients.
+    </p>
   </div>
 </template>
 
@@ -210,5 +214,12 @@ function onFrameLoaded(event: Event) {
 .mailpeek-device-container {
   margin: 0 auto;
   transition: max-width 0.3s ease;
+}
+
+.mailpeek-darkmode-note {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: #9aa0a6;
+  text-align: center;
 }
 </style>
