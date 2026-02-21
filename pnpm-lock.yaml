@@ -33,6 +33,34 @@ importers:
         specifier: ^3.5.0
         version: 3.5.28(typescript@5.9.3)
 
+  packages/components:
+    dependencies:
+      '@mailpeek/preview':
+        specifier: workspace:*
+        version: link:../preview
+    devDependencies:
+      '@vitejs/plugin-vue':
+        specifier: ^5.0.0
+        version: 5.2.4(vite@6.4.1)(vue@3.5.28(typescript@5.9.3))
+      '@vue/test-utils':
+        specifier: ^2.4.0
+        version: 2.4.6
+      jsdom:
+        specifier: ^28.1.0
+        version: 28.1.0
+      vite:
+        specifier: ^6.0.0
+        version: 6.4.1
+      vitest:
+        specifier: ^2.0.0
+        version: 2.1.9(jsdom@28.1.0)
+      vue:
+        specifier: ^3.5.0
+        version: 3.5.28(typescript@5.9.3)
+      vue-tsc:
+        specifier: ^2.0.0
+        version: 2.2.12(typescript@5.9.3)
+
   packages/preview:
     devDependencies:
       '@vitejs/plugin-vue':
