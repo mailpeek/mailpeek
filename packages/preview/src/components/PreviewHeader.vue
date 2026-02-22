@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import type { PreviewHeaderProps } from '../types'
 
 const props = withDefaults(defineProps<PreviewHeaderProps>(), {
   darkMode: false,
   compatibility: null,
+  detailsOpen: false,
 })
 
 const emit = defineEmits<{
   'toggle-details': [open: boolean]
 }>()
 
-const detailsOpen = ref(false)
-
 function toggleDetails() {
-  detailsOpen.value = !detailsOpen.value
-  emit('toggle-details', detailsOpen.value)
+  emit('toggle-details', !props.detailsOpen)
 }
 
 const badgeClass = computed(() => {
@@ -41,7 +39,7 @@ const badgeClass = computed(() => {
         v-if="compatibility"
         type="button"
         class="preview-header__score"
-        :class="[badgeClass, { 'preview-header__score--open': detailsOpen }]"
+        :class="[badgeClass, { 'preview-header__score--open': props.detailsOpen }]"
         :title="`Compatibility: ${compatibility.score}/100 (${compatibility.totalIssues} issues) — click for details`"
         @click="toggleDetails"
       >

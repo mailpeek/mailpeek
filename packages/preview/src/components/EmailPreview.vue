@@ -187,6 +187,7 @@ function onFrameLoaded(event: Event) {
       :metadata="metadata"
       :dark-mode="activeDarkMode"
       :compatibility="compatibilityReport"
+      :details-open="showCompatibilityDetails"
       @toggle-details="onToggleDetails"
     />
 

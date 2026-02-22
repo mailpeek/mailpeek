@@ -42,6 +42,8 @@ export interface PreviewHeaderProps {
   darkMode?: boolean
   /** Compatibility report for the current client */
   compatibility?: import('./utils/compatibility').CompatibilityReport | null
+  /** Whether the compatibility details panel is open (controls chevron direction) */
+  detailsOpen?: boolean
 }
 
 export interface EmailPreviewProps {
