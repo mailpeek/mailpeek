@@ -6,20 +6,33 @@ const props = withDefaults(defineProps<PreviewHeaderProps>(), {
   darkMode: false,
   compatibility: null,
   detailsOpen: false,
+  accessibility: null,
+  a11yDetailsOpen: false,
 })
 
 const emit = defineEmits<{
   'toggle-details': [open: boolean]
+  'toggle-a11y-details': [open: boolean]
 }>()
 
 function toggleDetails() {
   emit('toggle-details', !props.detailsOpen)
 }
 
+function toggleA11yDetails() {
+  emit('toggle-a11y-details', !props.a11yDetailsOpen)
+}
+
 const badgeClass = computed(() => {
   if (!props.compatibility) return ''
   const grade = props.compatibility.grade
   return `preview-header__score--${grade.toLowerCase()}`
+})
+
+const a11yBadgeClass = computed(() => {
+  if (!props.accessibility) return ''
+  const grade = props.accessibility.grade
+  return `preview-header__a11y--${grade.toLowerCase()}`
 })
 </script>
 
@@ -44,6 +57,17 @@ const badgeClass = computed(() => {
         @click="toggleDetails"
       >
         <span>{{ compatibility.grade }} {{ compatibility.score }}</span>
+        <svg class="preview-header__score-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2.5 3.5l2.5 3 2.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button
+        v-if="accessibility"
+        type="button"
+        class="preview-header__a11y"
+        :class="[a11yBadgeClass, { 'preview-header__a11y--open': props.a11yDetailsOpen }]"
+        :title="`Accessibility: ${accessibility.score}/100 (${accessibility.totalIssues} issues) — click for details`"
+        @click="toggleA11yDetails"
+      >
+        <span>A11y {{ accessibility.grade }} {{ accessibility.score }}</span>
         <svg class="preview-header__score-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2.5 3.5l2.5 3 2.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <span
@@ -145,6 +169,57 @@ const badgeClass = computed(() => {
   color: #dc2626;
 }
 
+.preview-header__a11y {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.preview-header__a11y:hover {
+  opacity: 0.85;
+}
+
+.preview-header__a11y--open .preview-header__score-chevron {
+  transform: rotate(180deg);
+}
+
+.preview-header__a11y--a {
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+
+.preview-header__a11y--b {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.preview-header__a11y--c {
+  background: #fef3c7;
+  color: #d97706;
+}
+
+.preview-header__a11y--d {
+  background: #ffedd5;
+  color: #ea580c;
+}
+
+.preview-header__a11y--f {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
 .preview-header__file-size {
   flex-shrink: 0;
   font-variant-numeric: tabular-nums;
@@ -188,6 +263,26 @@ const badgeClass = computed(() => {
   color: #fb923c;
 }
 .preview-header--dark .preview-header__score--f {
+  background: #451a1a;
+  color: #f87171;
+}
+.preview-header--dark .preview-header__a11y--a {
+  background: #2e1065;
+  color: #c4b5fd;
+}
+.preview-header--dark .preview-header__a11y--b {
+  background: #3b0764;
+  color: #a78bfa;
+}
+.preview-header--dark .preview-header__a11y--c {
+  background: #451a03;
+  color: #fbbf24;
+}
+.preview-header--dark .preview-header__a11y--d {
+  background: #431407;
+  color: #fb923c;
+}
+.preview-header--dark .preview-header__a11y--f {
   background: #451a1a;
   color: #f87171;
 }

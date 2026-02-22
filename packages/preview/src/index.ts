@@ -12,9 +12,10 @@ export { default as DeviceToggle } from './components/DeviceToggle.vue'
 export { default as DarkModeToggle } from './components/DarkModeToggle.vue'
 export { default as PreviewHeader } from './components/PreviewHeader.vue'
 export { default as CompatibilityDetails } from './components/CompatibilityDetails.vue'
+export { default as AccessibilityDetails } from './components/AccessibilityDetails.vue'
 
 // TypeScript types
-export type { EmailPreviewProps, PreviewFrameProps, EmailPreviewEmits, EmailClient, DeviceWidth, DeviceToggleProps, DarkModeToggleProps, PreviewHeaderProps, EmailMetadata, CompatibilityReport, CompatibilityIssue } from './types'
+export type { EmailPreviewProps, PreviewFrameProps, EmailPreviewEmits, EmailClient, DeviceWidth, DeviceToggleProps, DarkModeToggleProps, PreviewHeaderProps, EmailMetadata, CompatibilityReport, CompatibilityIssue, AccessibilityReport, AccessibilityIssue, AccessibilitySeverity } from './types'
 
 // Client configuration databases
 export { gmailConfig } from './clients/gmail'
@@ -26,6 +27,9 @@ export type { FilterResult } from './utils/css-filter'
 
 // Compatibility scoring utilities
 export { analyzeCompatibility } from './utils/compatibility'
+
+// Accessibility scoring utilities
+export { analyzeAccessibility } from './utils/accessibility'
 
 // Dark mode simulation utilities
 export { getDarkModeConfig, getDarkModeCss } from './utils/dark-mode'

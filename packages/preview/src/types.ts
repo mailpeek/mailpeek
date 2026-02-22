@@ -12,6 +12,9 @@ export type { EmailClient } from './clients/types'
 // Re-export compatibility types for public API
 export type { CompatibilityReport, CompatibilityIssue } from './utils/compatibility'
 
+// Re-export accessibility types for public API
+export type { AccessibilityReport, AccessibilityIssue, AccessibilitySeverity } from './utils/accessibility'
+
 // Phase 3: Device width presets
 export type DeviceWidth = 'mobile' | 'desktop'
 
@@ -44,6 +47,10 @@ export interface PreviewHeaderProps {
   compatibility?: import('./utils/compatibility').CompatibilityReport | null
   /** Whether the compatibility details panel is open (controls chevron direction) */
   detailsOpen?: boolean
+  /** Accessibility report for the email */
+  accessibility?: import('./utils/accessibility').AccessibilityReport | null
+  /** Whether the accessibility details panel is open (controls chevron direction) */
+  a11yDetailsOpen?: boolean
 }
 
 export interface EmailPreviewProps {

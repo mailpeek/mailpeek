@@ -10,10 +10,12 @@ import type { EmailPreviewProps, EmailPreviewEmits, EmailClient, DeviceWidth } f
 import { filterHtml } from '../utils/css-filter'
 import { analyzeEmail } from '../utils/html-analysis'
 import { analyzeCompatibility } from '../utils/compatibility'
+import { analyzeAccessibility } from '../utils/accessibility'
 import { gmailConfig } from '../clients/gmail'
 import { outlookConfig } from '../clients/outlook'
 import PreviewFrame from './PreviewFrame.vue'
 import CompatibilityDetails from './CompatibilityDetails.vue'
+import AccessibilityDetails from './AccessibilityDetails.vue'
 import GmailChrome from './GmailChrome.vue'
 import OutlookChrome from './OutlookChrome.vue'
 import ClientSwitcher from './ClientSwitcher.vue'
@@ -121,6 +123,19 @@ function onToggleDetails(open: boolean) {
   showCompatibilityDetails.value = open
 }
 
+// Accessibility report — client-independent, always computed when HTML is present
+const accessibilityReport = computed(() => {
+  if (!resolvedHtml.value) return null
+  return analyzeAccessibility(resolvedHtml.value)
+})
+
+// Whether accessibility details panel is open
+const showAccessibilityDetails = ref(false)
+
+function onToggleA11yDetails(open: boolean) {
+  showAccessibilityDetails.value = open
+}
+
 // Render slot content to an HTML string using vue/server-renderer
 async function renderSlotToHtml(): Promise<string> {
   const defaultSlot = slots.default?.()
@@ -188,7 +203,10 @@ function onFrameLoaded(event: Event) {
       :dark-mode="activeDarkMode"
       :compatibility="compatibilityReport"
       :details-open="showCompatibilityDetails"
+      :accessibility="accessibilityReport"
+      :a11y-details-open="showAccessibilityDetails"
       @toggle-details="onToggleDetails"
+      @toggle-a11y-details="onToggleA11yDetails"
     />
 
     <!-- Expandable compatibility details panel -->
@@ -197,6 +215,14 @@ function onFrameLoaded(event: Event) {
       :report="compatibilityReport"
       :dark-mode="activeDarkMode"
       @close="showCompatibilityDetails = false"
+    />
+
+    <!-- Expandable accessibility details panel -->
+    <AccessibilityDetails
+      v-if="showAccessibilityDetails && accessibilityReport"
+      :report="accessibilityReport"
+      :dark-mode="activeDarkMode"
+      @close="showAccessibilityDetails = false"
     />
 
     <!-- Device-width container constrains the chrome + iframe -->
