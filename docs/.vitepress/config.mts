@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'mailpeek',
   description: 'Vue.js email preview component',
+  appearance: 'dark',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico', sizes: '48x48' }],
     ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' }],
@@ -16,7 +17,8 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: 'https://mailpeek.dev/wordmark.png' }],
   ],
   themeConfig: {
-    logo: '/favicon-32x32.png',
+    logo: { src: '/logo-mark.png', alt: 'mailpeek' },
+    siteTitle: false,
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Demo', link: '/demo' },

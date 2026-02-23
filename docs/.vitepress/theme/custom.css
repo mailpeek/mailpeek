@@ -4,21 +4,69 @@
 }
 
 :root {
-  --vp-c-brand-1: #27272a;
-  --vp-c-brand-2: #3f3f46;
-  --vp-c-brand-3: #52525b;
-  --vp-c-brand-soft: rgba(39, 39, 42, 0.14);
+  --vp-c-brand-1: #00b2ad;
+  --vp-c-brand-2: #00948f;
+  --vp-c-brand-3: #007a76;
+  --vp-c-brand-soft: rgba(0, 178, 173, 0.14);
+  --mp-teal: #00b2ad;
+  --mp-teal-light: #33c4c0;
+  --mp-teal-dark: #00948f;
+  --mp-navy: #1e2d3d;
+  --hero-title-color: #18181b;
 }
 
 .dark {
-  --vp-c-brand-1: #d4d4d8;
-  --vp-c-brand-2: #a1a1aa;
-  --vp-c-brand-3: #71717a;
-  --vp-c-brand-soft: rgba(212, 212, 216, 0.14);
+  --vp-c-brand-1: #00d4ce;
+  --vp-c-brand-2: #00b2ad;
+  --vp-c-brand-3: #00948f;
+  --vp-c-brand-soft: rgba(0, 212, 206, 0.14);
+  --mp-teal: #00d4ce;
+  --mp-teal-light: #33e0db;
+  --mp-teal-dark: #00b2ad;
+  --hero-title-color: #ffffff;
 }
 
 :root {
   --vp-button-brand-bg: var(--vp-c-brand-1);
   --vp-button-brand-hover-bg: var(--vp-c-brand-2);
   --vp-button-brand-active-bg: var(--vp-c-brand-3);
+}
+
+/* Nav bar logo — always visible, properly sized */
+.VPNavBarTitle {
+  display: flex !important;
+  visibility: visible !important;
+}
+
+.VPImage.logo {
+  width: 28px;
+  height: 28px;
+}
+
+/* Landing page: hide sidebar and its mobile toggle */
+.Layout:has(.landing) .VPSidebar,
+.Layout:has(.landing) .VPLocalNav {
+  display: none !important;
+}
+
+.Layout:has(.landing) .VPContent {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.Layout:has(.landing) .VPContent .VPPage {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* VitePress uses --vp-sidebar-width to offset content; zero it on landing */
+.Layout:has(.landing) {
+  --vp-sidebar-width: 0px;
+}
+
+/* Ensure the VPDoc/VPPage container is full-width and centered */
+.Layout:has(.landing) .content-container,
+.Layout:has(.landing) .container {
+  max-width: 100% !important;
+  padding: 0 !important;
 }

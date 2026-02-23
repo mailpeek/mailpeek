@@ -255,8 +255,10 @@ function onFrameLoaded(event: Event) {
 
 .mailpeek-toolbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
   margin-bottom: 16px;
   max-width: 900px;
 }
@@ -265,6 +267,16 @@ function onFrameLoaded(event: Event) {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .mailpeek-toolbar {
+    justify-content: center;
+  }
+
+  .mailpeek-toolbar-right {
+    gap: 8px;
+  }
 }
 
 .mailpeek-device-container {
