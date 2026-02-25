@@ -11,9 +11,9 @@ You spent an afternoon building a beautiful transactional email. The header grad
 
 This is not a bug. This is email in 2026.
 
-Email rendering is stuck somewhere around 2004. Gmail runs every incoming email through a custom HTML sanitizer that aggressively strips CSS it considers unsafe or unnecessary. Outlook desktop (2016 through 2021) goes further -- it literally uses Microsoft Word as its HTML rendering engine. Word. The word processor. For rendering HTML.
+Email rendering is stuck somewhere around 2004. Gmail runs every incoming email through a custom HTML sanitizer that aggressively strips CSS it considers unsafe or unnecessary. Outlook desktop (2016 through 2021) goes further - it literally uses Microsoft Word as its HTML rendering engine. Word. The word processor. For rendering HTML.
 
-The result is that the CSS you write and the CSS your recipients see are often two completely different things. And unlike web development, there are no DevTools, no error messages, and no way to know what broke until someone screenshots it and sends you a Slack message.
+The result is that the CSS you write and the CSS your recipients see are often two completely different things. And unlike web development, there are no DevTools, no error messages, and no way to know what broke until someone screenshots it and sends it to you.
 
 Let's fix that.
 
@@ -21,7 +21,7 @@ Let's fix that.
 
 Gmail's HTML sanitizer is not documented in full, but between Google's own developer docs, community testing, and resources like caniemail.com, we have a clear picture. Here is what it removes.
 
-### @font-face -- gone entirely
+### @font-face - gone entirely
 
 ```css
 /* What you wrote */
@@ -42,7 +42,7 @@ h1 {
 
 The `@font-face` rule is stripped. The `font-family` declaration stays, but since the font was never loaded, you get whatever sans-serif fallback the system provides. On most machines, that is Arial.
 
-### @media queries -- ignored on desktop
+### @media queries - ignored on desktop
 
 ```css
 /* What you wrote */
@@ -55,9 +55,9 @@ The `@font-face` rule is stripped. The `font-family` declaration stays, but sinc
 /* Nothing. The entire @media block is removed. */
 ```
 
-Gmail desktop strips all `@media` rules. Your responsive email is not responsive in Gmail desktop. Gmail mobile has partial support, but desktop -- which is where a huge percentage of business email is read -- ignores media queries completely.
+Gmail desktop strips all `@media` rules. Your responsive email is not responsive in Gmail desktop. Gmail mobile has partial support, but desktop - which is where a huge percentage of business email is read - ignores media queries completely.
 
-### Positioning properties -- all stripped
+### Positioning properties - all stripped
 
 ```css
 /* What you wrote */
@@ -76,7 +76,7 @@ Gmail desktop strips all `@media` rules. Your responsive email is not responsive
 
 `position`, `top`, `right`, `bottom`, `left`, and `z-index` are all removed. Any layout that depends on positioned elements will collapse.
 
-### CSS Grid -- stripped (but flexbox partially survives)
+### CSS Grid - stripped (but flexbox partially survives)
 
 ```css
 /* What you wrote */
@@ -105,7 +105,7 @@ Gmail desktop strips all `@media` rules. Your responsive email is not responsive
 
 This is a subtle one. Gmail does support `display: flex`, but it strips the sub-properties that make flexbox useful -- `align-items`, `justify-content`, `flex-direction`, `flex-wrap`, and `flex`. So your flex container exists, but you have no control over how its children are laid out.
 
-### Visual effects -- stripped
+### Visual effects - stripped
 
 ```css
 /* What you wrote */
@@ -123,7 +123,7 @@ This is a subtle one. Gmail does support `display: flex`, but it strips the sub-
 
 `box-shadow`, `transform`, `animation`, and `transition` are all stripped. Your hover effects, entrance animations, and depth cues will not render.
 
-### External stylesheets and @import -- stripped
+### External stylesheets and @import - stripped
 
 ```html
 <!-- What you wrote -->
@@ -143,7 +143,7 @@ Gmail strips all external `<link>` stylesheet references and all `@import` rules
 
 ### The 8,192-character style block limit
 
-This is the one that catches people off guard. If a single `<style>` block in your email exceeds 8,192 characters, Gmail removes the **entire block**. Not the overflow -- the whole thing. Every rule in that block disappears.
+This is the one that catches people off guard. If a single `<style>` block in your email exceeds 8,192 characters, Gmail removes the **entire block**. Not the overflow - the whole thing. Every rule in that block disappears.
 
 ```html
 <!-- What you wrote -->
@@ -161,21 +161,21 @@ Most email developers do not know this limit exists. If you are using a CSS fram
 
 If Gmail's sanitizer is aggressive, Outlook's Word rendering engine is hostile. Outlook desktop (2016, 2019, 2021) strips everything Gmail strips, plus:
 
-- **`border-radius`** -- no rounded corners, period. Your carefully rounded buttons become rectangles.
-- **`display: flex`** -- Gmail keeps it, Outlook removes it. Flexbox does not exist in Word.
-- **`background-size`** -- background images render, but you cannot control their sizing.
-- **`max-width` and `min-width`** -- width constraints are unreliable. Use fixed `width` instead.
-- **`float`** -- the traditional CSS layout fallback does not work either.
+- **`border-radius`** - no rounded corners, period. Your carefully rounded buttons become rectangles.
+- **`display: flex`** - Gmail keeps it, Outlook removes it. Flexbox does not exist in Word.
+- **`background-size`** - background images render, but you cannot control their sizing.
+- **`max-width` and `min-width`** - width constraints are unreliable. Use fixed `width` instead.
+- **`float`** - the traditional CSS layout fallback does not work either.
 
 The reason is straightforward: Microsoft Word's HTML renderer was built for converting Word documents to HTML, not for rendering modern web pages. It supports a subset of HTML 4 and CSS 2, and that is roughly where it stops.
 
-There is good news on the horizon. Microsoft is rolling out a new Chromium-based Outlook that uses a proper browser engine. But the transition is gradual -- classic Word-engine Outlook and new Chromium Outlook coexist, and you need to support both for the foreseeable future.
+There is good news on the horizon. Microsoft is rolling out a new Chromium-based Outlook that uses a proper browser engine. But the transition is gradual - classic Word-engine Outlook and new Chromium Outlook coexist, and you need to support both for the foreseeable future.
 
 ## Dark Mode: The Wild West
 
 If cross-client CSS support is a mess, dark mode is where it becomes genuinely chaotic. Every email client handles dark mode differently, and there is no single approach that works everywhere.
 
-- **Gmail web desktop**: Does NOT transform email content at all. It darkens the surrounding Gmail UI chrome, but your email renders exactly as written -- light background and all.
+- **Gmail web desktop**: Does NOT transform email content at all. It darkens the surrounding Gmail UI chrome, but your email renders exactly as written - light background and all.
 - **Gmail iOS**: Full colour inversion. It applies a CSS filter that inverts colours across the entire email body, then re-inverts images so photos do not look like negatives.
 - **Outlook desktop (Word engine)**: Partial inversion with per-element colour replacement. It selectively replaces background and text colours, sometimes producing unexpected combinations.
 - **Outlook.com / New Outlook**: Partial inversion at a lower intensity, closer to a colour remap than a true invert.
@@ -218,7 +218,7 @@ The pattern is clear: Outlook strips everything Gmail strips, plus `border-radiu
 
 I got tired of sending test emails to myself, opening them in six different clients, and squinting at screenshots. So I built a tool to solve it.
 
-[`@mailpeek/preview`](https://www.npmjs.com/package/@mailpeek/preview) is a Vue component that approximates how Gmail and Outlook render your email HTML. It runs the same kind of CSS filtering those clients perform -- stripping unsupported properties, removing `@media` queries, enforcing the style block character limit -- and shows you the result in real time.
+[`@mailpeek/preview`](https://www.npmjs.com/package/@mailpeek/preview) is a Vue component that previews how Gmail and Outlook render your email HTML. It runs the same kind of CSS filtering those clients perform - stripping unsupported properties, removing `@media` queries, enforcing the style block character limit - and shows you the result in real time.
 
 Install it:
 
@@ -266,11 +266,11 @@ Switching between `client="gmail"` and `client="outlook"` shows you exactly what
 
 - A **compatibility score** (0-100) that tells you how much of your CSS survives in each client. A score of 100 means nothing is stripped. A score of 60 means you have problems.
 - **Console warnings** that name every stripped property, where it was found, and why it was removed.
-- A built-in **accessibility checker** running 10 WCAG-relevant checks -- missing alt text on images, broken heading hierarchy, vague link text, and more.
+- A built-in **accessibility checker** running 10 WCAG-relevant checks - missing alt text on images, broken heading hierarchy, vague link text, and more.
 - **Dark mode preview** that simulates Gmail's no-op behaviour, Outlook's partial inversion, and full colour inversion for iOS clients.
 - **Device width toggles** between mobile, tablet, and desktop viewports.
 
-It is not a pixel-perfect simulation -- it approximates client behaviour based on documented CSS restriction databases and community testing from caniemail.com. But it catches the vast majority of issues before you send.
+Disclaimer: It is not a pixel-perfect simulation - it approximates client behaviour based on documented CSS restriction databases and community testing from caniemail.com. But it catches the vast majority of issues before you send.
 
 ## Build Emails That Survive Gmail
 
@@ -315,7 +315,7 @@ import {
 </template>
 ```
 
-Every component outputs table-based HTML with inline styles -- the format that survives every email client. `EmailContainer` becomes a centred `<table>`, `EmailButton` becomes a padded `<a>` inside a `<td>` with a background colour, `EmailColumn` becomes table cells with proper `valign` attributes. You write clean Vue templates; the components handle the ugly-but-compatible output.
+Every component outputs table-based HTML with inline styles - the format that survives every email client. `EmailContainer` becomes a centred `<table>`, `EmailButton` becomes a padded `<a>` inside a `<td>` with a background colour, `EmailColumn` becomes table cells with proper `valign` attributes. You write clean Vue templates; the components handle the ugly-but-compatible output.
 
 When you are ready to send, render the template to an HTML string on the server:
 
@@ -343,4 +343,4 @@ Both `@mailpeek/preview` and `@mailpeek/components` are free, open source, and M
 - **GitHub**: [github.com/mailpeek/mailpeek](https://github.com/mailpeek/mailpeek)
 - **Live demo**: [mailpeek.dev/demo](https://mailpeek.dev/demo)
 
-If you have ever sent an email that looked perfect in your browser and broken in your inbox, give it a try. And if you find CSS restrictions that the filtering misses, open an issue -- the restriction databases are just TypeScript objects and they are straightforward to contribute to.
+If you have ever sent an email that looked perfect in your browser and broken in your inbox, give it a try. And if you find CSS restrictions that the filtering misses, open an issue - the restriction databases are just TypeScript objects and they are straightforward to contribute to.
