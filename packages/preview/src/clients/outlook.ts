@@ -21,6 +21,8 @@ export const outlookConfig: ClientConfig = {
   version: '2019-2021 (Word engine)',
   stripExternalStylesheets: true,
   stripAtImport: true,
+  stripFontFace: true,
+  stripMediaQueries: true,
   cssRestrictions: [
     // Positioning — Word engine ignores CSS positioning entirely (HIGH confidence)
     {
@@ -166,6 +168,12 @@ export const outlookConfig: ClientConfig = {
     {
       property: 'min-width',
       reason: 'Outlook Word renderer has inconsistent max/min-width support',
+    },
+
+    // Float — Word engine ignores float (HIGH confidence)
+    {
+      property: 'float',
+      reason: 'Outlook Word renderer does not support float',
     },
 
     // Aspect-ratio (HIGH confidence)

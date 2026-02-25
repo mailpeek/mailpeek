@@ -138,11 +138,85 @@ function stripAtImport(html: string, config: ClientConfig): FilterResult {
 }
 
 /**
+ * Strips @font-face blocks from <style> blocks if config.stripFontFace is true.
+ * Gmail and Outlook both strip web font declarations.
+ */
+function stripFontFace(html: string, config: ClientConfig): FilterResult {
+  if (!config.stripFontFace) {
+    return { html, warnings: [] }
+  }
+
+  const warnings: string[] = []
+  const result = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (_match, attrs: string, blockContent: string) => {
+    const filtered = blockContent.replace(/@font-face\s*\{[^}]*\}/gi, () => {
+      warnings.push(
+        `[mailpeek] ${config.name}: removed @font-face — ${config.name} strips web font declarations`
+      )
+      return ''
+    })
+    return `<style${attrs}>${filtered}</style>`
+  })
+
+  return { html: result, warnings }
+}
+
+/**
+ * Strips @media query blocks from <style> blocks if config.stripMediaQueries is true.
+ * Gmail desktop and Outlook Word engine ignore media queries entirely.
+ */
+function stripMediaQueries(html: string, config: ClientConfig): FilterResult {
+  if (!config.stripMediaQueries) {
+    return { html, warnings: [] }
+  }
+
+  const warnings: string[] = []
+  const result = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (_match, attrs: string, blockContent: string) => {
+    const filtered = blockContent.replace(/@media\s*[^{]*\{[\s\S]*?\}\s*\}/gi, () => {
+      warnings.push(
+        `[mailpeek] ${config.name}: removed @media query — ${config.name} does not support media queries`
+      )
+      return ''
+    })
+    return `<style${attrs}>${filtered}</style>`
+  })
+
+  return { html: result, warnings }
+}
+
+/**
+ * Removes <style> blocks that exceed the character limit.
+ * Gmail drops style blocks over 8,192 characters.
+ * Runs after all other style processing to check post-filtered size.
+ */
+function enforceStyleBlockLimit(html: string, config: ClientConfig): FilterResult {
+  if (!config.styleBlockCharLimit) {
+    return { html, warnings: [] }
+  }
+
+  const limit = config.styleBlockCharLimit
+  const warnings: string[] = []
+  const result = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (match, _attrs: string, blockContent: string) => {
+    if (blockContent.length > limit) {
+      warnings.push(
+        `[mailpeek] ${config.name}: removed <style> block (${blockContent.length} chars exceeds ${limit} char limit)`
+      )
+      return ''
+    }
+    return match
+  })
+
+  return { html: result, warnings }
+}
+
+/**
  * Main entry point. Processes an HTML string through all filtering passes:
  * 1. Strip external stylesheets (if config.stripExternalStylesheets)
  * 2. Strip @import rules (if config.stripAtImport)
- * 3. Filter <style> block declarations
- * 4. Filter inline style attributes
+ * 3. Strip @font-face blocks (if config.stripFontFace)
+ * 4. Strip @media query blocks (if config.stripMediaQueries)
+ * 5. Filter <style> block declarations
+ * 6. Filter inline style attributes
+ * 7. Enforce style block character limit (if config.styleBlockCharLimit)
  *
  * Returns the filtered HTML and all collected warnings.
  * Warnings should be emitted via console.warn after this call (not inside),
@@ -159,15 +233,27 @@ export function filterHtml(html: string, config: ClientConfig): FilterResult {
   const pass2 = stripAtImport(pass1.html, config)
   allWarnings.push(...pass2.warnings)
 
-  // Pass 3: Filter <style> block declarations
-  const pass3 = filterStyleBlocks(pass2.html, config)
+  // Pass 3: Strip @font-face blocks
+  const pass3 = stripFontFace(pass2.html, config)
   allWarnings.push(...pass3.warnings)
 
-  // Pass 4: Filter inline style attributes
-  const pass4 = filterInlineStyles(pass3.html, config)
+  // Pass 4: Strip @media query blocks
+  const pass4 = stripMediaQueries(pass3.html, config)
   allWarnings.push(...pass4.warnings)
 
-  return { html: pass4.html, warnings: allWarnings }
+  // Pass 5: Filter <style> block declarations
+  const pass5 = filterStyleBlocks(pass4.html, config)
+  allWarnings.push(...pass5.warnings)
+
+  // Pass 6: Filter inline style attributes
+  const pass6 = filterInlineStyles(pass5.html, config)
+  allWarnings.push(...pass6.warnings)
+
+  // Pass 7: Enforce style block character limit (after all other processing)
+  const pass7 = enforceStyleBlockLimit(pass6.html, config)
+  allWarnings.push(...pass7.warnings)
+
+  return { html: pass7.html, warnings: allWarnings }
 }
 
 // ─── Internal helpers ────────────────────────────────────────────────────────

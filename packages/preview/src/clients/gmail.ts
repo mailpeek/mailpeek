@@ -13,6 +13,9 @@ export const gmailConfig: ClientConfig = {
   version: '2024',
   stripExternalStylesheets: true,
   stripAtImport: true,
+  stripFontFace: true,
+  stripMediaQueries: true,
+  styleBlockCharLimit: 8192,
   cssRestrictions: [
     // Positioning — not in Gmail supported list (HIGH confidence)
     {

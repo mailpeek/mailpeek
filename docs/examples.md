@@ -17,7 +17,7 @@ The component automatically filters CSS properties that aren't supported by each
 </template>
 ```
 
-When simulating Gmail or Outlook, mailpeek logs warnings for any removed properties:
+When previewing in Gmail or Outlook mode, mailpeek logs warnings for any removed properties:
 
 ```
 [mailpeek] Gmail Web: removed "position: fixed" — Gmail does not support CSS positioning

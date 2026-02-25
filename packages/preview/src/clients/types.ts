@@ -48,4 +48,19 @@ export interface ClientConfig {
    * Gmail and Outlook both strip @import.
    */
   stripAtImport?: boolean
+  /**
+   * If true, @font-face blocks are removed from <style> blocks.
+   * Gmail and Outlook both strip web font declarations.
+   */
+  stripFontFace?: boolean
+  /**
+   * If true, @media query blocks are removed from <style> blocks.
+   * Gmail desktop and Outlook Word engine ignore media queries entirely.
+   */
+  stripMediaQueries?: boolean
+  /**
+   * If set, <style> blocks exceeding this character count are removed entirely.
+   * Gmail drops style blocks over 8,192 characters.
+   */
+  styleBlockCharLimit?: number
 }

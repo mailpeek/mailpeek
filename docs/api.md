@@ -10,7 +10,7 @@ The main component for rendering email previews.
 |------|------|---------|-------------|
 | `html` | `string` | `undefined` | Raw email HTML to preview |
 | `width` | `string` | `'600px'` | CSS width for the preview container |
-| `client` | `EmailClient` | `'gmail'` | Email client to simulate |
+| `client` | `EmailClient` | `'gmail'` | Email client to preview |
 | `mobile` | `boolean` | `false` | Enable mobile chrome variant |
 | `deviceWidth` | `DeviceWidth` | `'desktop'` | Device width preset |
 
@@ -175,8 +175,8 @@ These components are exported individually for advanced use cases.
 | Component | Description |
 |-----------|-------------|
 | `PreviewFrame` | Iframe wrapper that injects HTML via `srcdoc` |
-| `GmailChrome` | Gmail web interface chrome simulation |
-| `OutlookChrome` | Outlook web interface chrome simulation |
+| `GmailChrome` | Gmail web interface chrome |
+| `OutlookChrome` | Outlook web interface chrome |
 | `ClientSwitcher` | Client switching toolbar |
 | `DeviceToggle` | Device width toggle buttons |
 | `PreviewHeader` | Email metadata display header |

@@ -4,14 +4,16 @@
 // Returns CSS strings that simulate how email clients render
 // emails in dark mode. Injected into the PreviewFrame iframe.
 //
-// Three strategies based on real client behaviour:
+// Four strategies based on real client behaviour:
+// - none: No content transformation — just a dark background. Gmail web does NOT
+//   invert email content in dark mode; it only darkens the surrounding chrome.
 // - full-inversion: CSS filter invert(0.9) + hue-rotate — used by Gmail mobile, Outlook Windows
 // - partial-inversion: CSS filter at lower intensity — used by Outlook.com/mobile
 // - color-scheme: sets color-scheme: dark to trigger @media (prefers-color-scheme: dark) — Apple Mail (future)
 
 import type { EmailClient } from '../clients/types'
 
-export type DarkModeStrategy = 'full-inversion' | 'partial-inversion' | 'color-scheme'
+export type DarkModeStrategy = 'none' | 'full-inversion' | 'partial-inversion' | 'color-scheme'
 
 export interface DarkModeConfig {
   /** The inversion strategy this client uses */
@@ -21,6 +23,11 @@ export interface DarkModeConfig {
   /** Whether to set color-scheme: dark on <html> */
   colorScheme: boolean
 }
+
+// Gmail web: dark background only, no content transformation
+const NONE_CSS = `
+  html { background-color: #1a1a1a !important; }
+`
 
 const FULL_INVERSION_CSS = `
   html { background-color: #1a1a1a !important; }
@@ -40,8 +47,8 @@ const PARTIAL_INVERSION_CSS = `
 
 const configs: Record<EmailClient, DarkModeConfig> = {
   gmail: {
-    strategy: 'full-inversion',
-    css: FULL_INVERSION_CSS,
+    strategy: 'none',
+    css: NONE_CSS,
     colorScheme: false,
   },
   outlook: {
