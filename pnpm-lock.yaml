@@ -39,8 +39,8 @@ importers:
   packages/components:
     dependencies:
       '@mailpeek/preview':
-        specifier: workspace:*
-        version: link:../preview
+        specifier: ^0.1.3
+        version: 0.1.3(vue@3.5.28(typescript@5.9.3))
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^5.0.0
@@ -602,6 +602,11 @@ packages:
 
   '@jridgewell/sourcemap-codec@1.5.5':
     resolution: {integrity: sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og==}
+
+  '@mailpeek/preview@0.1.3':
+    resolution: {integrity: sha512-Wvx4gSycI88reIdSnbYqOa7xhBOgfJhrnaosaTRII4K6IHxXmPaySwuqcOIw5MLvAM8BFpKjXhW0+q32px8KGg==}
+    peerDependencies:
+      vue: ^3.5.0
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2536,6 +2541,10 @@ snapshots:
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
   '@jridgewell/sourcemap-codec@1.5.5': {}
+
+  '@mailpeek/preview@0.1.3(vue@3.5.28(typescript@5.9.3))':
+    dependencies:
+      vue: 3.5.28(typescript@5.9.3)
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
