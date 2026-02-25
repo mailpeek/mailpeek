@@ -1,17 +1,38 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const activeTab = ref<'preview' | 'build'>('preview')
+</script>
+
 <template>
   <section class="code-section">
     <h2 class="code-section__title">Drop it into any Vue app</h2>
     <p class="code-section__subtitle">
-      One component. Pass your HTML. Pick a client.
+      Preview emails or build them — one import, a few lines of code.
     </p>
     <div class="code-section__block">
       <div class="code-section__header">
         <div class="code-section__dots" aria-hidden="true">
           <span></span><span></span><span></span>
         </div>
-        <span class="code-section__filename">EmailDashboard.vue</span>
+        <div class="code-section__tabs">
+          <button
+            :class="['code-section__tab', { 'code-section__tab--active': activeTab === 'preview' }]"
+            @click="activeTab = 'preview'"
+          >
+            Preview
+          </button>
+          <button
+            :class="['code-section__tab', { 'code-section__tab--active': activeTab === 'build' }]"
+            @click="activeTab = 'build'"
+          >
+            Build
+          </button>
+        </div>
       </div>
-      <pre class="code-section__pre"><code class="code-section__code"><span class="code-t">&lt;script setup&gt;</span>
+
+      <!-- Preview tab -->
+      <pre v-show="activeTab === 'preview'" class="code-section__pre"><code class="code-section__code"><span class="code-t">&lt;script setup&gt;</span>
 <span class="code-k">import</span> { EmailPreview } <span class="code-k">from</span> <span class="code-s">'@mailpeek/preview'</span>
 <span class="code-k">import</span> <span class="code-s">'@mailpeek/preview/style.css'</span>
 
@@ -20,6 +41,26 @@
 
 <span class="code-t">&lt;template&gt;</span>
   <span class="code-e">&lt;EmailPreview</span> <span class="code-a">:html</span>=<span class="code-s">"html"</span> <span class="code-a">client</span>=<span class="code-s">"gmail"</span> <span class="code-e">/&gt;</span>
+<span class="code-t">&lt;/template&gt;</span></code></pre>
+
+      <!-- Build tab -->
+      <pre v-show="activeTab === 'build'" class="code-section__pre"><code class="code-section__code"><span class="code-t">&lt;script setup&gt;</span>
+<span class="code-k">import</span> {
+  EmailContainer, EmailHeading, EmailText, EmailButton
+} <span class="code-k">from</span> <span class="code-s">'@mailpeek/components'</span>
+<span class="code-t">&lt;/script&gt;</span>
+
+<span class="code-t">&lt;template&gt;</span>
+  <span class="code-e">&lt;EmailContainer&gt;</span>
+    <span class="code-e">&lt;EmailHeading</span> <span class="code-a">as</span>=<span class="code-s">"h1"</span><span class="code-e">&gt;</span>Welcome!<span class="code-e">&lt;/EmailHeading&gt;</span>
+    <span class="code-e">&lt;EmailText&gt;</span>Thanks for signing up.<span class="code-e">&lt;/EmailText&gt;</span>
+    <span class="code-e">&lt;EmailButton</span>
+      <span class="code-a">href</span>=<span class="code-s">"https://example.com"</span>
+      <span class="code-a">backgroundColor</span>=<span class="code-s">"#0d9488"</span>
+    <span class="code-e">&gt;</span>
+      Get Started
+    <span class="code-e">&lt;/EmailButton&gt;</span>
+  <span class="code-e">&lt;/EmailContainer&gt;</span>
 <span class="code-t">&lt;/template&gt;</span></code></pre>
     </div>
   </section>
@@ -75,10 +116,31 @@
   background: rgba(255, 255, 255, 0.12);
 }
 
-.code-section__filename {
+.code-section__tabs {
+  display: flex;
+  gap: 2px;
+  margin-left: 8px;
+}
+
+.code-section__tab {
+  background: none;
+  border: none;
+  cursor: pointer;
   font-size: 12px;
   font-family: var(--vp-font-family-mono);
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.35);
+  padding: 4px 12px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.code-section__tab:hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.code-section__tab--active {
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .code-section__pre {

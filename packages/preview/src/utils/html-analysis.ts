@@ -33,21 +33,23 @@ export function extractPreviewText(html: string): string | null {
   // 1. Check for explicit preheader class on span
   const spanPreheaderMatch = html.match(/<span[^>]*class="[^"]*preheader[^"]*"[^>]*>([\s\S]*?)<\/span>/i)
   if (spanPreheaderMatch) {
-    const text = stripTags(spanPreheaderMatch[1]).trim()
+    const text = cleanPreviewText(stripTags(spanPreheaderMatch[1]))
     if (text.length > 0) return truncate(text, 100)
   }
 
   // 2. Check for explicit preheader class on div
   const divPreheaderMatch = html.match(/<div[^>]*class="[^"]*preheader[^"]*"[^>]*>([\s\S]*?)<\/div>/i)
   if (divPreheaderMatch) {
-    const text = stripTags(divPreheaderMatch[1]).trim()
+    const text = cleanPreviewText(stripTags(divPreheaderMatch[1]))
     if (text.length > 0) return truncate(text, 100)
   }
 
-  // 3. Check for first hidden span (display:none style) in the body
-  const hiddenSpanMatch = html.match(/<span[^>]*style="[^"]*display\s*:\s*none[^"]*"[^>]*>([\s\S]*?)<\/span>/i)
-  if (hiddenSpanMatch) {
-    const text = stripTags(hiddenSpanMatch[1]).trim()
+  // 3. Check for first hidden element (display:none style) — matches both
+  //    <span style="display:none"> and <div style="display:none"> patterns,
+  //    including the EmailPreviewText component output.
+  const hiddenMatch = html.match(/<(?:span|div)[^>]*style="[^"]*display\s*:\s*none[^"]*"[^>]*>([\s\S]*?)<\/(?:span|div)>/i)
+  if (hiddenMatch) {
+    const text = cleanPreviewText(stripTags(hiddenMatch[1]))
     if (text.length > 0) return truncate(text, 100)
   }
 
@@ -59,8 +61,11 @@ export function extractPreviewText(html: string): string | null {
     bodyContent = bodyMatch[1]
   }
 
-  // Strip all tags and collapse whitespace
-  const visibleText = stripTags(bodyContent).replace(/\s+/g, ' ').trim()
+  // Remove hidden elements (display:none) before extracting visible text
+  bodyContent = bodyContent.replace(/<(?:span|div)[^>]*style="[^"]*display\s*:\s*none[^"]*"[^>]*>[\s\S]*?<\/(?:span|div)>/gi, '')
+
+  // Strip all tags, decode entities, remove invisible chars, and collapse whitespace
+  const visibleText = cleanPreviewText(stripTags(bodyContent))
   if (visibleText.length > 0) return truncate(visibleText, 100)
 
   return null
@@ -92,9 +97,28 @@ export function analyzeEmail(html: string): EmailMetadata {
 
 // --- Helpers ---
 
-/** Strip all HTML tags from a string */
+/** Strip all HTML tags from a string and decode common HTML entities */
 function stripTags(html: string): string {
-  return html.replace(/<[^>]+>/g, '')
+  return html
+    .replace(/<[^>]+>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&#\d+;/g, '') // strip numeric entities (e.g. &#847; padding chars)
+}
+
+/**
+ * Clean preview text by removing invisible padding characters
+ * used by EmailPreviewText (combining grapheme joiner U+034F, zero-width chars, etc.)
+ */
+function cleanPreviewText(text: string): string {
+  return text
+    .replace(/[\u034F\u200B\u200C\u200D\uFEFF]/g, '') // invisible chars
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
 /** Truncate string to maxLen characters, no ellipsis */

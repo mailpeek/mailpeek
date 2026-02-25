@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: 'mailpeek',
-  description: 'Vue.js email preview component',
+  description: 'Vue.js email components and preview toolkit',
   appearance: 'dark',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico', sizes: '48x48' }],
@@ -12,7 +12,7 @@ export default defineConfig({
     ['link', { rel: 'manifest', href: '/site.webmanifest' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'mailpeek' }],
-    ['meta', { property: 'og:description', content: 'Vue.js email preview component — see how your emails render before you send them.' }],
+    ['meta', { property: 'og:description', content: 'Build emails with Vue components and preview them across Gmail, Outlook, and dark mode.' }],
     ['meta', { property: 'og:url', content: 'https://mailpeek.dev' }],
     ['meta', { property: 'og:image', content: 'https://mailpeek.dev/wordmark.png' }],
   ],
@@ -24,6 +24,7 @@ export default defineConfig({
       { text: 'Demo', link: '/demo' },
       { text: 'Getting Started', link: '/getting-started' },
       { text: 'API', link: '/api' },
+      { text: 'Components', link: '/components' },
       { text: 'Examples', link: '/examples' },
     ],
     sidebar: [
@@ -38,6 +39,7 @@ export default defineConfig({
         text: 'Reference',
         items: [
           { text: 'API', link: '/api' },
+          { text: 'Components', link: '/components' },
         ],
       },
     ],

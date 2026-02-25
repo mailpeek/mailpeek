@@ -35,14 +35,41 @@ ${props.html}
 </html>`
 })
 
-function onLoad(event: Event) {
-  const iframe = event.target as HTMLIFrameElement
+function recalcHeight(iframe: HTMLIFrameElement) {
   try {
     const height = iframe.contentDocument?.documentElement?.scrollHeight
     if (height && height > 0) iframeHeight.value = height + 'px'
   } catch {
+    // ignore cross-origin errors
+  }
+}
+
+function onLoad(event: Event) {
+  const iframe = event.target as HTMLIFrameElement
+  recalcHeight(iframe)
+
+  // Recalculate after images inside the iframe finish loading —
+  // scrollHeight at @load time may not account for image dimensions.
+  try {
+    const images = iframe.contentDocument?.querySelectorAll('img') ?? []
+    let pending = 0
+    images.forEach((img) => {
+      if (!img.complete) {
+        pending++
+        img.addEventListener('load', () => {
+          pending--
+          if (pending === 0) recalcHeight(iframe)
+        }, { once: true })
+        img.addEventListener('error', () => {
+          pending--
+          if (pending === 0) recalcHeight(iframe)
+        }, { once: true })
+      }
+    })
+  } catch {
     // ignore
   }
+
   emit('load', event)
 }
 </script>
@@ -53,7 +80,7 @@ function onLoad(event: Event) {
       :srcdoc="srcdoc"
       sandbox="allow-same-origin"
       frameborder="0"
-      scrolling="no"
+      scrolling="auto"
       :style="{ width: '100%', height: iframeHeight, border: 'none', display: 'block' }"
       @load="onLoad"
     />
@@ -63,6 +90,5 @@ function onLoad(event: Event) {
 <style scoped>
 .mailpeek-preview-frame {
   display: block;
-  overflow: hidden;
 }
 </style>

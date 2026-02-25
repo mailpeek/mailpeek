@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 const copied = ref(false)
-const installCmd = 'npm install @mailpeek/preview'
+const installCmd = 'npm install @mailpeek/preview @mailpeek/components'
 
 async function copyInstall() {
   try {
@@ -39,8 +39,8 @@ async function copyInstall() {
         See what your recipients see.
       </h1>
       <p class="hero__subtitle">
-        Email preview for Vue. Simulate Gmail and Outlook rendering, dark mode,
-        compatibility scoring, and accessibility checking. Open source, zero dependencies.
+        Build and preview emails in Vue. Compose with type-safe components, render to HTML,
+        then preview across Gmail, Outlook, and dark mode. Open source, zero dependencies.
       </p>
 
       <div class="hero__actions">

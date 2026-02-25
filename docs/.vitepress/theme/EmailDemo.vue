@@ -7,8 +7,8 @@ import emailHtml from '../../../demo/welcome-email.html?raw'
 <template>
   <div class="demo-page">
     <div class="demo-container">
-      <h1>Live Demo</h1>
-      <p>Switch between Gmail, Outlook, and Raw rendering. Toggle between mobile and desktop views.</p>
+      <h1>Preview Demo</h1>
+      <p>See how <code>@mailpeek/preview</code> renders an email across Gmail, Outlook, and Raw views. Toggle between mobile and desktop, light and dark mode.</p>
       <EmailPreview :html="emailHtml" />
     </div>
   </div>

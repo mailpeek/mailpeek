@@ -1,8 +1,8 @@
 <template>
   <section class="comparison">
-    <h2 class="comparison__title">How mailpeek compares</h2>
+    <h2 class="comparison__title">Enterprise features, zero cost</h2>
     <p class="comparison__subtitle">
-      Most email preview tools are expensive SaaS platforms. mailpeek is a Vue component you own.
+      Other tools charge hundreds per month for what mailpeek gives you for free — embedded directly in your Vue app.
     </p>
     <div class="comparison__table-wrap">
       <table class="comparison__table">
@@ -45,14 +45,28 @@
             <td><span class="comparison__no" aria-label="No">&#10005;</span></td>
           </tr>
           <tr>
-            <td class="comparison__label">Gmail simulation</td>
+            <td class="comparison__label">Vue email components</td>
+            <td class="comparison__highlight"><span class="comparison__yes" aria-label="Yes">&#10003;</span></td>
+            <td><span class="comparison__no" aria-label="No">&#10005;</span></td>
+            <td><span class="comparison__no" aria-label="No">&#10005;</span></td>
+            <td><span class="comparison__no" aria-label="No">&#10005;</span></td>
+          </tr>
+          <tr>
+            <td class="comparison__label">SSR render-to-HTML</td>
+            <td class="comparison__highlight"><span class="comparison__yes" aria-label="Yes">&#10003;</span></td>
+            <td><span class="comparison__no" aria-label="No">&#10005;</span></td>
+            <td><span class="comparison__no" aria-label="No">&#10005;</span></td>
+            <td><span class="comparison__yes" aria-label="Yes">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td class="comparison__label">Gmail preview</td>
             <td class="comparison__highlight"><span class="comparison__yes" aria-label="Yes">&#10003;</span></td>
             <td><span class="comparison__yes" aria-label="Yes">&#10003;</span></td>
             <td><span class="comparison__yes" aria-label="Yes">&#10003;</span></td>
             <td><span class="comparison__no" aria-label="No">&#10005;</span></td>
           </tr>
           <tr>
-            <td class="comparison__label">Outlook simulation</td>
+            <td class="comparison__label">Outlook preview</td>
             <td class="comparison__highlight"><span class="comparison__yes" aria-label="Yes">&#10003;</span></td>
             <td><span class="comparison__yes" aria-label="Yes">&#10003;</span></td>
             <td><span class="comparison__yes" aria-label="Yes">&#10003;</span></td>

@@ -1,14 +1,34 @@
 <template>
   <section class="features">
-    <h2 class="features__title">Everything you need to preview emails</h2>
+    <h2 class="features__title">Build and preview emails in Vue</h2>
     <div class="features__grid">
+      <div class="features__card">
+        <div class="features__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+        </div>
+        <h3 class="features__card-title">Vue Email Components</h3>
+        <p class="features__card-text">
+          14 type-safe components that compile to cross-client HTML. Tables, buttons, headings, images — all email-safe out of the box.
+        </p>
+      </div>
+
+      <div class="features__card">
+        <div class="features__icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 01-.78-1.63l9.9-10.2a.5.5 0 01.86.46l-1.92 6.02A1 1 0 0013 10h7a1 1 0 01.78 1.63l-9.9 10.2a.5.5 0 01-.86-.46l1.92-6.02A1 1 0 0011 14H4z"/></svg>
+        </div>
+        <h3 class="features__card-title">Server-Side Render</h3>
+        <p class="features__card-text">
+          One function to render any Vue email to an HTML string. Plug into Resend, SendGrid, Nodemailer, or any sending API.
+        </p>
+      </div>
+
       <div class="features__card">
         <div class="features__icon">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 8h20"/><circle cx="6" cy="6" r="0.5" fill="currentColor"/><circle cx="9" cy="6" r="0.5" fill="currentColor"/></svg>
         </div>
-        <h3 class="features__card-title">Client Simulation</h3>
+        <h3 class="features__card-title">Client Preview</h3>
         <p class="features__card-text">
-          Preview emails as Gmail and Outlook render them. Accurate CSS filtering replicates each client's restrictions.
+          Preview emails as Gmail and Outlook render them. Per-client CSS filtering approximates each client's restrictions.
         </p>
       </div>
 
@@ -18,7 +38,7 @@
         </div>
         <h3 class="features__card-title">Dark Mode Preview</h3>
         <p class="features__card-text">
-          Simulate how Gmail, Outlook, and Apple Mail transform your email in dark mode before your users see it.
+          Preview how Gmail, Outlook, and Apple Mail transform your email in dark mode before your users see it.
         </p>
       </div>
 
@@ -80,7 +100,7 @@
 
 .features__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 
