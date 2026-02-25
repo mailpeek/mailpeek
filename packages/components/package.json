@@ -44,7 +44,7 @@
     "vue": "^3.5.0"
   },
   "dependencies": {
-    "@mailpeek/preview": "workspace:*"
+    "@mailpeek/preview": "^0.1.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
