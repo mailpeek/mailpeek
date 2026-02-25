@@ -20,13 +20,10 @@ describe('EmailHtml', () => {
     expect(html.attributes('dir')).toBe('rtl')
   })
 
-  it('renders head with meta tags', () => {
+  it('renders html wrapper without head (head is now EmailHead)', () => {
     const wrapper = mount(EmailHtml)
-    const metas = wrapper.findAll('meta')
-    expect(metas.length).toBeGreaterThanOrEqual(4)
-    expect(wrapper.find('meta[charset="utf-8"]').exists()).toBe(true)
-    expect(wrapper.find('meta[name="viewport"]').exists()).toBe(true)
-    expect(wrapper.find('meta[name="x-apple-disable-message-reformatting"]').exists()).toBe(true)
+    // EmailHtml no longer renders <head> — that's delegated to EmailHead
+    expect(wrapper.find('html').exists()).toBe(true)
   })
 
   it('renders slot content', () => {
