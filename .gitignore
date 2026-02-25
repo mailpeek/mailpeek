@@ -140,3 +140,5 @@ vite.config.ts.timestamp-*
 
 # Private planning docs
 ROADMAP.md
+CLAUDE.md
+.claude/
