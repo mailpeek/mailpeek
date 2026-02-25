@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@mailpeek/components':
+        specifier: workspace:*
+        version: link:packages/components
       '@mailpeek/preview':
         specifier: workspace:*
         version: link:packages/preview
