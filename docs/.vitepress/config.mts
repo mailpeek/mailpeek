@@ -26,6 +26,7 @@ export default defineConfig({
       { text: 'API', link: '/api' },
       { text: 'Components', link: '/components' },
       { text: 'Examples', link: '/examples' },
+      { text: 'Blog', link: '/blog/' },
     ],
     sidebar: [
       {
@@ -40,6 +41,12 @@ export default defineConfig({
         items: [
           { text: 'API', link: '/api' },
           { text: 'Components', link: '/components' },
+        ],
+      },
+      {
+        text: 'Blog',
+        items: [
+          { text: 'Why Gmail Breaks Your Email CSS', link: '/blog/gmail-breaks-your-email-css' },
         ],
       },
     ],
