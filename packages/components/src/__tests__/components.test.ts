@@ -219,6 +219,7 @@ describe('EmailButton', () => {
   it('applies default button styles', () => {
     const wrapper = mount(EmailButton, {
       props: { href: 'https://example.com' },
+      slots: { default: 'Click' },
     })
     const style = wrapper.find('a').attributes('style')!
     expect(style).toContain('display: inline-block')
@@ -230,7 +231,7 @@ describe('EmailButton', () => {
 describe('EmailImage', () => {
   it('renders an <img> with src and alt', () => {
     const wrapper = mount(EmailImage, {
-      props: { src: 'https://example.com/logo.png', alt: 'Logo' },
+      props: { src: 'https://example.com/logo.png', alt: 'Logo', width: 200, height: 50 },
     })
     const img = wrapper.find('img')
     expect(img.attributes('src')).toBe('https://example.com/logo.png')
@@ -239,7 +240,7 @@ describe('EmailImage', () => {
 
   it('applies email-safe default styles', () => {
     const wrapper = mount(EmailImage, {
-      props: { src: 'https://example.com/img.png' },
+      props: { src: 'https://example.com/img.png', width: 200, height: 100 },
     })
     const style = wrapper.find('img').attributes('style')!
     expect(style).toContain('display: block')
@@ -247,7 +248,7 @@ describe('EmailImage', () => {
     expect(style).toContain('outline: none')
   })
 
-  it('applies width and height when provided', () => {
+  it('always renders width and height as attributes and styles', () => {
     const wrapper = mount(EmailImage, {
       props: { src: 'https://example.com/img.png', width: 200, height: 100 },
     })
@@ -255,11 +256,12 @@ describe('EmailImage', () => {
     expect(img.attributes('width')).toBe('200')
     expect(img.attributes('height')).toBe('100')
     expect(img.attributes('style')).toContain('width: 200px')
+    expect(img.attributes('style')).toContain('height: 100px')
   })
 
   it('wraps in div with text-align when align is set', () => {
     const wrapper = mount(EmailImage, {
-      props: { src: 'https://example.com/img.png', align: 'center' },
+      props: { src: 'https://example.com/img.png', width: 200, height: 100, align: 'center' },
     })
     const div = wrapper.find('div')
     expect(div.exists()).toBe(true)

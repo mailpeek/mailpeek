@@ -17,8 +17,8 @@ const imgStyle = computed<CSSProperties>(() => ({
   outline: 'none',
   textDecoration: 'none',
   maxWidth: '100%',
-  width: props.width ? `${props.width}px` : undefined,
-  height: props.height ? `${props.height}px` : undefined,
+  width: `${props.width}px`,
+  height: `${props.height}px`,
   margin: props.align === 'center' ? '0 auto' : undefined,
   ...props.style,
 }))

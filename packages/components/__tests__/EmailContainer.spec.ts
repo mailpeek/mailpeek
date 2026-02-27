@@ -40,4 +40,24 @@ describe('EmailContainer', () => {
     expect(wrapper.find('tbody tr td').exists()).toBe(true)
     expect(wrapper.text()).toContain('Hello')
   })
+
+  // Rule 1: No flex or grid CSS
+  it('contains no flex or grid CSS properties', () => {
+    const wrapper = mount(EmailContainer)
+    expect(wrapper.html()).not.toMatch(/display:\s*(flex|grid|inline-flex|inline-grid)/)
+  })
+
+  // Rule 3: All styles inlined (no class-based styles)
+  it('uses only inline styles, no class attributes', () => {
+    const wrapper = mount(EmailContainer)
+    expect(wrapper.find('table').attributes('class')).toBeUndefined()
+  })
+
+  // Rule 7: Arbitrary HTML attributes passthrough
+  it('passes through arbitrary HTML attributes', () => {
+    const wrapper = mount(EmailContainer, {
+      attrs: { 'data-testid': 'email-container' },
+    })
+    expect(wrapper.find('table').attributes('data-testid')).toBe('email-container')
+  })
 })

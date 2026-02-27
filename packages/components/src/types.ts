@@ -119,10 +119,10 @@ export interface EmailImageProps {
   src: string
   /** Alt text for accessibility */
   alt?: string
-  /** Image width in pixels */
-  width?: number
-  /** Image height in pixels */
-  height?: number
+  /** Image width in pixels (required for email client compatibility) */
+  width: number
+  /** Image height in pixels (required for email client compatibility) */
+  height: number
   /** Horizontal alignment */
   align?: 'left' | 'center' | 'right'
   /** Style overrides */
