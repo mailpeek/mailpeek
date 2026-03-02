@@ -8,6 +8,8 @@ const props = withDefaults(defineProps<PreviewHeaderProps>(), {
   detailsOpen: false,
   accessibility: null,
   a11yDetailsOpen: false,
+  subject: undefined,
+  previewText: undefined,
 })
 
 const emit = defineEmits<{
@@ -39,14 +41,14 @@ const a11yBadgeClass = computed(() => {
 <template>
   <div class="preview-header" :class="{ 'preview-header--dark': darkMode }">
     <div class="preview-header__subject">
-      {{ props.metadata.subject ?? 'No subject' }}
+      {{ props.subject ? props.subject : props.metadata.subject ?? 'No subject' }}
     </div>
     <div class="preview-header__meta">
       <span
-        v-if="props.metadata.previewText !== null"
+        v-if="props.metadata.previewText !== undefined && props.metadata.previewText !== null"
         class="preview-header__preview-text"
       >
-        {{ props.metadata.previewText }}
+        {{ props.previewText ?? props.metadata.previewText }}
       </span>
       <button
         v-if="compatibility"

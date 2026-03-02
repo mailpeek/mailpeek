@@ -51,6 +51,10 @@ export interface PreviewHeaderProps {
   accessibility?: import('./utils/accessibility').AccessibilityReport | null
   /** Whether the accessibility details panel is open (controls chevron direction) */
   a11yDetailsOpen?: boolean
+  /** Subject line of the email (optional, can be extracted from metadata) */
+  subject?: string
+  /** Preview text of the email (optional, can be extracted from metadata) */
+  previewText?: string
 }
 
 export interface EmailPreviewProps {
@@ -66,6 +70,10 @@ export interface EmailPreviewProps {
   deviceWidth?: DeviceWidth
   /** Enable dark mode simulation (default: false) */
   darkMode?: boolean
+  /** Subject line of the email */
+  subject?: string
+  /** Preview text of the email */
+  previewText?: string
 }
 
 export interface PreviewFrameProps {
