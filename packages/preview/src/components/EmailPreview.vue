@@ -30,6 +30,8 @@ const props = withDefaults(defineProps<EmailPreviewProps>(), {
   mobile: false,
   deviceWidth: 'desktop',
   darkMode: false,
+  subject: undefined,
+  previewText: undefined,
 })
 
 const emit = defineEmits<EmailPreviewEmits>()
@@ -200,6 +202,8 @@ function onFrameLoaded(event: Event) {
     <!-- Metadata header with compatibility score badge -->
     <PreviewHeader
       :metadata="metadata"
+      :subject="props.subject"
+      :preview-text="props.previewText"
       :dark-mode="activeDarkMode"
       :compatibility="compatibilityReport"
       :details-open="showCompatibilityDetails"

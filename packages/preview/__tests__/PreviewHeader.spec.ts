@@ -20,6 +20,13 @@ describe('PreviewHeader', () => {
     expect(wrapper.find('.preview-header__subject').text()).toBe('My Campaign Email')
   })
 
+  it('displays the subject prop over metadata.subject', () => {
+    const wrapper = mount(PreviewHeader, {
+      props: { subject: 'My Campaign Email', metadata: makeMetadata({ subject: 'Email Subject from metadata' }) },
+    })
+    expect(wrapper.find('.preview-header__subject').text()).toBe('My Campaign Email')
+  })
+
   it('displays "No subject" placeholder when subject is null', () => {
     const wrapper = mount(PreviewHeader, {
       props: { metadata: makeMetadata({ subject: null }) },
