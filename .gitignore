@@ -142,3 +142,10 @@ vite.config.ts.timestamp-*
 ROADMAP.md
 CLAUDE.md
 .claude/
+
+# Paid templates (distributed separately via Polar)
+packages/templates/src/
+packages/templates/__tests__/
+packages/templates/scripts/
+docs/public/thumbnails/
+docs/public/html/
