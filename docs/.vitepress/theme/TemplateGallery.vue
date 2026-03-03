@@ -251,7 +251,7 @@ function isCompleteTier(category: string) {
       <div class="signup__card">
         <template v-if="signupState !== 'success'">
           <h2 class="signup__title">Get notified when templates launch</h2>
-          <p class="signup__subtitle">Be the first to know. We'll email you once — no spam.</p>
+          <p class="signup__subtitle">Be the first to know when the templates are available.</p>
           <form class="signup__form" @submit.prevent="submitSignup">
             <input
               v-model="signupEmail"
