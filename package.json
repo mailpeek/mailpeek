@@ -2,7 +2,7 @@
   "name": "mailpeek",
   "private": true,
   "scripts": {
-    "build": "pnpm -r build",
+    "build": "pnpm -r --filter '!mailpeek-sandbox' build",
     "test": "pnpm -r test",
     "lint": "eslint packages --ext .ts,.vue",
     "docs:dev": "vitepress dev docs",
