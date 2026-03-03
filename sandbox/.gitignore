@@ -1,0 +1,4 @@
+# Ignore everything in sandbox except scaffolding
+node_modules/
+dist/
+src/App.vue

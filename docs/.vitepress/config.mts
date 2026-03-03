@@ -15,6 +15,7 @@ export default defineConfig({
     ['meta', { property: 'og:description', content: 'Build emails with Vue components and preview them across Gmail, Outlook, and dark mode.' }],
     ['meta', { property: 'og:url', content: 'https://mailpeek.dev' }],
     ['meta', { property: 'og:image', content: 'https://mailpeek.dev/wordmark.png' }],
+    ['script', { defer: '', 'data-auto-init': '', src: 'https://cdn.jsdelivr.net/npm/@polar-sh/checkout@latest/dist/embed.global.js' }],
   ],
   themeConfig: {
     logo: { src: '/logo-mark.png', alt: 'mailpeek' },
@@ -25,6 +26,7 @@ export default defineConfig({
       { text: 'Getting Started', link: '/getting-started' },
       { text: 'API', link: '/api' },
       { text: 'Components', link: '/components' },
+      { text: 'Templates', link: '/templates' },
       { text: 'Examples', link: '/examples' },
       { text: 'Blog', link: '/blog/' },
     ],
@@ -41,6 +43,7 @@ export default defineConfig({
         items: [
           { text: 'API', link: '/api' },
           { text: 'Components', link: '/components' },
+          { text: 'Templates', link: '/templates' },
         ],
       },
       {

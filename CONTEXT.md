@@ -55,7 +55,7 @@ This is a complete greenfield opportunity.
 - Cross-origin iframe restrictions don't apply since we're using srcdoc (same origin)
 
 ### Why pnpm monorepo
-- Future packages (@mailpeek/components, @mailpeek/render) share types and utilities
+- Three packages (@mailpeek/preview, @mailpeek/components, @mailpeek/templates) share types and utilities
 - pnpm workspaces are the Vue ecosystem standard (Vue itself uses pnpm)
 - Single repo = single CI pipeline, coordinated releases
 
@@ -71,6 +71,12 @@ This is a complete greenfield opportunity.
 - Simple npm install + import, works immediately
 - Premium features validated via offline license key check (no server calls)
 
+### Why a TemplateTheme config object (not a theming engine)
+- Competitors (react.email, Craftingemails/Maizzle) all ship templates with sensible defaults and props/config-based customisation — nobody builds a complex theming engine for email HTML
+- `TemplateTheme` interface gives users one object to define brand colors, typography, logo, company info, and social links — reusable across all templates
+- Templates are also designed as copy-paste starting points — users can fork Vue SFCs for deeper customisation
+- Every template accepts an optional `theme` prop alongside its specific content props
+
 ---
 
 ## Revenue Strategy
@@ -78,15 +84,34 @@ This is a complete greenfield opportunity.
 ### Pricing
 - **Free tier (MIT):** Preview component, mobile/desktop toggle, metadata extraction, CSS inline warning
 - **Pro tier (€14.99/mo or €149/yr):** Dark mode sim, client hints, compatibility score, accessibility, Gmail clipping
-- **Premium components (€99 one-time):** 50+ email patterns, tested across 30+ clients
+- **Essentials templates (€49 one-time):** 15 transactional email templates (Vue SFC + HTML)
+- **Complete templates (€99 one-time):** 45 templates — transactional + marketing + reusable patterns
 
 ### Revenue math
 - 100 Pro subs × €14.99 = €1,499/mo
-- 10 component pack sales × €99 = €990/mo
-- Combined: €2,489/mo (exceeds €1-2k target)
+- 10 Essentials sales × €49 = €490/mo
+- 5 Complete sales × €99 = €495/mo
+- Combined: €2,484/mo (exceeds €1-2k target)
 
-### Payment infrastructure
-- Lemon Squeezy or Gumroad for license key generation and subscription management
+### Pricing benchmarks (Feb 2026)
+- Craftingemails: 27 templates = $99, 12 transactional = $19, full access (165+) = $199/yr
+- react.email: Templates are free/open-source (monetises via Resend sending API instead)
+- Maizzle: Framework free, premium template packs via Craftingemails partnership
+- Two-tier model (Essentials €49 / Complete €99) is well-supported by market comparables
+
+### Payment infrastructure — Polar (polar.sh)
+- **Decision:** Polar over Stripe, Lemon Squeezy, and Gumroad
+- **Why Polar:**
+  - Merchant of Record — handles EU VAT, US sales tax, and global tax compliance (critical for Ireland-based solo dev selling globally)
+  - 4% + 40c per transaction (20% cheaper than Lemon Squeezy's 5% + 50c, far cheaper than Gumroad's 10%)
+  - Built-in license key generation and validation
+  - Built specifically for developers selling software
+  - Embeddable checkout for mailpeek.dev integration
+  - Open source — aligns with mailpeek ethos
+  - No monthly fees — only pay when you sell
+- **Why not Stripe:** Cheapest fees (2.9% + 30c) but no Merchant of Record — would require handling VAT/sales tax compliance manually or paying for Stripe Tax add-on. Not worth the admin overhead for a side project at €1-2k/month.
+- **Why not Lemon Squeezy:** Acquired by Stripe in 2024, reports of reliability/support issues since. Higher fees than Polar (5% + 50c). Future uncertain as Stripe builds its own MoR solution.
+- **Why not Gumroad:** 10% + 2.9% fees are prohibitively expensive. No license key support.
 - License key passed as prop to component — premium features activate client-side
 - No server needed for validation in v1 (hash-based check)
 - Upgrade to server validation if piracy becomes a problem
