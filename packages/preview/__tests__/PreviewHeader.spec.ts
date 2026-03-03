@@ -34,12 +34,26 @@ describe('PreviewHeader', () => {
     expect(wrapper.find('.preview-header__subject').text()).toBe('No subject')
   })
 
+  it('displays the preview text over metadata.previewText', () => {
+    const wrapper = mount(PreviewHeader, {
+      props: { previewText: 'Custom preview text', metadata: makeMetadata({ previewText: 'Preview text from metadata' }) },
+    })
+    expect(wrapper.find('.preview-header__preview-text').text()).toBe('Custom preview text')
+  })
+
   it('displays preview text when previewText is present', () => {
     const wrapper = mount(PreviewHeader, {
       props: { metadata: makeMetadata({ previewText: 'Great preview here' }) },
     })
     expect(wrapper.find('.preview-header__preview-text').exists()).toBe(true)
     expect(wrapper.find('.preview-header__preview-text').text()).toBe('Great preview here')
+  })
+
+  it('does not display `undefined` as a fallback', () => {
+    const wrapper = mount(PreviewHeader, {
+      props: { metadata: makeMetadata({ previewText: undefined }), previewText: undefined },
+    })
+    expect(wrapper.find('.preview-header__preview-text').exists()).toBe(false)
   })
 
   it('hides preview text element when previewText is null', () => {
