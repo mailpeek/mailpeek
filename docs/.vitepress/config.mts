@@ -49,6 +49,7 @@ export default defineConfig({
       {
         text: 'Blog',
         items: [
+          { text: 'Dark Mode in Email', link: '/blog/dark-mode-email-rendering' },
           { text: 'Why Gmail Breaks Your Email CSS', link: '/blog/gmail-breaks-your-email-css' },
         ],
       },

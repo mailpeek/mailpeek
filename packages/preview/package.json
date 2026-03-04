@@ -1,6 +1,6 @@
 {
   "name": "@mailpeek/preview",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "Vue.js email preview component — see how emails render in Gmail and Outlook",
   "license": "MIT",
   "author": "Aoife Shannon",
