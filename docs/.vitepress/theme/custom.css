@@ -4,6 +4,7 @@
 }
 
 :root {
+  --vp-layout-top-height: 36px;
   --vp-c-brand-1: #00b2ad;
   --vp-c-brand-2: #00948f;
   --vp-c-brand-3: #007a76;

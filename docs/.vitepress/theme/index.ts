@@ -1,12 +1,19 @@
 import DefaultTheme from 'vitepress/theme'
+import { h } from 'vue'
 import EmailDemo from './EmailDemo.vue'
 import LandingPage from './LandingPage.vue'
 import ComponentsDemo from './ComponentsDemo.vue'
 import TemplateGallery from './TemplateGallery.vue'
+import AnnouncementBar from './AnnouncementBar.vue'
 import './custom.css'
 
 export default {
   extends: DefaultTheme,
+  Layout() {
+    return h(DefaultTheme.Layout, null, {
+      'layout-top': () => h(AnnouncementBar),
+    })
+  },
   enhanceApp({ app }) {
     app.component('EmailDemo', EmailDemo)
     app.component('LandingPage', LandingPage)

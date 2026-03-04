@@ -12,23 +12,11 @@ async function onSubmit() {
   }
   error.value = ''
 
-  // TODO: Replace this URL with your actual Brevo form action URL
-  // You can get this from Brevo > Contacts > Forms > Create a form > Get embed code
-  // The form action URL looks like: https://sibforms.com/serve/XXXXX
-  const BREVO_FORM_URL = 'https://ae8222f3.sibforms.com/serve/MUIFAFVY1lcYq6Ipu5dAdXteqrexW4eWvzXBELaatjLWr8WqDHWHORZHW5XDx0qpPVBrZI6bzBLXinoYFNcqeepNwPRC3VJRuIKN6gNttci8L9blWS2vyErONtsqnJQoIabwOGd9ar34AEMUDNzApZ9c-WY6O3trOTKqt3KTWN7sXaeid9srGyC_bIa6JcPuYOIn92EMN0v9zmPRMg=='
-
-  if (!BREVO_FORM_URL) {
-    // Placeholder behaviour until Brevo is configured
-    submitted.value = true
-    return
-  }
-
   try {
-    await fetch(BREVO_FORM_URL, {
+    await fetch('https://hook.eu1.make.com/q2xbveigisobioj2m784kvho9col61qv', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ EMAIL: email.value }).toString(),
-      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email.value }),
     })
     submitted.value = true
   } catch {
