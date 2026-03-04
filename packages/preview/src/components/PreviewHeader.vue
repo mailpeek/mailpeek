@@ -10,11 +10,13 @@ const props = withDefaults(defineProps<PreviewHeaderProps>(), {
   a11yDetailsOpen: false,
   subject: undefined,
   previewText: undefined,
+  showPlainText: false,
 })
 
 const emit = defineEmits<{
   'toggle-details': [open: boolean]
   'toggle-a11y-details': [open: boolean]
+  'toggle-plaintext': [show: boolean]
 }>()
 
 function toggleDetails() {
@@ -71,6 +73,15 @@ const a11yBadgeClass = computed(() => {
       >
         <span>A11y {{ accessibility.grade }} {{ accessibility.score }}</span>
         <svg class="preview-header__score-chevron" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2.5 3.5l2.5 3 2.5-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button
+        type="button"
+        class="preview-header__plaintext"
+        :class="{ 'preview-header__plaintext--active': props.showPlainText }"
+        :title="props.showPlainText ? 'Switch to HTML view' : 'Switch to plain text view'"
+        @click="emit('toggle-plaintext', !props.showPlainText)"
+      >
+        {{ props.showPlainText ? 'HTML' : 'Text' }}
       </button>
       <span
         class="preview-header__file-size"
@@ -222,6 +233,35 @@ const a11yBadgeClass = computed(() => {
   color: #dc2626;
 }
 
+.preview-header__plaintext {
+  flex-shrink: 0;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid #d4d4d8;
+  background: transparent;
+  color: #71717a;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.preview-header__plaintext:hover {
+  background: #f4f4f5;
+  color: #18181b;
+}
+
+.preview-header__plaintext--active {
+  background: #18181b;
+  color: #ffffff;
+  border-color: #18181b;
+}
+
+.preview-header__plaintext--active:hover {
+  background: #27272a;
+  color: #ffffff;
+}
+
 .preview-header__file-size {
   flex-shrink: 0;
   font-variant-numeric: tabular-nums;
@@ -287,6 +327,23 @@ const a11yBadgeClass = computed(() => {
 .preview-header--dark .preview-header__a11y--f {
   background: #451a1a;
   color: #f87171;
+}
+.preview-header--dark .preview-header__plaintext {
+  border-color: #3c4043;
+  color: #9aa0a6;
+}
+.preview-header--dark .preview-header__plaintext:hover {
+  background: #3c4043;
+  color: #e8eaed;
+}
+.preview-header--dark .preview-header__plaintext--active {
+  background: #e8eaed;
+  color: #18181b;
+  border-color: #e8eaed;
+}
+.preview-header--dark .preview-header__plaintext--active:hover {
+  background: #d4d4d8;
+  color: #18181b;
 }
 .preview-header--dark .preview-header__file-size {
   background: #3c4043;

@@ -93,4 +93,35 @@ describe('PreviewHeader', () => {
     const sizeEl = wrapper.find('.preview-header__file-size')
     expect(sizeEl.classes()).not.toContain('preview-header__file-size--warning')
   })
+
+  it('renders the plaintext toggle button', () => {
+    const wrapper = mount(PreviewHeader, {
+      props: { metadata: makeMetadata() },
+    })
+    const btn = wrapper.find('.preview-header__plaintext')
+    expect(btn.exists()).toBe(true)
+    expect(btn.text()).toBe('Text')
+  })
+
+  it('shows "HTML" label when plaintext is active', () => {
+    const wrapper = mount(PreviewHeader, {
+      props: { metadata: makeMetadata(), showPlainText: true },
+    })
+    expect(wrapper.find('.preview-header__plaintext').text()).toBe('HTML')
+  })
+
+  it('emits toggle-plaintext when button is clicked', async () => {
+    const wrapper = mount(PreviewHeader, {
+      props: { metadata: makeMetadata(), showPlainText: false },
+    })
+    await wrapper.find('.preview-header__plaintext').trigger('click')
+    expect(wrapper.emitted('toggle-plaintext')).toEqual([[true]])
+  })
+
+  it('applies active class when showPlainText is true', () => {
+    const wrapper = mount(PreviewHeader, {
+      props: { metadata: makeMetadata(), showPlainText: true },
+    })
+    expect(wrapper.find('.preview-header__plaintext').classes()).toContain('preview-header__plaintext--active')
+  })
 })
