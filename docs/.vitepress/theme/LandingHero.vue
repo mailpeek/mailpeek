@@ -129,9 +129,6 @@ async function copyInstall() {
   display: block;
 }
 
-.dark .hero__wordmark {
-  filter: brightness(1.8) saturate(1.2);
-}
 
 .hero__title {
   font-size: 52px;
