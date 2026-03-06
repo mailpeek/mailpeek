@@ -5,6 +5,7 @@ import LandingPage from './LandingPage.vue'
 import ComponentsDemo from './ComponentsDemo.vue'
 import TemplateGallery from './TemplateGallery.vue'
 import AnnouncementBar from './AnnouncementBar.vue'
+import PlaygroundPage from './PlaygroundPage.vue'
 import './custom.css'
 
 export default {
@@ -19,5 +20,6 @@ export default {
     app.component('LandingPage', LandingPage)
     app.component('ComponentsDemo', ComponentsDemo)
     app.component('TemplateGallery', TemplateGallery)
+    app.component('PlaygroundPage', PlaygroundPage)
   },
 }

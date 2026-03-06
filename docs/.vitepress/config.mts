@@ -23,6 +23,7 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Demo', link: '/demo' },
+      { text: 'Playground', link: '/playground' },
       { text: 'Getting Started', link: '/getting-started' },
       { text: 'API', link: '/api' },
       { text: 'Components', link: '/components' },

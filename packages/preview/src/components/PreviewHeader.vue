@@ -100,14 +100,17 @@ const a11yBadgeClass = computed(() => {
 
 .preview-header__meta {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 12px;
   font-size: 12px;
   color: #71717a;
+  overflow: hidden;
 }
 
 .preview-header__preview-text {
   flex: 1;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -136,6 +139,7 @@ const a11yBadgeClass = computed(() => {
 }
 
 .preview-header__score-chevron {
+  display: inline;
   transition: transform 0.2s;
   flex-shrink: 0;
   width: 10px;

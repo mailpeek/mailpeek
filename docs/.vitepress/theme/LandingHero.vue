@@ -46,6 +46,7 @@ async function copyInstall() {
       <div class="hero__actions">
         <a href="/getting-started" class="hero__cta hero__cta--primary">Get Started</a>
         <a href="#demo" class="hero__cta hero__cta--secondary">Try the Demo</a>
+        <a href="/playground" class="hero__cta hero__cta--secondary">Try the Playground →</a>
       </div>
 
       <div class="hero__install" @click="copyInstall">
