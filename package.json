@@ -13,12 +13,17 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild"
-    ]
+    ],
+    "overrides": {
+      "minimatch": "^9.0.7",
+      "rollup": "^4.59.0",
+      "esbuild": "^0.25.0",
+      "ajv": "^6.14.0"
+    }
   },
   "devDependencies": {
     "@mailpeek/components": "workspace:*",
     "@mailpeek/preview": "workspace:*",
-    "@mailpeek/templates": "workspace:*",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.50.0",
