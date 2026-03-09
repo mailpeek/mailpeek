@@ -8,6 +8,7 @@ import { ref, computed, watch, useSlots, onMounted, h, createSSRApp } from 'vue'
 import { renderToString } from 'vue/server-renderer'
 import type { EmailPreviewProps, EmailPreviewEmits, EmailClient, DeviceWidth } from '../types'
 import { filterHtml } from '../utils/css-filter'
+import { htmlToPlainText } from '../utils/plaintext'
 import { analyzeEmail } from '../utils/html-analysis'
 import { analyzeCompatibility } from '../utils/compatibility'
 import { analyzeAccessibility } from '../utils/accessibility'
@@ -32,6 +33,7 @@ const props = withDefaults(defineProps<EmailPreviewProps>(), {
   darkMode: false,
   subject: undefined,
   previewText: undefined,
+  text: undefined,
 })
 
 const emit = defineEmits<EmailPreviewEmits>()
@@ -87,6 +89,19 @@ function onDarkModeChange(enabled: boolean) {
   activeDarkMode.value = enabled
   emit('darkmode-change', enabled)
 }
+
+// Plain text view state
+const showPlainText = ref(false)
+
+function onTogglePlainText(show: boolean) {
+  showPlainText.value = show
+}
+
+// Plain text content — user-provided text prop takes precedence over auto-stripped HTML
+const plainTextContent = computed(() => {
+  if (props.text !== undefined) return props.text
+  return htmlToPlainText(resolvedHtml.value)
+})
 
 const isMobile = computed(() => props.mobile || activeDevice.value === 'mobile')
 
@@ -209,8 +224,10 @@ function onFrameLoaded(event: Event) {
       :details-open="showCompatibilityDetails"
       :accessibility="accessibilityReport"
       :a11y-details-open="showAccessibilityDetails"
+      :show-plain-text="showPlainText"
       @toggle-details="onToggleDetails"
       @toggle-a11y-details="onToggleA11yDetails"
+      @toggle-plaintext="onTogglePlainText"
     />
 
     <!-- Expandable compatibility details panel -->
@@ -229,8 +246,13 @@ function onFrameLoaded(event: Event) {
       @close="showAccessibilityDetails = false"
     />
 
+    <!-- Plain text view -->
+    <div v-if="showPlainText" class="mailpeek-plaintext" :class="{ 'mailpeek-plaintext--dark': activeDarkMode }">
+      <pre class="mailpeek-plaintext__content">{{ plainTextContent }}</pre>
+    </div>
+
     <!-- Device-width container constrains the chrome + iframe -->
-    <div class="mailpeek-device-container" :style="{ maxWidth: effectiveWidth }">
+    <div v-else class="mailpeek-device-container" :style="{ maxWidth: effectiveWidth }">
       <!-- Gmail chrome wrapper -->
       <GmailChrome v-if="activeClient === 'gmail'" :mobile="isMobile" :dark-mode="activeDarkMode">
         <PreviewFrame :html="filteredHtml" :width="'100%'" :dark-mode="activeDarkMode" :client="activeClient" @load="onFrameLoaded" />
@@ -281,6 +303,35 @@ function onFrameLoaded(event: Event) {
   .mailpeek-toolbar-right {
     gap: 8px;
   }
+}
+
+.mailpeek-plaintext {
+  background: #ffffff;
+  border: 1px solid #d4d4d8;
+  border-radius: 6px;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+.mailpeek-plaintext--dark {
+  background: #1a1a1a;
+  border-color: #3c4043;
+}
+
+.mailpeek-plaintext__content {
+  margin: 0;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #18181b;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.mailpeek-plaintext--dark .mailpeek-plaintext__content {
+  color: #e8eaed;
 }
 
 .mailpeek-device-container {

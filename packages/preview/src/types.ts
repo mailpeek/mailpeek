@@ -55,6 +55,8 @@ export interface PreviewHeaderProps {
   subject?: string
   /** Preview text of the email (optional, can be extracted from metadata) */
   previewText?: string
+  /** Whether the plain text view is currently active */
+  showPlainText?: boolean
 }
 
 export interface EmailPreviewProps {
@@ -74,6 +76,8 @@ export interface EmailPreviewProps {
   subject?: string
   /** Preview text of the email */
   previewText?: string
+  /** User-provided plain text version of the email (overrides auto-generated) */
+  text?: string
 }
 
 export interface PreviewFrameProps {

@@ -37,3 +37,6 @@ export type { DarkModeConfig, DarkModeStrategy } from './utils/dark-mode'
 
 // HTML analysis utilities
 export { analyzeEmail, extractSubject, extractPreviewText, calculateFileSize } from './utils/html-analysis'
+
+// Plain text conversion
+export { htmlToPlainText } from './utils/plaintext'
