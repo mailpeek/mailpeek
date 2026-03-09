@@ -45,11 +45,11 @@ async function copyInstall() {
 
       <div class="hero__actions">
         <a href="/getting-started" class="hero__cta hero__cta--primary">Get Started</a>
-        <a href="#demo" class="hero__cta hero__cta--secondary">Try the Demo</a>
         <a href="/playground" class="hero__cta hero__cta--secondary">Try the Playground →</a>
       </div>
 
-      <div class="hero__install" @click="copyInstall">
+      <div class="hero__bottom-row">
+        <div class="hero__install" @click="copyInstall">
         <span class="hero__install-prompt">$</span>
         <code class="hero__install-cmd">{{ installCmd }}</code>
         <button type="button" class="hero__install-copy" :title="copied ? 'Copied!' : 'Copy to clipboard'">
@@ -61,6 +61,14 @@ async function copyInstall() {
             <path d="M4 8.5l3 3 5-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
+        </div>
+
+        <a href="https://github.com/mailpeek/mailpeek" target="_blank" rel="noopener" class="hero__github-star">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display:inline;vertical-align:middle;">
+            <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/>
+          </svg>
+          Star on GitHub
+        </a>
       </div>
     </div>
   </section>
@@ -190,6 +198,27 @@ async function copyInstall() {
 
 .hero__cta--secondary:hover {
   border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+
+.hero__bottom-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero__github-star {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.hero__github-star:hover {
   color: var(--vp-c-brand-1);
 }
 

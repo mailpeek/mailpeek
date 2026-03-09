@@ -2,9 +2,14 @@
 
 The only Vue-native email toolkit. Build cross-client emails with type-safe components, then preview them across Gmail, Outlook, and dark mode.
 
+[![npm](https://img.shields.io/npm/v/@mailpeek/preview?label=%40mailpeek%2Fpreview&color=00b2ad)](https://www.npmjs.com/package/@mailpeek/preview)
+[![npm](https://img.shields.io/npm/v/@mailpeek/components?label=%40mailpeek%2Fcomponents&color=00b2ad)](https://www.npmjs.com/package/@mailpeek/components)
+[![GitHub Stars](https://img.shields.io/github/stars/mailpeek/mailpeek?style=flat&color=00b2ad)](https://github.com/mailpeek/mailpeek/stargazers)
+[![License: MIT](https://img.shields.io/badge/license-MIT-00b2ad.svg)](LICENSE)
+
 ![mailpeek demo](https://raw.githubusercontent.com/mailpeek/mailpeek/main/demo/mailpeek-demo.gif)
 
-**[Live Demo](https://mailpeek.dev/demo)** · **[Docs](https://mailpeek.dev)** · **[GitHub](https://github.com/mailpeek/mailpeek)**
+**[Playground](https://mailpeek.dev/playground)** · **[Live Demo](https://mailpeek.dev/demo)** · **[Docs](https://mailpeek.dev)** · **[GitHub](https://github.com/mailpeek/mailpeek)**
 
 ## Packages
 
