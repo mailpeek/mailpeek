@@ -71,7 +71,7 @@ export interface EmailHeadProps {
 export interface EmailSectionProps {
   /** Background color */
   backgroundColor?: string
-  /** CSS padding value (e.g. '16px', '16px 24px') */
+  /** CSS padding value — shorthand (e.g. '16px', '16px 24px') is expanded to longhand automatically */
   padding?: string
   /** Style overrides */
   style?: CSSProperties
@@ -91,7 +91,7 @@ export interface EmailColumnProps {
   valign?: 'top' | 'middle' | 'bottom'
   /** Background color */
   backgroundColor?: string
-  /** CSS padding value */
+  /** CSS padding value — shorthand (e.g. '16px', '16px 24px') is expanded to longhand automatically */
   padding?: string
   /** Style overrides */
   style?: CSSProperties

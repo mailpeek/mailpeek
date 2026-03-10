@@ -11,9 +11,10 @@ const props = withDefaults(defineProps<EmailContainerProps>(), {
 const tableStyle = computed<CSSProperties>(() => ({
   width: '100%',
   maxWidth: `${props.maxWidth}px`,
-  margin: props.align === 'center' ? '0 auto' : undefined,
-  marginRight: props.align === 'left' ? 'auto' : undefined,
-  marginLeft: props.align === 'right' ? 'auto' : undefined,
+  marginTop: '0',
+  marginRight: props.align === 'center' || props.align === 'right' ? 'auto' : undefined,
+  marginBottom: '0',
+  marginLeft: props.align === 'center' || props.align === 'left' ? 'auto' : undefined,
   backgroundColor: props.backgroundColor,
   ...props.style,
 }))
@@ -22,6 +23,8 @@ const tableStyle = computed<CSSProperties>(() => ({
 <template>
   <table
     role="presentation"
+    :align="align"
+    width="100%"
     :style="tableStyle"
     cellpadding="0"
     cellspacing="0"

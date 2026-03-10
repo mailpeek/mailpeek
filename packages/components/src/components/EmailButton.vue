@@ -29,7 +29,10 @@ export default defineComponent({
   setup(props, { slots }) {
     const wrapperStyle = computed<CSSProperties>(() => ({
       textAlign: props.align,
-      margin: '0 0 16px 0',
+      marginTop: '0',
+      marginRight: '0',
+      marginBottom: '16px',
+      marginLeft: '0',
     }))
 
     const buttonHeight = computed(() => props.paddingY * 2 + props.fontSize + 4)
@@ -50,7 +53,10 @@ export default defineComponent({
         ['text-decoration', 'none'],
         ['text-align', 'center'],
         ['border-radius', `${props.borderRadius}px`],
-        ['padding', `${props.paddingY}px ${props.paddingX}px`],
+        ['padding-top', `${props.paddingY}px`],
+        ['padding-right', `${props.paddingX}px`],
+        ['padding-bottom', `${props.paddingY}px`],
+        ['padding-left', `${props.paddingX}px`],
       ]
 
       if (props.style) {

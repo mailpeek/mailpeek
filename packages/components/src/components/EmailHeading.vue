@@ -18,7 +18,10 @@ const headingStyle = computed<CSSProperties>(() => ({
   fontFamily: props.fontFamily,
   color: props.color,
   textAlign: props.align,
-  margin: '0 0 16px 0',
+  marginTop: '0',
+  marginRight: '0',
+  marginBottom: '16px',
+  marginLeft: '0',
   ...props.style,
 }))
 </script>

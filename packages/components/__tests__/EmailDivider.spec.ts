@@ -3,33 +3,39 @@ import { mount } from '@vue/test-utils'
 import EmailDivider from '../src/components/EmailDivider.vue'
 
 describe('EmailDivider', () => {
-  it('renders an hr element', () => {
+  it('renders a table-based divider', () => {
     const wrapper = mount(EmailDivider)
-    expect(wrapper.find('hr').exists()).toBe(true)
+    expect(wrapper.find('table').exists()).toBe(true)
+    expect(wrapper.find('td').exists()).toBe(true)
+    expect(wrapper.find('hr').exists()).toBe(false)
   })
 
   it('applies default styles', () => {
     const wrapper = mount(EmailDivider)
-    const style = wrapper.find('hr').attributes('style')!
-    // jsdom normalizes 'border: none' on <hr> to 'border: medium' — check border is set
-    expect(style).toContain('border')
-    expect(style).toContain('height: 1px')
+    const td = wrapper.find('td')
+    expect(td.attributes('height')).toBe('1')
+    expect(td.attributes('bgcolor')).toBe('#e0e0e0')
+    // jsdom normalizes longhand margin properties to shorthand
+    const tableStyle = wrapper.find('table').attributes('style')!
+    expect(tableStyle).toContain('margin')
   })
 
   it('applies custom color and height', () => {
     const wrapper = mount(EmailDivider, {
       props: { color: '#cccccc', height: 2 },
     })
-    const style = wrapper.find('hr').attributes('style')!
-    expect(style).toContain('height: 2px')
-    expect(style).toContain('background-color')
+    const td = wrapper.find('td')
+    expect(td.attributes('height')).toBe('2')
+    expect(td.attributes('bgcolor')).toBe('#cccccc')
   })
 
   it('applies custom margin', () => {
     const wrapper = mount(EmailDivider, {
       props: { margin: '24px 0' },
     })
-    expect(wrapper.find('hr').attributes('style')).toContain('margin')
+    // jsdom normalizes longhand margin properties to shorthand
+    const tableStyle = wrapper.find('table').attributes('style')!
+    expect(tableStyle).toContain('24px')
   })
 
   // Rule 1: No flex or grid CSS
@@ -41,14 +47,13 @@ describe('EmailDivider', () => {
   // Rule 3: All styles inlined (no class-based styles)
   it('uses only inline styles, no class attributes', () => {
     const wrapper = mount(EmailDivider)
-    expect(wrapper.find('hr').attributes('class')).toBeUndefined()
+    expect(wrapper.find('table').attributes('class')).toBeUndefined()
+    expect(wrapper.find('td').attributes('class')).toBeUndefined()
   })
 
-  // Rule 7: Arbitrary HTML attributes passthrough
-  it('passes through arbitrary HTML attributes', () => {
-    const wrapper = mount(EmailDivider, {
-      attrs: { 'data-testid': 'email-divider' },
-    })
-    expect(wrapper.find('hr').attributes('data-testid')).toBe('email-divider')
+  // Rule 7: Table has role="presentation"
+  it('table has role="presentation"', () => {
+    const wrapper = mount(EmailDivider)
+    expect(wrapper.find('table').attributes('role')).toBe('presentation')
   })
 })

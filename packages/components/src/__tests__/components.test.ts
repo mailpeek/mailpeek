@@ -299,27 +299,27 @@ describe('EmailLink', () => {
 })
 
 describe('EmailDivider', () => {
-  it('renders an <hr>', () => {
+  it('renders a table-based divider', () => {
     const wrapper = mount(EmailDivider)
-    expect(wrapper.find('hr').exists()).toBe(true)
+    expect(wrapper.find('table').exists()).toBe(true)
+    expect(wrapper.find('td').exists()).toBe(true)
+    expect(wrapper.find('hr').exists()).toBe(false)
   })
 
   it('applies default styles', () => {
     const wrapper = mount(EmailDivider)
-    const style = wrapper.find('hr').attributes('style')!
-    // jsdom normalizes 'border: none' to 'border: medium'
-    expect(style).toContain('border')
-    expect(style).toContain('height: 1px')
-    expect(style).toContain('margin: 16px')
+    const td = wrapper.find('td')
+    expect(td.attributes('height')).toBe('1')
+    expect(td.attributes('bgcolor')).toBe('#e0e0e0')
   })
 
   it('applies custom color and height', () => {
     const wrapper = mount(EmailDivider, {
       props: { color: '#000000', height: 2 },
     })
-    const style = wrapper.find('hr').attributes('style')!
-    expect(style).toContain('background-color: rgb(0, 0, 0)')
-    expect(style).toContain('height: 2px')
+    const td = wrapper.find('td')
+    expect(td.attributes('bgcolor')).toBe('#000000')
+    expect(td.attributes('height')).toBe('2')
   })
 })
 

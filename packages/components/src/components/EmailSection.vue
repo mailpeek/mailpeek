@@ -2,12 +2,19 @@
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { EmailSectionProps } from '../types'
+import { expandShorthand } from '../utils/expandShorthand'
 
 const props = withDefaults(defineProps<EmailSectionProps>(), {})
 
+const paddingStyle = computed(() => {
+  if (!props.padding) return {}
+  const { top, right, bottom, left } = expandShorthand(props.padding)
+  return { paddingTop: top, paddingRight: right, paddingBottom: bottom, paddingLeft: left }
+})
+
 const tdStyle = computed<CSSProperties>(() => ({
   backgroundColor: props.backgroundColor,
-  padding: props.padding,
+  ...paddingStyle.value,
   ...props.style,
 }))
 </script>
