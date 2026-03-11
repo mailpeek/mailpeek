@@ -1,0 +1,65 @@
+{
+  "name": "@mailpeek/templates",
+  "version": "0.1.0",
+  "description": "Typed, themeable Vue SFC email templates for Mailpeek",
+  "license": "MIT",
+  "author": "Aoife Shannon",
+  "homepage": "https://mailpeek.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mailpeek/mailpeek",
+    "directory": "packages/templates"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "email",
+    "email-templates",
+    "html-email",
+    "ssr",
+    "transactional",
+    "marketing",
+    "template"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./transactional": {
+      "types": "./dist/transactional/index.d.ts",
+      "import": "./dist/transactional/index.js"
+    },
+    "./marketing": {
+      "types": "./dist/marketing/index.d.ts",
+      "import": "./dist/marketing/index.js"
+    },
+    "./patterns": {
+      "types": "./dist/patterns/index.d.ts",
+      "import": "./dist/patterns/index.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build && vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly --declarationDir dist --noEmit false",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "dependencies": {
+    "@mailpeek/components": "workspace:*"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vite": "^6.0.0",
+    "vue": "^3.5.0",
+    "vue-tsc": "^2.0.0"
+  }
+}
