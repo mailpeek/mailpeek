@@ -941,7 +941,7 @@ function isCompleteTier(category: string) {
 .gallery__modal-body {
   flex: 1;
   overflow: auto;
-  padding: 24px;
+  padding: 16px 20px;
 }
 
 /* ─── Responsive: Tablet ─── */

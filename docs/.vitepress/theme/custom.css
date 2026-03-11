@@ -49,6 +49,13 @@
   display: none !important;
 }
 
+/* Force EmailPreview toolbar to single row inside gallery modal (desktop only) */
+@media (min-width: 641px) {
+  .gallery__modal .mailpeek-toolbar {
+    flex-wrap: nowrap;
+  }
+}
+
 /* Hide the partial-width sidebar divider line on landing page */
 .Layout:has(.landing) .VPNavBar .divider {
   display: none !important;

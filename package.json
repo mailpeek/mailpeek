@@ -10,7 +10,8 @@
     "docs:preview": "vitepress preview docs",
     "build:all": "pnpm build && pnpm docs:build",
     "send-test": "node scripts/send-test.mjs",
-    "pack:templates": "cd packages/templates && npm pack"
+    "pack:templates": "cd packages/templates && npm pack",
+    "generate-thumbnails": "node scripts/generate-thumbnails.mjs"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -28,6 +29,7 @@
     "@mailpeek/preview": "workspace:*",
     "@mailpeek/templates": "workspace:*",
     "dotenv": "^16.0.0",
+    "playwright": "^1.40.0",
     "resend": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
