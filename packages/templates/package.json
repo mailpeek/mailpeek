@@ -48,6 +48,7 @@
   },
   "scripts": {
     "build": "vite build && vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly --declarationDir dist --noEmit false",
+    "prepublishOnly": "pnpm build",
     "typecheck": "vue-tsc --noEmit"
   },
   "peerDependencies": {
