@@ -204,9 +204,13 @@ function isCompleteTier(category: string) {
             <p class="pricing__card-desc">Everything you need for transactional emails</p>
           </div>
           <div class="pricing__card-price">
-            <span class="pricing__amount">&euro;39</span>
+            <div class="pricing__amount-group">
+              <span class="pricing__amount-original">$49</span>
+              <span class="pricing__amount">$39</span>
+            </div>
             <span class="pricing__period">one-time</span>
           </div>
+          <p class="pricing__launch-note">Launch pricing - ends April 4th</p>
           <ul class="pricing__features">
             <li>15 transactional templates</li>
             <li>Vue SFC + pre-rendered HTML</li>
@@ -228,9 +232,13 @@ function isCompleteTier(category: string) {
             <p class="pricing__card-desc">The full collection for any email you'll ever need</p>
           </div>
           <div class="pricing__card-price">
-            <span class="pricing__amount">&euro;89</span>
+            <div class="pricing__amount-group">
+              <span class="pricing__amount-original">$99</span>
+              <span class="pricing__amount">$79</span>
+            </div>
             <span class="pricing__period">one-time</span>
           </div>
+          <p class="pricing__launch-note">Launch pricing - ends April 4th</p>
           <ul class="pricing__features">
             <li>Everything in Essentials</li>
             <li>15 marketing templates</li>
@@ -582,7 +590,21 @@ function isCompleteTier(category: string) {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin-bottom: 24px;
+  margin-bottom: 6px;
+}
+
+.pricing__amount-group {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.pricing__amount-original {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--vp-c-text-3);
+  text-decoration: line-through;
+  letter-spacing: -0.01em;
 }
 
 .pricing__amount {
@@ -596,6 +618,14 @@ function isCompleteTier(category: string) {
   font-size: 14px;
   color: var(--vp-c-text-3);
   font-weight: 500;
+}
+
+.pricing__launch-note {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
+  margin: 0 0 20px;
+  letter-spacing: 0.01em;
 }
 
 .pricing__features {
