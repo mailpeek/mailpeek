@@ -21,9 +21,6 @@
     "marketing",
     "template"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "dist"
   ],
@@ -48,7 +45,7 @@
   },
   "scripts": {
     "build": "vite build && vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly --declarationDir dist --noEmit false",
-    "prepublishOnly": "pnpm build",
+    "prepack": "pnpm build",
     "typecheck": "vue-tsc --noEmit"
   },
   "peerDependencies": {

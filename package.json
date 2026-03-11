@@ -9,7 +9,8 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "build:all": "pnpm build && pnpm docs:build",
-    "send-test": "node scripts/send-test.mjs"
+    "send-test": "node scripts/send-test.mjs",
+    "pack:templates": "cd packages/templates && npm pack"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
