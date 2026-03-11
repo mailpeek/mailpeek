@@ -115,25 +115,6 @@ function toggleFaq(index: number) {
   openFaqIndex.value = openFaqIndex.value === index ? null : index
 }
 
-// Email signup
-const signupEmail = ref('')
-const signupState = ref<'idle' | 'sending' | 'success' | 'error'>('idle')
-
-async function submitSignup() {
-  const email = signupEmail.value.trim()
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return
-  signupState.value = 'sending'
-  try {
-    await fetch('https://hook.eu1.make.com/q2xbveigisobioj2m784kvho9col61qv', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    })
-    signupState.value = 'success'
-  } catch {
-    signupState.value = 'error'
-  }
-}
 
 async function openPreview(template: TemplateInfo) {
   try {
@@ -251,46 +232,6 @@ function isCompleteTier(category: string) {
             Coming Soon
           </span>
         </div>
-      </div>
-    </section>
-
-    <!-- Signup -->
-    <section class="signup">
-      <div class="signup__card">
-        <template v-if="signupState !== 'success'">
-          <h2 class="signup__title">Get notified when templates launch</h2>
-          <p class="signup__subtitle">Be the first to know when the templates are available.</p>
-          <form class="signup__form" @submit.prevent="submitSignup">
-            <input
-              v-model="signupEmail"
-              type="email"
-              name="email"
-              placeholder="you@example.com"
-              class="signup__input"
-              required
-              :disabled="signupState === 'sending'"
-            />
-            <button
-              type="submit"
-              class="signup__button"
-              :disabled="signupState === 'sending'"
-            >
-              {{ signupState === 'sending' ? 'Sending...' : 'Notify me' }}
-            </button>
-          </form>
-          <p v-if="signupState === 'error'" class="signup__error">
-            Something went wrong. Please try again.
-          </p>
-        </template>
-        <template v-else>
-          <div class="signup__success">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <circle cx="16" cy="16" r="16" fill="var(--vp-c-brand-1)" opacity="0.15"/>
-              <path d="M11 16.5l3.5 3.5 6.5-7" stroke="var(--vp-c-brand-1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <p class="signup__success-text">You're on the list!</p>
-          </div>
-        </template>
       </div>
     </section>
 
@@ -702,112 +643,6 @@ function isCompleteTier(category: string) {
   pointer-events: none;
 }
 
-/* ─── Signup ─── */
-.signup {
-  padding: 0 0 48px;
-  display: flex;
-  justify-content: center;
-}
-
-.signup__card {
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 14px;
-  padding: 40px;
-  text-align: center;
-  max-width: 520px;
-  width: 100%;
-}
-
-.signup__title {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--vp-c-text-1);
-  margin: 0 0 8px;
-}
-
-.signup__subtitle {
-  font-size: 15px;
-  color: var(--vp-c-text-2);
-  margin: 0 0 24px;
-  line-height: 1.5;
-}
-
-.signup__form {
-  display: flex;
-  gap: 8px;
-}
-
-.signup__input {
-  flex: 1;
-  padding: 12px 16px;
-  font-size: 15px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 10px;
-  background: var(--vp-c-bg);
-  color: var(--vp-c-text-1);
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.signup__input:focus {
-  border-color: var(--vp-c-brand-1);
-}
-
-.signup__input::placeholder {
-  color: var(--vp-c-text-3);
-}
-
-.signup__button {
-  padding: 12px 24px;
-  font-size: 15px;
-  font-weight: 600;
-  border: none;
-  border-radius: 10px;
-  background: var(--vp-c-brand-1);
-  color: #ffffff;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.2s;
-  box-shadow: 0 0 20px rgba(0, 178, 173, 0.3);
-}
-
-.signup__button:hover {
-  box-shadow: 0 0 30px rgba(0, 178, 173, 0.5);
-  transform: translateY(-1px);
-}
-
-.signup__button:disabled {
-  opacity: 0.6;
-  cursor: default;
-  transform: none;
-  box-shadow: 0 0 20px rgba(0, 178, 173, 0.3);
-}
-
-.dark .signup__button {
-  color: #0a0a0a;
-}
-
-.signup__error {
-  font-size: 13px;
-  color: #ef4444;
-  margin: 12px 0 0;
-}
-
-.signup__success {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 0;
-}
-
-.signup__success-text {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--vp-c-brand-1);
-  margin: 0;
-}
 
 /* ─── Gallery ─── */
 .gallery {
@@ -1261,35 +1096,6 @@ function isCompleteTier(category: string) {
 
   .gallery__modal-body {
     padding: 12px;
-  }
-
-  .signup {
-    padding: 36px 0;
-  }
-
-  .signup__card {
-    padding: 28px 20px;
-  }
-
-  .signup__title {
-    font-size: 18px;
-  }
-
-  .signup__subtitle {
-    font-size: 13px;
-  }
-
-  .signup__form {
-    flex-direction: column;
-  }
-
-  .signup__input {
-    width: 100%;
-  }
-
-  .signup__button {
-    width: 100%;
-    justify-content: center;
   }
 
   .faq {
