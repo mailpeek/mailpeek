@@ -2,7 +2,7 @@
   "name": "mailpeek",
   "private": true,
   "scripts": {
-    "build": "pnpm -r --filter '!mailpeek-sandbox' build",
+    "build": "pnpm -r --filter '!mailpeek-sandbox' --filter '!@mailpeek/templates' build",
     "test": "pnpm -r test",
     "lint": "eslint packages --ext .ts,.vue",
     "docs:dev": "vitepress dev docs",
@@ -10,7 +10,7 @@
     "docs:preview": "vitepress preview docs",
     "build:all": "pnpm build && pnpm docs:build",
     "send-test": "node scripts/send-test.mjs",
-    "pack:templates": "cd packages/templates && npm pack",
+    "pack:templates": "node scripts/pack-templates.mjs",
     "generate-thumbnails": "node scripts/generate-thumbnails.mjs"
   },
   "pnpm": {
