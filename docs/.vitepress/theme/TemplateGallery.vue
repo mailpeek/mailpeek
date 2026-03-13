@@ -105,7 +105,7 @@ const faqItems = [
   },
   {
     question: 'Is there a refund policy?',
-    answer: 'Yes — 14-day money-back guarantee, no questions asked. If the templates don\'t work for your project, get a full refund.',
+    answer: 'Yes — if the templates don\'t render or integrate as described within 14 days of purchase, contact us and we\'ll issue a full refund.',
   },
 ]
 
@@ -200,9 +200,9 @@ function isCompleteTier(category: string) {
             <li>Dark mode variants</li>
             <li>Lifetime updates</li>
           </ul>
-          <span class="pricing__cta pricing__cta--disabled">
-            Coming Soon
-          </span>
+          <a href="https://buy.polar.sh/polar_cl_GJlqleLZ0q7jOp355qtIMnKb8yZVx3rloAwBb4TbLvT" class="pricing__cta" target="_blank" rel="noopener">
+            Buy Essentials
+          </a>
         </div>
 
         <!-- Complete -->
@@ -228,9 +228,9 @@ function isCompleteTier(category: string) {
             <li>Priority support</li>
             <li>Lifetime updates</li>
           </ul>
-          <span class="pricing__cta pricing__cta--disabled">
-            Coming Soon
-          </span>
+          <a href="https://buy.polar.sh/polar_cl_icsoOHZkflOGBQiHnR832Hphqw845JyhEwNHC4Xwyzc" class="pricing__cta pricing__cta--featured" target="_blank" rel="noopener">
+            Buy Complete
+          </a>
         </div>
       </div>
     </section>

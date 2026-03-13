@@ -19,37 +19,38 @@ const showContent = ref(true)
 
   <h1 class="thank-you__title">You're all set!</h1>
   <p class="thank-you__text">
-    Thanks for purchasing mailpeek templates. Check your email for your license key and download instructions.
+    Thanks for purchasing Mailpeek templates. You will receive an email with a download link within 1-2 minutes.
   </p>
 
   <div class="thank-you__steps">
     <div class="thank-you__step">
       <span class="thank-you__step-num">1</span>
       <div>
-        <strong>Check your email</strong>
-        <p>Your license key and download link are on the way.</p>
+        <strong>Download your file</strong>
+        <p>Check your email for a download link from Polar. Save the <code>.tgz</code> file somewhere in your project.</p>
       </div>
     </div>
     <div class="thank-you__step">
       <span class="thank-you__step-num">2</span>
       <div>
-        <strong>Install the package</strong>
-        <p>Follow the instructions in the email to add <code>@mailpeek/templates</code> to your project.</p>
+        <strong>Install it</strong>
+        <p>Run <code>npm install ./mailpeek-templates-complete-0.1.0.tgz</code> (or the essentials equivalent) from your project root. Full setup instructions are in the <code>README.md</code> included in the download.</p>
       </div>
     </div>
     <div class="thank-you__step">
       <span class="thank-you__step-num">3</span>
       <div>
         <strong>Start building</strong>
-        <p>Import templates, pass your theme, and render to HTML.</p>
+        <p>Use the pre-rendered HTML files in <code>html/</code> directly, or render with your own props using <code>@mailpeek/components</code>.</p>
       </div>
     </div>
   </div>
 
   <div class="thank-you__links">
-    <a href="/getting-started" class="thank-you__cta">Getting Started Guide</a>
-    <a href="/templates" class="thank-you__cta thank-you__cta--secondary">Back to Templates</a>
+    <a href="/templates" class="thank-you__cta">Browse Templates</a>
   </div>
+
+  <p class="thank-you__support">Any issues, please contact us at <a href="mailto:mailpeekplugin@gmail.com">mailpeekplugin@gmail.com</a></p>
 </div>
 
 <style>
@@ -61,6 +62,8 @@ const showContent = ref(true)
 }
 
 .thank-you__icon {
+  display: flex;
+  justify-content: center;
   margin-bottom: 24px;
 }
 
@@ -181,6 +184,21 @@ const showContent = ref(true)
 
 .dark .thank-you__cta--secondary {
   color: var(--vp-c-text-1);
+}
+
+.thank-you__support {
+  margin-top: 28px;
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+}
+
+.thank-you__support a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+}
+
+.thank-you__support a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 640px) {

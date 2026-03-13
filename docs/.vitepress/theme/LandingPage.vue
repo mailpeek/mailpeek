@@ -4,6 +4,7 @@ import EmailDemo from './EmailDemo.vue'
 import LandingFeatures from './LandingFeatures.vue'
 import LandingComparison from './LandingComparison.vue'
 import LandingCode from './LandingCode.vue'
+import LandingTemplatesBanner from './LandingTemplatesBanner.vue'
 import LandingSignup from './LandingSignup.vue'
 </script>
 
@@ -21,6 +22,7 @@ import LandingSignup from './LandingSignup.vue'
     <LandingFeatures />
     <LandingComparison />
     <LandingCode />
+    <LandingTemplatesBanner />
     <LandingSignup />
   </div>
 </template>

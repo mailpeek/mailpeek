@@ -28,9 +28,9 @@ async function onSubmit() {
 <template>
   <section class="signup">
     <div class="signup__inner">
-      <h2 class="signup__title">Stay updated</h2>
+      <h2 class="signup__title">Get notified about new features</h2>
       <p class="signup__subtitle">
-        Get notified about new features and premium templates.
+        New templates, component updates, and release notes — straight to your inbox.
       </p>
 
       <div v-if="submitted" class="signup__success">
