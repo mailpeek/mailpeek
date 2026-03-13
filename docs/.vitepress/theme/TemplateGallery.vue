@@ -150,9 +150,9 @@ function isCompleteTier(category: string) {
     <section class="hero">
       <div class="hero__glow" aria-hidden="true"></div>
       <div class="hero__content">
-        <h1 class="hero__title">45 production-ready email templates</h1>
+        <h1 class="hero__title">45 email templates built with Vue components</h1>
         <p class="hero__subtitle">
-          Beautiful, tested email templates built with Vue components. Table-based layouts, inline styles, dark mode — all the hard parts handled for you.
+          Solid, fully-tested email templates built with Vue components. Table-based layouts, bulletproof buttons, dark mode, responsive. All the hard parts handled for you.
         </p>
         <div class="hero__stats">
           <div class="hero__stat">
