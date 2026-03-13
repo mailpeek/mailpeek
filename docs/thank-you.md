@@ -3,13 +3,7 @@ layout: page
 title: Thank you
 ---
 
-<script setup>
-import { ref, onMounted } from 'vue'
-
-const showContent = ref(true)
-</script>
-
-<div class="thank-you" v-if="showContent">
+<div class="thank-you">
   <div class="thank-you__icon">
     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="32" cy="32" r="32" fill="var(--vp-c-brand-1)" opacity="0.12"/>
@@ -34,14 +28,17 @@ const showContent = ref(true)
       <span class="thank-you__step-num">2</span>
       <div>
         <strong>Install it</strong>
-        <p>Run <code>npm install ./mailpeek-templates-complete-0.1.0.tgz</code> (or the essentials equivalent) from your project root. Full setup instructions are in the <code>README.md</code> included in the download.</p>
+        <p>Run from your project root — use whichever filename matches your download:</p>
+        <p><code>npm install ./mailpeek-templates-essentials-0.1.0.tgz</code></p>
+        <p><code>npm install ./mailpeek-templates-complete-0.1.0.tgz</code></p>
+        <p>Full setup instructions are in the <code>README.md</code> included in the download.</p>
       </div>
     </div>
     <div class="thank-you__step">
       <span class="thank-you__step-num">3</span>
       <div>
         <strong>Start building</strong>
-        <p>Use the pre-rendered HTML files in <code>html/</code> directly, or render with your own props using <code>@mailpeek/components</code>.</p>
+        <p>Use the pre-rendered HTML files in <code>html/</code> directly, or import template components from <code>@mailpeek/templates</code> and render them with <code>@mailpeek/components</code>. Everything is in the README.</p>
       </div>
     </div>
   </div>
@@ -50,7 +47,7 @@ const showContent = ref(true)
     <a href="/templates" class="thank-you__cta">Browse Templates</a>
   </div>
 
-  <p class="thank-you__support">Any issues, please contact us at <a href="mailto:mailpeekplugin@gmail.com">mailpeekplugin@gmail.com</a></p>
+  <p class="thank-you__support">Any issues, please contact us at <a href="mailto:support@mailpeek.dev">support@mailpeek.dev</a></p>
 </div>
 
 <style>

@@ -29,17 +29,17 @@ onMounted(() => {
           Vue components + pre-rendered HTML, ready to drop into Resend, SendGrid, or Nodemailer.
         </p>
         <ul class="tmpl-banner__features">
-          <li>Multi-client compatibility - Gmail, Outlook, Apple Mail</li>
+          <li>Multi-client compatibility — Gmail, Outlook, Apple Mail</li>
           <li>Fully responsive single-column mobile layouts</li>
           <li>Bulletproof VML buttons for Outlook</li>
-          <li>Customisable themes - colours, fonts, logo, and more</li>
+          <li>Customisable themes — colours, fonts, company name, and more</li>
         </ul>
         <div class="tmpl-banner__actions">
           <a href="https://buy.polar.sh/polar_cl_icsoOHZkflOGBQiHnR832Hphqw845JyhEwNHC4Xwyzc" class="tmpl-banner__cta tmpl-banner__cta--primary" target="_blank" rel="noopener">
-            Get Complete - $79
+            Get Complete — $79
           </a>
-          <a href="/templates" class="tmpl-banner__cta tmpl-banner__cta--secondary">
-            Browse all templates →
+          <a href="https://buy.polar.sh/polar_cl_GJlqleLZ0q7jOp355qtIMnKb8yZVx3rloAwBb4TbLvT" class="tmpl-banner__cta tmpl-banner__cta--secondary" target="_blank" rel="noopener">
+            Essentials — $39
           </a>
         </div>
       </div>

@@ -142,18 +142,18 @@ export default defineEventHandler(async (event) => {
 
 ## Theming
 
-Every template accepts a `theme` prop with up to 20 properties:
+Every template accepts a `theme` prop with 8 properties:
 
 ```ts
 const theme = {
   companyName: 'Acme',
   primaryColor: '#6366f1',
   backgroundColor: '#f8fafc',
+  contentBackground: '#ffffff',
   fontFamily: '"Inter", Arial, sans-serif',
-  logoUrl: 'https://acme.com/logo.png',
-  logoAlt: 'Acme',
-  footerAddress: '123 Main St, Dublin, Ireland',
-  // ... see TypeScript types for the full list
+  companyAddress: '123 Main St, Dublin, Ireland',
+  unsubscribeUrl: 'https://acme.com/unsubscribe',
+  privacyUrl: 'https://acme.com/privacy',
 }
 
 const html = await render(WelcomeEmail, { theme })
@@ -186,4 +186,4 @@ import { HeroFullWidth } from '@mailpeek/templates/patterns'
 
 ## Support
 
-Questions or issues: mailpeekplugin@gmail.com
+Questions or issues: support@mailpeek.dev

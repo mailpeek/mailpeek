@@ -93,7 +93,7 @@ const faqItems = [
   },
   {
     question: 'Can I customise the design?',
-    answer: 'Yes. Each template accepts a theme object with 20+ properties (colours, fonts, company name, logo). For deeper changes, fork the .vue source and edit it directly.',
+    answer: 'Yes. Each template accepts a theme object with 8 properties (primary colour, font, company name, background colours, unsubscribe/privacy URLs, footer address). For deeper changes, fork the .vue source and edit it directly.',
   },
   {
     question: 'Which email clients are supported?',
@@ -120,7 +120,7 @@ async function openPreview(template: TemplateInfo) {
   try {
     const response = await fetch(`/html/${template.category}/${template.slug}.html`)
     if (!response.ok) {
-      previewHtml.value = `<html><body style="font-family: sans-serif; padding: 40px; text-align: center; color: #666;"><p>Preview not available. Run the render script to generate HTML files.</p></body></html>`
+      previewHtml.value = `<html><body style="font-family: sans-serif; padding: 40px; text-align: center; color: #666;"><p>Preview not available for this template.</p></body></html>`
     } else {
       previewHtml.value = await response.text()
     }
@@ -281,6 +281,9 @@ function isCompleteTier(category: string) {
               </span>
               <span v-if="isCompleteTier(template.category)" class="gallery__tier-badge">
                 Complete
+              </span>
+              <span v-else class="gallery__tier-badge gallery__tier-badge--essentials">
+                Essentials
               </span>
             </div>
             <h3 class="gallery__name">{{ template.name }}</h3>
@@ -637,11 +640,6 @@ function isCompleteTier(category: string) {
   color: #0a0a0a;
 }
 
-.pricing__cta--disabled {
-  opacity: 0.5;
-  cursor: default;
-  pointer-events: none;
-}
 
 
 /* ─── Gallery ─── */
@@ -793,6 +791,16 @@ function isCompleteTier(category: string) {
   border-radius: 4px;
   background: rgba(0, 178, 173, 0.12);
   color: var(--vp-c-brand-1);
+}
+
+.gallery__tier-badge--essentials {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+}
+
+.dark .gallery__tier-badge--essentials {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
 }
 
 .gallery__name {
