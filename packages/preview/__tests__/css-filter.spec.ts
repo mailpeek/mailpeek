@@ -25,16 +25,28 @@ describe('filterInlineStyles', () => {
     expect(html).toContain('display: flex')
   })
 
-  it('strips display: grid in Gmail mode (unsupportedValues match)', () => {
+  it('preserves display: grid in Gmail mode (Gmail supports grid display like flex)', () => {
     const input = '<div style="display: grid;">Test</div>'
     const { html } = filterInlineStyles(input, gmailConfig)
-    expect(html).not.toContain('display: grid')
+    expect(html).toContain('display: grid')
   })
 
-  it('strips display: inline-grid in Gmail mode', () => {
+  it('preserves display: inline-grid in Gmail mode (Gmail supports grid display)', () => {
     const input = '<div style="display: inline-grid;">Test</div>'
     const { html } = filterInlineStyles(input, gmailConfig)
-    expect(html).not.toContain('display: inline-grid')
+    expect(html).toContain('display: inline-grid')
+  })
+
+  it('strips gap in Gmail mode (grid sub-property)', () => {
+    const input = '<div style="gap: 16px;">Test</div>'
+    const { html } = filterInlineStyles(input, gmailConfig)
+    expect(html).not.toContain('gap')
+  })
+
+  it('strips grid-template-columns in Gmail mode (grid sub-property)', () => {
+    const input = '<div style="grid-template-columns: 1fr 1fr;">Test</div>'
+    const { html } = filterInlineStyles(input, gmailConfig)
+    expect(html).not.toContain('grid-template-columns')
   })
 
   it('strips align-items in Gmail mode (flexbox sub-property)', () => {
@@ -282,7 +294,7 @@ describe('filterHtml — @font-face', () => {
 // ─── @media query stripping ─────────────────────────────────────────────────
 
 describe('filterHtml — @media queries', () => {
-  it('strips @media blocks for Gmail', () => {
+  it('preserves @media blocks for Gmail (Gmail supports media queries)', () => {
     const input = `
       <style>
         body { color: black; }
@@ -290,12 +302,23 @@ describe('filterHtml — @media queries', () => {
       </style>
     `
     const { html } = filterHtml(input, gmailConfig)
-    expect(html).not.toContain('@media')
-    expect(html).not.toContain('max-width: 600px')
+    expect(html).toContain('@media')
+    expect(html).toContain('max-width: 600px')
     expect(html).toContain('color: black')
   })
 
-  it('strips @media blocks for Outlook', () => {
+  it('returns no @media warnings for Gmail (Gmail supports media queries)', () => {
+    const input = `
+      <style>
+        @media (max-width: 600px) { .mobile { display: block; } }
+      </style>
+    `
+    const { warnings } = filterHtml(input, gmailConfig)
+    const mediaWarnings = warnings.filter(w => w.includes('@media'))
+    expect(mediaWarnings).toHaveLength(0)
+  })
+
+  it('strips @media blocks for Outlook (Word engine does not support media queries)', () => {
     const input = `
       <style>
         @media screen and (min-width: 768px) { .wide { padding: 20px; } }
@@ -307,13 +330,13 @@ describe('filterHtml — @media queries', () => {
     expect(html).toContain('font-size: 14px')
   })
 
-  it('returns warnings for stripped @media blocks', () => {
+  it('returns warnings for stripped @media blocks in Outlook', () => {
     const input = `
       <style>
         @media (max-width: 600px) { .mobile { display: block; } }
       </style>
     `
-    const { warnings } = filterHtml(input, gmailConfig)
+    const { warnings } = filterHtml(input, outlookConfig)
     const mediaWarnings = warnings.filter(w => w.includes('@media'))
     expect(mediaWarnings).toHaveLength(1)
     expect(mediaWarnings[0]).toContain('does not support media queries')

@@ -2,8 +2,13 @@
 // Source: Google Developers Gmail CSS support docs (updated December 11, 2025)
 // Source: caniemail.com API data
 //
-// Note: Gmail web DOES support display:flex (listed in official supported properties),
-// but does NOT support flex layout sub-properties (align-items, justify-content, etc.)
+// Note: Gmail web DOES support display:flex AND display:grid (both listed in official
+// supported properties), but does NOT support their sub-properties
+// (align-items, justify-content, grid-template-columns, gap, etc.).
+//
+// Note: Gmail web DOES support @media queries. The viewport used is the full browser
+// window width (not the email pane width), so min-width queries almost always fire on
+// desktop. stripMediaQueries is false for Gmail.
 
 import type { ClientConfig } from './types'
 
@@ -14,7 +19,7 @@ export const gmailConfig: ClientConfig = {
   stripExternalStylesheets: true,
   stripAtImport: true,
   stripFontFace: true,
-  stripMediaQueries: true,
+  stripMediaQueries: false,
   styleBlockCharLimit: 8192,
   cssRestrictions: [
     // Positioning — not in Gmail supported list (HIGH confidence)
@@ -98,31 +103,35 @@ export const gmailConfig: ClientConfig = {
       reason: 'Gmail does not support flexbox layout properties',
     },
 
-    // CSS Grid — display:grid and display:inline-grid are unsupported (HIGH confidence)
-    {
-      property: 'display',
-      reason: 'Gmail does not support CSS Grid',
-      unsupportedValues: ['grid', 'inline-grid'],
-    },
+    // CSS Grid sub-properties — display:grid IS supported by Gmail (same as display:flex),
+    // but sub-properties that control grid layout are stripped (HIGH confidence)
     {
       property: 'grid',
-      reason: 'Gmail does not support CSS Grid',
+      reason: 'Gmail does not support CSS Grid layout sub-properties (display: grid is supported)',
     },
     {
       property: 'grid-template-columns',
-      reason: 'Gmail does not support CSS Grid',
+      reason: 'Gmail does not support CSS Grid layout sub-properties (display: grid is supported)',
     },
     {
       property: 'grid-template-rows',
-      reason: 'Gmail does not support CSS Grid',
+      reason: 'Gmail does not support CSS Grid layout sub-properties (display: grid is supported)',
     },
     {
       property: 'grid-column',
-      reason: 'Gmail does not support CSS Grid',
+      reason: 'Gmail does not support CSS Grid layout sub-properties (display: grid is supported)',
     },
     {
       property: 'grid-row',
-      reason: 'Gmail does not support CSS Grid',
+      reason: 'Gmail does not support CSS Grid layout sub-properties (display: grid is supported)',
+    },
+    {
+      property: 'gap',
+      reason: 'Gmail does not support CSS Grid layout sub-properties (display: grid is supported)',
+    },
+    {
+      property: 'grid-gap',
+      reason: 'Gmail does not support CSS Grid layout sub-properties (display: grid is supported)',
     },
 
     // Clip-path — caniemail css-clip-path:n (HIGH confidence)

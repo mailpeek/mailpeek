@@ -99,6 +99,14 @@ export const outlookConfig: ClientConfig = {
       property: 'grid-row',
       reason: 'Outlook Word renderer does not support CSS Grid',
     },
+    {
+      property: 'gap',
+      reason: 'Outlook Word renderer does not support CSS Grid',
+    },
+    {
+      property: 'grid-gap',
+      reason: 'Outlook Word renderer does not support CSS Grid',
+    },
 
     // Border radius — caniemail css-border-radius:n for Outlook 2019 (HIGH confidence)
     {
