@@ -158,15 +158,23 @@ describe('analyzeCompatibility', () => {
   })
 
   describe('value-specific restrictions', () => {
-    it('flags display:grid but not display:flex for Gmail', () => {
+    it('does NOT flag display:grid or display:flex for Gmail (both are supported)', () => {
       const html = `
         <div style="display: grid;">Grid</div>
         <div style="display: flex;">Flex</div>
       `
       const report = analyzeCompatibility(html, gmailConfig)
       const displayIssue = report.issues.find(i => i.property === 'display')
-      expect(displayIssue).toBeDefined()
-      expect(displayIssue!.value).toContain('grid')
+      expect(displayIssue).toBeUndefined()
+    })
+
+    it('flags grid-template-columns (not display:grid) as the grid issue for Gmail', () => {
+      const html = '<div style="display: grid; grid-template-columns: 1fr 1fr;">Grid</div>'
+      const report = analyzeCompatibility(html, gmailConfig)
+      const gridSubIssue = report.issues.find(i => i.property === 'grid-template-columns')
+      const displayIssue = report.issues.find(i => i.property === 'display')
+      expect(gridSubIssue).toBeDefined()
+      expect(displayIssue).toBeUndefined()
     })
 
     it('flags display:flex for Outlook', () => {
@@ -174,6 +182,14 @@ describe('analyzeCompatibility', () => {
       const report = analyzeCompatibility(html, outlookConfig)
       const displayIssue = report.issues.find(i => i.property === 'display')
       expect(displayIssue).toBeDefined()
+    })
+
+    it('flags display:grid for Outlook (Word engine strips it)', () => {
+      const html = '<div style="display: grid;">Grid</div>'
+      const report = analyzeCompatibility(html, outlookConfig)
+      const displayIssue = report.issues.find(i => i.property === 'display')
+      expect(displayIssue).toBeDefined()
+      expect(displayIssue!.value).toContain('grid')
     })
   })
 

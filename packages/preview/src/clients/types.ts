@@ -55,7 +55,9 @@ export interface ClientConfig {
   stripFontFace?: boolean
   /**
    * If true, @media query blocks are removed from <style> blocks.
-   * Gmail desktop and Outlook Word engine ignore media queries entirely.
+   * Outlook Word engine strips media queries entirely.
+   * Gmail web DOES support @media queries (viewport = full browser window width),
+   * so stripMediaQueries should be false for Gmail.
    */
   stripMediaQueries?: boolean
   /**
