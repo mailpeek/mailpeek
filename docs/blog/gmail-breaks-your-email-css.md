@@ -42,20 +42,26 @@ h1 {
 
 The `@font-face` rule is stripped. The `font-family` declaration stays, but since the font was never loaded, you get whatever sans-serif fallback the system provides. On most machines, that is Arial.
 
-### @media queries - ignored on desktop
+### @media queries - supported, but the viewport is not what you expect
 
 ```css
-/* What you wrote */
+/* Mobile-first: max-width query */
 @media (max-width: 600px) {
   .container { width: 100% !important; }
   .column { display: block !important; }
 }
 
-/* What Gmail desktop renders */
-/* Nothing. The entire @media block is removed. */
+/* Desktop-first: min-width query */
+@media (min-width: 600px) {
+  .container { width: 600px; }
+}
 ```
 
-Gmail desktop strips all `@media` rules. Your responsive email is not responsive in Gmail desktop. Gmail mobile has partial support, but desktop - which is where a huge percentage of business email is read - ignores media queries completely.
+Gmail supports a wide range of `@media` queries, including `max-width`, `min-width`, and `prefers-color-scheme`. The confusion comes from how viewport width works in webmail clients.
+
+In Gmail web, the viewport is the full browser window width - not the width of the email pane. So a `@media (min-width: 600px)` query will almost always be active, because the browser itself is wider than 600px even when the email panel is narrow. But a `@media (max-width: 600px)` query will only trigger if the browser window itself is below 600px, which rarely happens on desktop.
+
+The practical consequence: mobile-first CSS (using `max-width` breakpoints) behaves as expected in Gmail. Desktop-first CSS (using `min-width` breakpoints) can produce unexpected results because the breakpoints are evaluated against the browser viewport, not the email container width.
 
 ### Positioning properties - all stripped
 
@@ -76,7 +82,7 @@ Gmail desktop strips all `@media` rules. Your responsive email is not responsive
 
 `position`, `top`, `right`, `bottom`, `left`, and `z-index` are all removed. Any layout that depends on positioned elements will collapse.
 
-### CSS Grid - stripped (but flexbox partially survives)
+### CSS Grid and Flexbox - display survives, sub-properties don't
 
 ```css
 /* What you wrote */
@@ -94,16 +100,17 @@ Gmail desktop strips all `@media` rules. Your responsive email is not responsive
 
 /* What Gmail renders */
 .grid-layout {
-  /* display: grid is removed entirely */
+  display: grid; /* Kept - but sub-properties are stripped */
 }
 
 .flex-layout {
-  display: flex; /* Kept! */
-  /* But align-items and justify-content are stripped */
+  display: flex; /* Kept - but sub-properties are stripped */
 }
 ```
 
-This is a subtle one. Gmail does support `display: flex`, but it strips the sub-properties that make flexbox useful -- `align-items`, `justify-content`, `flex-direction`, `flex-wrap`, and `flex`. So your flex container exists, but you have no control over how its children are laid out.
+Gmail treats `display: grid` and `display: flex` the same way - both are kept, but the sub-properties that make them useful are stripped. `grid-template-columns`, `gap`, `align-items`, `justify-content`, `flex-direction`, and `flex-wrap` are all removed.
+
+The reason grid looks more broken than flex in practice is that without `grid-template-columns`, grid falls back to stacking all children in a single column. Flex without its sub-properties at least keeps items in a row by default. Both are unreliable for layout - use HTML tables instead.
 
 ### Visual effects - stripped
 
@@ -199,7 +206,8 @@ Here is a quick reference for what survives and what does not in the two most co
 | `display: block/inline/none` | Supported | Supported |
 | `display: flex` | Supported | **Stripped** |
 | `align-items`, `justify-content` | **Stripped** | **Stripped** |
-| `display: grid` | **Stripped** | **Stripped** |
+| `display: grid` | Supported | **Stripped** |
+| `grid-template-columns`, `gap` | **Stripped** | **Stripped** |
 | `border-radius` | Supported | **Stripped** |
 | `max-width`, `min-width` | Supported | **Stripped** |
 | `float` | Supported | **Stripped** |
@@ -209,7 +217,7 @@ Here is a quick reference for what survives and what does not in the two most co
 | `transform` | **Stripped** | **Stripped** |
 | `animation`, `transition` | **Stripped** | **Stripped** |
 | `@font-face` | **Stripped** | **Stripped** |
-| `@media` queries | **Stripped** | **Stripped** |
+| `@media` queries | Supported (viewport = browser width) | **Stripped** |
 | `@import` / external stylesheets | **Stripped** | **Stripped** |
 
 The pattern is clear: Outlook strips everything Gmail strips, plus `border-radius`, `display: flex`, `background-size`, `max-width`/`min-width`, and `float`. If it works in Outlook, it works everywhere.
@@ -218,7 +226,7 @@ The pattern is clear: Outlook strips everything Gmail strips, plus `border-radiu
 
 I got tired of sending test emails to myself, opening them in six different clients, and squinting at screenshots. So I built a tool to solve it.
 
-[`@mailpeek/preview`](https://www.npmjs.com/package/@mailpeek/preview) is a Vue component that previews how Gmail and Outlook render your email HTML. It runs the same kind of CSS filtering those clients perform - stripping unsupported properties, removing `@media` queries, enforcing the style block character limit - and shows you the result in real time.
+[`@mailpeek/preview`](https://www.npmjs.com/package/@mailpeek/preview) is a Vue component that previews how Gmail and Outlook render your email HTML. It runs the same kind of CSS filtering those clients perform - stripping unsupported properties, enforcing the style block character limit - and shows you the result in real time.
 
 Install it:
 
