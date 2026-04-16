@@ -6,21 +6,19 @@ date: 2026-03-16
 
 # How I Built 45 Email Templates as Typed Vue SFCs
 
-Every SaaS project I've ever started has the same week-one tax. Before you can ship your welcome email, your password reset, your invoice — you have to build them. From scratch. Table-based layouts, inline CSS, Outlook conditional comments. Every time.
-
-After doing this four or five times I got fed up and decided to build a proper set of reusable templates. What started as a personal time-saver became 45 typed Vue SFCs with a full theme system. Here's what I learned building them.
+Every SaaS project I've ever started comes with the dreaded transactional and marketing emails - welcome, password reset, invoicing and so on. Each involving the pain of email-specific HTML. If I never saw table-based layouts or Outlook conditional comments again I'd be happy! After doing this multiple times across projects I got fed up and decided to build a proper set of reusable templates. What started as a personal time-saver became 45 typed Vue SFCs with a full theme system. Here's what I learned while building them.
 
 ---
 
 ## Email HTML is nothing like web HTML
 
-The first thing to understand is that email clients are a terrible, fragmented rendering environment. Gmail strips `<style>` blocks from the `<head>`. Outlook uses Microsoft Word's rendering engine — yes, Word — which means flexbox and grid are completely ignored. Apple Mail is mostly fine but has its own dark mode quirks.
+The first thing to understand is that email clients are a terrible, fragmented rendering environment. Gmail strips `<style>` blocks from the `<head>`. Outlook uses Microsoft Word's rendering engine (yes, Word) which means flexbox and grid are completely ignored. Apple Mail is mostly fine but has its own dark mode quirks.
 
 The rules that apply:
 
 - **No flexbox or grid.** Use HTML tables for every multi-column layout.
 - **All styles must be inlined.** Gmail strips anything in a `<style>` block. Every element needs a `style="..."` attribute.
-- **No CSS shorthand.** Use `margin-top`, `margin-right`, `margin-bottom`, `margin-left` individually — shorthand is unreliable across clients.
+- **No CSS shorthand.** Use `margin-top`, `margin-right`, `margin-bottom`, `margin-left` individually - shorthand is unreliable across clients.
 - **Explicit dimensions on every image.** `width` and `height` as HTML attributes, not just CSS.
 - **Bulletproof buttons.** A plain `<a>` styled as a button will break in Outlook. The reliable pattern uses VML conditional comments:
 
@@ -57,7 +55,7 @@ Plain HTML files work, but they don't compose well. Copy-pasting a footer across
 
 Vue SFCs work well here for three reasons.
 
-**First, SSR render-to-string gives you exactly what you need.** Email isn't interactive — you just need a string of HTML to hand to Resend, Nodemailer, or whatever sending provider you use. Vue's `renderToString` produces that string from any component.
+**First, SSR render-to-string gives you exactly what you need.** Email isn't interactive - you just need a string of HTML to hand to Resend, Nodemailer, or whatever sending provider you use. Vue's `renderToString` produces that string from any component.
 
 **Second, TypeScript props give you a typed contract for every template.** Instead of a comment saying "remember to update the recipient name", you get a compile error if you forget. Every template's required and optional fields are explicit.
 
@@ -90,7 +88,7 @@ The shell renders around it: branded header, content, footer. Change the shell o
 
 ## The theme system
 
-The part I spent the most time on is `TemplateTheme` — a plain TypeScript interface that controls branding across every template:
+The part I spent the most time on is `TemplateTheme` - a plain TypeScript interface that controls branding across every template:
 
 ```typescript
 export interface TemplateTheme {
@@ -113,12 +111,12 @@ The practical benefit: set your brand colour and company name once, pass the the
 
 ## Dark mode without CSS variables
 
-Dark mode in email is genuinely tricky. The approach that works on the web — `prefers-color-scheme` with CSS custom properties — doesn't work in email because CSS variables are stripped.
+Dark mode in email is genuinely tricky. The approach that works on the web (`prefers-color-scheme` with CSS custom properties) doesn't work in email because CSS variables are stripped.
 
 The solution is `@media (prefers-color-scheme: dark)` with attribute selectors targeting actual hex values. Instead of:
 
 ```css
-/* This won't work — CSS variables are stripped */
+/* This won't work - CSS variables are stripped */
 @media (prefers-color-scheme: dark) {
   .email-body { background-color: var(--bg-dark); }
 }
@@ -157,7 +155,7 @@ export async function render(component, props) {
 }
 ```
 
-This works anywhere Node runs — a Nuxt server route, an Express handler, a Vercel edge function. The email DOCTYPE is prepended automatically because email clients expect it.
+This works anywhere Node runs: a Nuxt server route, an Express handler, a Vercel edge function. The email DOCTYPE is prepended automatically because email clients expect it.
 
 Using it looks like this:
 
@@ -185,7 +183,7 @@ await resend.emails.send({
 
 ## What this became
 
-After building this out across 45 templates — 15 transactional, 15 marketing, 15 reusable layout patterns — it's now Mailpeek Templates, a paid template pack for Vue and Nuxt developers.
+After building this out across 45 templates (15 transactional, 15 marketing, 15 reusable layout patterns) it's now Mailpeek Templates, a paid template pack for Vue and Nuxt developers.
 
 If you're building a SaaS product and want to skip the email HTML work entirely, it's available at [mailpeek.dev/templates](https://mailpeek.dev/templates). Pre-rendered HTML is also included if you'd rather not use the Vue layer at all.
 
