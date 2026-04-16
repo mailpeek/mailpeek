@@ -191,7 +191,7 @@ function isCompleteTier(category: string) {
             </div>
             <span class="pricing__period">one-time</span>
           </div>
-          <p class="pricing__launch-note">Launch pricing - ends April 4th</p>
+          <p class="pricing__launch-note">Launch pricing - ends April 30th</p>
           <ul class="pricing__features">
             <li>15 transactional templates</li>
             <li>Vue SFC + pre-rendered HTML</li>
@@ -219,7 +219,7 @@ function isCompleteTier(category: string) {
             </div>
             <span class="pricing__period">one-time</span>
           </div>
-          <p class="pricing__launch-note">Launch pricing - ends April 4th</p>
+          <p class="pricing__launch-note">Launch pricing - ends April 30th</p>
           <ul class="pricing__features">
             <li>Everything in Essentials</li>
             <li>15 marketing templates</li>

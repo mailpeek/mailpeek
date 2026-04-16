@@ -98,7 +98,7 @@ The Vue SFCs are there when you want full control. The HTML is there when you ju
 ---
 
 **Tweet 6 — Pricing**
-Launch pricing (ends April 4th):
+Launch pricing (ends April 30th):
 
 Essentials — 15 transactional templates
 $39 (goes to $49)
@@ -117,7 +117,7 @@ If you're a Vue or Nuxt developer shipping a SaaS product, this is for you.
 
 mailpeek.dev/templates
 
-Launch pricing ends April 4th.
+Launch pricing ends April 30th.
 
 ---
 
@@ -135,7 +135,7 @@ Every SaaS project I build has the same hidden tax in week one: building all the
 **Title:** Launched today: 45 email templates for Vue/Nuxt developers — one-time payment, no subscriptions
 
 **Body:**
-Six months of weekend work, and today it's live. I kept solving the same problem at the start of every SaaS project — building all the transactional emails from scratch. It's boring, it's slow, and table-based email HTML is genuinely painful to write well. So I built a pack of 45 production-ready email templates specifically for Vue developers: typed Vue SFCs, a theme system that lets you configure your brand once and have it flow through all 45 templates, dark mode support, and pre-rendered HTML if you want to skip the Vue layer entirely. Two tiers: Essentials (15 transactional templates, $39 launch price) and Complete (all 45 templates, $79 launch price). Distributed as a .tgz via Polar. Launch pricing ends April 4th.
+Six months of weekend work, and today it's live. I kept solving the same problem at the start of every SaaS project — building all the transactional emails from scratch. It's boring, it's slow, and table-based email HTML is genuinely painful to write well. So I built a pack of 45 production-ready email templates specifically for Vue developers: typed Vue SFCs, a theme system that lets you configure your brand once and have it flow through all 45 templates, dark mode support, and pre-rendered HTML if you want to skip the Vue layer entirely. Two tiers: Essentials (15 transactional templates, $39 launch price) and Complete (all 45 templates, $79 launch price). Distributed as a .tgz via Polar. Launch pricing ends April 30th.
 
 ---
 
@@ -159,7 +159,7 @@ If you're building a Vue or Nuxt SaaS product, this is the email layer you've be
 ## Email to Subscribers
 
 ### Subject line options
-- Option A: `Your Vue email templates are ready — launch pricing ends April 4th`
+- Option A: `Your Vue email templates are ready — launch pricing ends April 30th`
 - Option B: `45 email templates for Vue developers (no more building from scratch)`
 - Option C: `Mailpeek Templates is live — here's what's inside`
 
