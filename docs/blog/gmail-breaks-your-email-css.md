@@ -2,7 +2,6 @@
 title: "Why Gmail Breaks Your Email CSS (and How to Catch It Before Your Users Do)"
 description: "A deep dive into what Gmail and Outlook actually strip from your email HTML, how dark mode makes it worse, and how to preview the damage before you hit send."
 date: 2026-02-25
-author: Aoife Shannon
 ---
 
 # Why Gmail Breaks Your Email CSS (and How to Catch It Before Your Users Do)

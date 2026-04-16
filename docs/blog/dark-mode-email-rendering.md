@@ -2,7 +2,6 @@
 title: "Dark Mode in Email: Why Every Client Does It Differently"
 description: "Gmail, Outlook, and Apple Mail each handle dark mode in their own way. Here's exactly what happens to your email in each one, and how to preview the damage before you send."
 date: 2026-03-03
-author: Aoife Shannon
 ---
 
 # Dark Mode in Email: Why Every Client Does It Differently
