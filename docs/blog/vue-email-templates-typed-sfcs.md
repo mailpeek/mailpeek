@@ -186,5 +186,3 @@ await resend.emails.send({
 After building this out across 45 templates (15 transactional, 15 marketing, 15 reusable layout patterns) it's now Mailpeek Templates, a paid template pack for Vue and Nuxt developers.
 
 If you're building a SaaS product and want to skip the email HTML work entirely, it's available at [mailpeek.dev/templates](https://mailpeek.dev/templates). Pre-rendered HTML is also included if you'd rather not use the Vue layer at all.
-
-Happy to answer questions about any of the technical decisions in the comments.
