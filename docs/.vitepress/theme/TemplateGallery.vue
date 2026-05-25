@@ -184,10 +184,6 @@ function isCompleteTier(category: string) {
             <h3 class="pricing__card-name">Essentials</h3>
             <p class="pricing__card-desc">Everything you need for transactional emails</p>
           </div>
-          <div class="pricing__card-price">
-            <span class="pricing__amount">$29</span>
-            <span class="pricing__period">one-time</span>
-          </div>
           <ul class="pricing__features">
             <li>15 transactional templates</li>
             <li>Vue SFC + pre-rendered HTML</li>
@@ -197,7 +193,7 @@ function isCompleteTier(category: string) {
             <li>Lifetime updates</li>
           </ul>
           <a href="https://buy.polar.sh/polar_cl_GJlqleLZ0q7jOp355qtIMnKb8yZVx3rloAwBb4TbLvT" class="pricing__cta" target="_blank" rel="noopener">
-            Buy Essentials
+            Get Essentials
           </a>
         </div>
 
@@ -208,10 +204,6 @@ function isCompleteTier(category: string) {
             <h3 class="pricing__card-name">Complete</h3>
             <p class="pricing__card-desc">The full collection for any email you'll ever need</p>
           </div>
-          <div class="pricing__card-price">
-            <span class="pricing__amount">$59</span>
-            <span class="pricing__period">one-time</span>
-          </div>
           <ul class="pricing__features">
             <li>Everything in Essentials</li>
             <li>15 marketing templates</li>
@@ -221,7 +213,7 @@ function isCompleteTier(category: string) {
             <li>Lifetime updates</li>
           </ul>
           <a href="https://buy.polar.sh/polar_cl_icsoOHZkflOGBQiHnR832Hphqw845JyhEwNHC4Xwyzc" class="pricing__cta pricing__cta--featured" target="_blank" rel="noopener">
-            Buy Complete
+            Get Complete
           </a>
         </div>
       </div>
@@ -520,26 +512,6 @@ function isCompleteTier(category: string) {
   color: var(--vp-c-text-2);
   margin: 0;
   line-height: 1.5;
-}
-
-.pricing__card-price {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
-.pricing__amount {
-  font-size: 40px;
-  font-weight: 800;
-  color: var(--vp-c-text-1);
-  letter-spacing: -0.02em;
-}
-
-.pricing__period {
-  font-size: 14px;
-  color: var(--vp-c-text-3);
-  font-weight: 500;
 }
 
 .pricing__features {

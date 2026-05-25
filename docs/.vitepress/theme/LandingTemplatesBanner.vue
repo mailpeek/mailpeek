@@ -36,10 +36,10 @@ onMounted(() => {
         </ul>
         <div class="tmpl-banner__actions">
           <a href="https://buy.polar.sh/polar_cl_icsoOHZkflOGBQiHnR832Hphqw845JyhEwNHC4Xwyzc" class="tmpl-banner__cta tmpl-banner__cta--primary" target="_blank" rel="noopener">
-            Get Complete — $59
+            Get Complete
           </a>
           <a href="https://buy.polar.sh/polar_cl_GJlqleLZ0q7jOp355qtIMnKb8yZVx3rloAwBb4TbLvT" class="tmpl-banner__cta tmpl-banner__cta--secondary" target="_blank" rel="noopener">
-            Essentials — $29
+            Get Essentials
           </a>
         </div>
       </div>
