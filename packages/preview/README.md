@@ -82,6 +82,8 @@ When previewing in Gmail or Outlook mode, mailpeek removes unsupported CSS prope
 
 [`@mailpeek/components`](https://www.npmjs.com/package/@mailpeek/components) — 14 Vue components for building cross-client email HTML with server-side rendering.
 
+[mailpeek templates](https://mailpeek.dev/templates) - 45 production-ready email templates (transactional, marketing, and reusable patterns) with typed props, dark mode, and pre-rendered HTML.
+
 ## License
 
 MIT
