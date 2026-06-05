@@ -41,6 +41,18 @@ import {
 </template>
 ```
 
+## Ready-made templates
+
+Don't want to build every email from scratch? **[mailpeek templates](https://mailpeek.dev/templates)** is a pack of 45 production-ready emails built with these components:
+
+- **Transactional** - welcome, email verification, password reset, magic link, order confirmation, shipping, invoice, payment failed, and more
+- **Marketing** - newsletters, product launch, promotions, re-engagement, referral, event invites, and more
+- **Patterns** - heroes, feature grids, pricing tables, testimonials, footers, and more
+
+Typed props, dark mode variants, and pre-rendered HTML you can drop straight into Resend, SendGrid, or Nodemailer.
+
+**[Browse all 45 templates →](https://mailpeek.dev/templates)**
+
 ## Server-Side Rendering
 
 Use the `render()` function to convert any Vue email component to an HTML string:
@@ -89,6 +101,8 @@ All components output table-based HTML with inline styles for maximum email clie
 ## Also Available
 
 [`@mailpeek/preview`](https://www.npmjs.com/package/@mailpeek/preview) — Preview emails across Gmail, Outlook, and dark mode with compatibility scoring and accessibility checking.
+
+[mailpeek templates](https://mailpeek.dev/templates) - 45 production-ready email templates built with these components, with typed props, dark mode, and pre-rendered HTML.
 
 ## License
 
