@@ -1,6 +1,6 @@
 # @mailpeek/templates
 
-45 production-ready email templates for Vue 3. Table-based layouts, inline styles, full TypeScript support, and dark mode — built on top of `@mailpeek/components`.
+45 production-ready email templates for Vue 3. Table-based layouts, inline styles, full TypeScript support, and dark mode, built on top of `@mailpeek/components`.
 
 ## What's included
 
@@ -9,9 +9,9 @@ dist/          Vue SFCs + TypeScript types (use in your Vue/Nuxt app)
 html/          Pre-rendered HTML files (drop straight into any email sender)
 ```
 
-**Essentials** — 15 transactional templates (welcome, password reset, invoice, order confirmation, and more)
+**Essentials** - 15 transactional templates (welcome, password reset, invoice, order confirmation, and more)
 
-**Complete** — all 45 templates: 15 transactional + 15 marketing + 15 reusable patterns
+**Complete** - all 45 templates: 15 transactional + 15 marketing + 15 reusable patterns
 
 ---
 
