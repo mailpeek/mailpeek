@@ -6,10 +6,10 @@
 
 ## Features
 
-- **14 email components** — Layout, content, and utility primitives that compile to email-safe HTML
-- **Server-side rendering** — `render()` function converts Vue email templates to HTML strings
-- **Type-safe** — Full TypeScript support for all components and props
-- **Zero dependencies** — Vue 3 peer dep only
+- **14 email components** - Layout, content, and utility primitives that compile to email-safe HTML
+- **Server-side rendering** - `render()` function converts Vue email templates to HTML strings
+- **Type-safe** - Full TypeScript support for all components and props
+- **Zero dependencies** - Vue 3 peer dep only
 
 ## Installation
 
@@ -100,7 +100,7 @@ All components output table-based HTML with inline styles for maximum email clie
 
 ## Also Available
 
-[`@mailpeek/preview`](https://www.npmjs.com/package/@mailpeek/preview) — Preview emails across Gmail, Outlook, and dark mode with compatibility scoring and accessibility checking.
+[`@mailpeek/preview`](https://www.npmjs.com/package/@mailpeek/preview) - Preview emails across Gmail, Outlook, and dark mode with compatibility scoring and accessibility checking.
 
 [mailpeek templates](https://mailpeek.dev/templates) - 45 production-ready email templates built with these components, with typed props, dark mode, and pre-rendered HTML.
 

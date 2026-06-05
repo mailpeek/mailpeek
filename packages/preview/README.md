@@ -1,6 +1,6 @@
 # @mailpeek/preview
 
-Vue 3 component for previewing email HTML across Gmail, Outlook, and dark mode — with compatibility scoring and accessibility checking built in.
+Vue 3 component for previewing email HTML across Gmail, Outlook, and dark mode, with compatibility scoring and accessibility checking built in.
 
 ![mailpeek demo](https://raw.githubusercontent.com/mailpeek/mailpeek/main/demo/mailpeek-demo.gif)
 
@@ -8,13 +8,13 @@ Vue 3 component for previewing email HTML across Gmail, Outlook, and dark mode �
 
 ## Features
 
-- **Gmail & Outlook preview** — Per-client CSS filtering strips unsupported properties (`@font-face`, `@media`, positioning, flexbox, grid, and more)
-- **Dark mode** — Preview how each client transforms your email in dark mode
-- **Compatibility scoring** — 0-100 score with per-property breakdown of what breaks in each client
-- **Accessibility checker** — 10 WCAG checks for alt text, heading hierarchy, link text, and colour contrast
-- **Device toggle** — Switch between mobile and desktop viewports
-- **Metadata display** — Subject line, preview text, and file size with Gmail 102KB clipping warning
-- **Zero dependencies** — Vue 3 peer dep only, fully typed, SSR compatible with Nuxt 3
+- **Gmail & Outlook preview** - Per-client CSS filtering strips unsupported properties (`@font-face`, `@media`, positioning, flexbox, grid, and more)
+- **Dark mode** - Preview how each client transforms your email in dark mode
+- **Compatibility scoring** - 0-100 score with per-property breakdown of what breaks in each client
+- **Accessibility checker** - 10 WCAG checks for alt text, heading hierarchy, link text, and colour contrast
+- **Device toggle** - Switch between mobile and desktop viewports
+- **Metadata display** - Subject line, preview text, and file size with Gmail 102KB clipping warning
+- **Zero dependencies** - Vue 3 peer dep only, fully typed, SSR compatible with Nuxt 3
 
 ## Installation
 
@@ -80,7 +80,7 @@ When previewing in Gmail or Outlook mode, mailpeek removes unsupported CSS prope
 
 ## Also Available
 
-[`@mailpeek/components`](https://www.npmjs.com/package/@mailpeek/components) — 14 Vue components for building cross-client email HTML with server-side rendering.
+[`@mailpeek/components`](https://www.npmjs.com/package/@mailpeek/components) - 14 Vue components for building cross-client email HTML with server-side rendering.
 
 [mailpeek templates](https://mailpeek.dev/templates) - 45 production-ready email templates (transactional, marketing, and reusable patterns) with typed props, dark mode, and pre-rendered HTML.
 
