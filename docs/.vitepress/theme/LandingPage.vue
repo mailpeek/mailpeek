@@ -20,9 +20,9 @@ import LandingSignup from './LandingSignup.vue'
 
 
     <LandingFeatures />
+    <LandingTemplatesBanner />
     <LandingComparison />
     <LandingCode />
-    <LandingTemplatesBanner />
     <LandingSignup />
   </div>
 </template>
