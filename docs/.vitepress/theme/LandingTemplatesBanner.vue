@@ -35,11 +35,11 @@ onMounted(() => {
           <li>Customisable themes — colours, fonts, company name, and more</li>
         </ul>
         <div class="tmpl-banner__actions">
-          <a href="https://buy.polar.sh/polar_cl_icsoOHZkflOGBQiHnR832Hphqw845JyhEwNHC4Xwyzc" class="tmpl-banner__cta tmpl-banner__cta--primary" target="_blank" rel="noopener">
-            Get Complete
+          <a href="/templates" class="tmpl-banner__cta tmpl-banner__cta--primary">
+            Browse all 45 templates →
           </a>
-          <a href="https://buy.polar.sh/polar_cl_GJlqleLZ0q7jOp355qtIMnKb8yZVx3rloAwBb4TbLvT" class="tmpl-banner__cta tmpl-banner__cta--secondary" target="_blank" rel="noopener">
-            Get Essentials
+          <a href="/templates#pricing" class="tmpl-banner__cta tmpl-banner__cta--secondary">
+            See pricing
           </a>
         </div>
       </div>

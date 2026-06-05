@@ -4,6 +4,7 @@ import LandingPage from './LandingPage.vue'
 import ComponentsDemo from './ComponentsDemo.vue'
 import TemplateGallery from './TemplateGallery.vue'
 import PlaygroundPage from './PlaygroundPage.vue'
+import BuyRedirect from './BuyRedirect.vue'
 import './custom.css'
 
 export default {
@@ -14,5 +15,6 @@ export default {
     app.component('ComponentsDemo', ComponentsDemo)
     app.component('TemplateGallery', TemplateGallery)
     app.component('PlaygroundPage', PlaygroundPage)
+    app.component('BuyRedirect', BuyRedirect)
   },
 }

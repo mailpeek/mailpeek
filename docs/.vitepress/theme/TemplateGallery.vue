@@ -174,7 +174,7 @@ function isCompleteTier(category: string) {
     </section>
 
     <!-- Pricing -->
-    <section class="pricing">
+    <section id="pricing" class="pricing">
       <h2 class="pricing__title">Choose your plan</h2>
       <p class="pricing__subtitle">One-time purchase. Lifetime updates. No subscription.</p>
       <div class="pricing__grid">
@@ -192,7 +192,7 @@ function isCompleteTier(category: string) {
             <li>Dark mode variants</li>
             <li>Lifetime updates</li>
           </ul>
-          <a href="https://buy.polar.sh/polar_cl_GJlqleLZ0q7jOp355qtIMnKb8yZVx3rloAwBb4TbLvT" class="pricing__cta" target="_blank" rel="noopener">
+          <a href="/go/essentials" class="pricing__cta">
             Get Essentials
           </a>
         </div>
@@ -212,7 +212,7 @@ function isCompleteTier(category: string) {
             <li>Priority support</li>
             <li>Lifetime updates</li>
           </ul>
-          <a href="https://buy.polar.sh/polar_cl_icsoOHZkflOGBQiHnR832Hphqw845JyhEwNHC4Xwyzc" class="pricing__cta pricing__cta--featured" target="_blank" rel="noopener">
+          <a href="/go/complete" class="pricing__cta pricing__cta--featured">
             Get Complete
           </a>
         </div>
