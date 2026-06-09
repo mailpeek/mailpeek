@@ -2,6 +2,14 @@
 
 ---
 
+### [How to Send Transactional Emails with Vue and Resend](/blog/send-vue-email-with-resend)
+
+Build an email as a Vue component, render it to email-safe HTML, and send it with Resend. A complete, copy-paste guide for Vue 3 and Nuxt apps.
+
+*June 5, 2026*
+
+---
+
 ### [How I Built 45 Email Templates as Typed Vue SFCs](/blog/vue-email-templates-typed-sfcs)
 
 The technical constraints of email HTML, why Vue SFCs are a surprisingly good fit, and how a theme system works without CSS variables.
