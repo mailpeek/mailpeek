@@ -50,6 +50,7 @@ export default defineConfig({
       {
         text: 'Blog',
         items: [
+          { text: 'Send Transactional Emails with Vue and Resend', link: '/blog/send-vue-email-with-resend' },
           { text: '45 Email Templates as Typed Vue SFCs', link: '/blog/vue-email-templates-typed-sfcs' },
           { text: 'Dark Mode in Email', link: '/blog/dark-mode-email-rendering' },
           { text: 'Why Gmail Breaks Your Email CSS', link: '/blog/gmail-breaks-your-email-css' },
