@@ -11,7 +11,9 @@
     "build:all": "pnpm build && pnpm docs:build",
     "send-test": "node scripts/send-test.mjs",
     "pack:templates": "node scripts/pack-templates.mjs",
-    "generate-thumbnails": "node scripts/generate-thumbnails.mjs"
+    "generate-thumbnails": "node scripts/generate-thumbnails.mjs",
+    "test:site": "vitest run --dir docs",
+    "test:site:e2e": "node scripts/check-templates-page.mjs"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -28,15 +30,16 @@
     "@mailpeek/components": "workspace:*",
     "@mailpeek/preview": "workspace:*",
     "@mailpeek/templates": "workspace:*",
-    "dotenv": "^16.0.0",
-    "playwright": "^1.40.0",
-    "resend": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "dotenv": "^16.0.0",
     "eslint": "^8.50.0",
     "eslint-plugin-vue": "^9.17.0",
+    "playwright": "^1.40.0",
+    "resend": "^4.0.0",
     "typescript": "^5.2.0",
     "vitepress": "^1.6.4",
+    "vitest": "^2.1.9",
     "vue": "^3.5.0"
   }
 }
