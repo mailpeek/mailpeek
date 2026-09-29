@@ -133,7 +133,7 @@ function closePreview() {
             <li>Lifetime updates</li>
           </ul>
           <a :href="TIERS.essentials.href" class="pricing__cta">
-            Get Essentials — {{ TIERS.essentials.price }}
+            Get Essentials
           </a>
         </div>
 
@@ -154,7 +154,7 @@ function closePreview() {
             <li>Lifetime updates</li>
           </ul>
           <a :href="TIERS.complete.href" class="pricing__cta pricing__cta--featured">
-            Get Complete — {{ TIERS.complete.price }}
+            Get Complete
           </a>
         </div>
       </div>
@@ -261,7 +261,7 @@ function closePreview() {
           <div class="gallery__modal-header">
             <h3>{{ selected.name }}</h3>
             <a :href="TIERS[tierOf(selected)].href" class="gallery__modal-cta">
-              {{ tierOf(selected) === 'essentials' ? 'In Essentials & Complete' : 'In Complete' }} — from {{ TIERS[tierOf(selected)].price }}
+              Get {{ TIERS[tierOf(selected)].label }} for {{ TIERS[tierOf(selected)].price }}
             </a>
             <button class="gallery__modal-close" @click="closePreview">&times;</button>
           </div>

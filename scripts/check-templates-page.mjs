@@ -2,7 +2,7 @@
 /**
  * Browser checks for the /templates page against the built docs site.
  *
- * - Pricing cards and buy buttons show the prices from theme/templates.ts
+ * - Pricing cards show the prices from theme/templates.ts
  * - Paid templates open an image-only modal and never request their HTML
  * - Paid HTML URLs return 404
  * - Free templates open a live EmailPreview
@@ -69,17 +69,17 @@ try {
     })
     await page.goto(`${BASE}/templates`)
 
-    await check('buy buttons show prices', async () => {
-      const buttons = await page.locator('.pricing__cta').allTextContents()
-      assert.match(buttons[0], /Get Essentials — \$\d+/)
-      assert.match(buttons[1], /Get Complete — \$\d+/)
+    await check('pricing cards show prices', async () => {
+      const prices = await page.locator('.pricing__price').allTextContents()
+      assert.equal(prices.length, 2)
+      for (const p of prices) assert.match(p, /^\$\d+$/)
     })
 
     await check('paid template opens image modal without loading HTML', async () => {
       await page.click(`#${PAID.slug}`)
       await page.locator('.gallery__modal-image').waitFor()
       assert.equal(await page.locator('.gallery__modal iframe').count(), 0)
-      assert.match(await page.locator('.gallery__modal-cta').textContent(), /In Complete — from \$\d+/)
+      assert.match(await page.locator('.gallery__modal-cta').textContent(), /^\s*Get Complete for \$\d+\s*$/)
       assert.deepEqual(htmlRequests, [])
     })
 
@@ -93,7 +93,7 @@ try {
     await check('free template opens live preview', async () => {
       await page.click(`#${FREE.slug}`)
       await page.locator('.gallery__modal iframe').first().waitFor({ timeout: 5000 })
-      assert.match(await page.locator('.gallery__modal-cta').textContent(), /In Essentials & Complete — from \$\d+/)
+      assert.match(await page.locator('.gallery__modal-cta').textContent(), /^\s*Get Essentials for \$\d+\s*$/)
     })
 
     await check('no horizontal scroll with free modal open', async () => {
