@@ -29,10 +29,10 @@ onMounted(() => {
           Vue components + pre-rendered HTML, ready to drop into Resend, SendGrid, or Nodemailer.
         </p>
         <ul class="tmpl-banner__features">
-          <li>Multi-client compatibility — Gmail, Outlook, Apple Mail</li>
+          <li>Multi-client compatibility - Gmail, Outlook, Apple Mail</li>
           <li>Fully responsive single-column mobile layouts</li>
           <li>Bulletproof VML buttons for Outlook</li>
-          <li>Customisable themes — colours, fonts, company name, and more</li>
+          <li>Customisable themes - colours, fonts, company name, and more</li>
         </ul>
         <div class="tmpl-banner__actions">
           <a href="/templates" class="tmpl-banner__cta tmpl-banner__cta--primary">

@@ -23,9 +23,16 @@ const pkgDir = resolve(root, 'packages/templates')
 const pkgJsonPath = resolve(pkgDir, 'package.json')
 const distIndexJs = resolve(pkgDir, 'dist/index.js')
 const distIndexDts = resolve(pkgDir, 'dist/index.d.ts')
-const htmlSrc = resolve(root, 'docs/public/html')
+// Pre-rendered HTML for all 45 templates. Kept out of git and out of
+// docs/public so it's only available to buyers.
+const htmlSrc = resolve(root, 'packages/templates/prerendered')
 const htmlDest = resolve(pkgDir, 'html')
 const polarDir = resolve(root, 'polar')
+
+if (!existsSync(htmlSrc)) {
+  console.error(`Missing ${htmlSrc} — render the template HTML there first.`)
+  process.exit(1)
+}
 
 // ── Sync README version ────────────────────────────────────────────────────
 

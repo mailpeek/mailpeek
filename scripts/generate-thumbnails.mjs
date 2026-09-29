@@ -2,7 +2,7 @@
 /**
  * Generate thumbnail screenshots for all 45 email templates.
  *
- * Reads pre-rendered HTML from docs/public/html/{category}/{slug}.html
+ * Reads pre-rendered HTML from packages/templates/prerendered/{category}/{slug}.html
  * Writes 1200x1600 PNG to docs/public/thumbnails/{category}/{slug}.png
  * (600px viewport @ 2x device pixel ratio — matches existing thumbnails)
  *
@@ -33,7 +33,7 @@ async function main() {
   let success = 0
 
   for (const category of CATEGORIES) {
-    const htmlDir = join(ROOT, 'docs/public/html', category)
+    const htmlDir = join(ROOT, 'packages/templates/prerendered', category)
     const thumbDir = join(ROOT, 'docs/public/thumbnails', category)
     mkdirSync(thumbDir, { recursive: true })
 
