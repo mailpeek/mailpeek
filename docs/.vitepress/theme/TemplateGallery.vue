@@ -286,6 +286,8 @@ function closePreview() {
   max-width: 1152px;
   margin: 0 auto;
   padding: 0 24px;
+  /* The hero glow is 100vw wide; stop it causing horizontal scroll */
+  overflow-x: clip;
 }
 
 /* ─── Hero ─── */
