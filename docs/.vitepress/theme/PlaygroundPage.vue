@@ -65,7 +65,7 @@ function clear() {
   <div class="playground-page">
     <div class="playground-header">
       <h1>Playground</h1>
-      <p>Paste your email HTML and instantly see how it renders across Gmail, Outlook, and dark mode. Everything runs in your browser — no HTML is sent to any server.</p>
+      <p>Paste your email HTML and instantly see how it renders across Gmail, Outlook, and dark mode. Everything runs in your browser - no HTML is sent to any server.</p>
     </div>
 
     <div class="playground-layout">
@@ -107,7 +107,7 @@ function clear() {
         <div v-if="loadedTemplate && !bannerDismissed && previewHtml" class="template-bar">
           <p>
             This is the {{ loadedTemplate.name }} template from mailpeek Templates.
-            <a href="/templates">{{ paidCount }} more, ready to use as typed Vue SFCs →</a>
+            <a href="/templates">Click here for {{ paidCount }} more ready to use layouts.</a>
           </p>
           <button class="template-bar__close" aria-label="Dismiss" @click="bannerDismissed = true">&times;</button>
         </div>
