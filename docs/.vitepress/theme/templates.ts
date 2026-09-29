@@ -10,8 +10,8 @@ export interface TemplateInfo {
 
 // Prices are set in Polar; keep these in sync with the checkout products.
 export const TIERS: Record<Tier, { label: string; price: string; href: string }> = {
-  essentials: { label: 'Essentials', price: '€30', href: '/go/essentials' },
-  complete: { label: 'Complete', price: '€60', href: '/go/complete' },
+  essentials: { label: 'Essentials', price: '$28', href: '/go/essentials' },
+  complete: { label: 'Complete', price: '$55', href: '/go/complete' },
 }
 
 // Only these templates have their pre-rendered HTML published under
