@@ -3,69 +3,13 @@ import { ref, computed } from 'vue'
 import { EmailPreview } from '@mailpeek/preview'
 import '@mailpeek/preview/style.css'
 
-type Category = 'all' | 'transactional' | 'marketing' | 'patterns'
+import { templates, TIERS, tierOf, isFree, thumbnailPath, type TemplateInfo } from './templates'
 
-interface TemplateInfo {
-  name: string
-  slug: string
-  category: 'transactional' | 'marketing' | 'patterns'
-  description: string
-}
-
-const templates: TemplateInfo[] = [
-  // Transactional
-  { name: 'Welcome', slug: 'welcome', category: 'transactional', description: 'New user onboarding with CTA' },
-  { name: 'Email Verification', slug: 'email-verification', category: 'transactional', description: 'Verify email with code or link' },
-  { name: 'Password Reset', slug: 'password-reset', category: 'transactional', description: 'Reset password link with expiry' },
-  { name: 'Magic Link Login', slug: 'magic-link-login', category: 'transactional', description: 'Passwordless auth link' },
-  { name: 'Invitation', slug: 'invitation', category: 'transactional', description: 'Team invite with accept button' },
-  { name: 'Order Confirmation', slug: 'order-confirmation', category: 'transactional', description: 'Purchase receipt with line items' },
-  { name: 'Shipping Notification', slug: 'shipping-notification', category: 'transactional', description: 'Order shipped with tracking' },
-  { name: 'Invoice', slug: 'invoice', category: 'transactional', description: 'Payment receipt with breakdown' },
-  { name: 'Payment Failed', slug: 'payment-failed', category: 'transactional', description: 'Failed payment with retry CTA' },
-  { name: 'Subscription Confirmation', slug: 'subscription-confirmation', category: 'transactional', description: 'Plan activated confirmation' },
-  { name: 'Trial Ending', slug: 'trial-ending', category: 'transactional', description: 'Trial expiry with upgrade CTA' },
-  { name: 'Account Deactivation', slug: 'account-deactivation', category: 'transactional', description: 'Account closing notice' },
-  { name: 'Feedback Request', slug: 'feedback-request', category: 'transactional', description: 'NPS-style review request' },
-  { name: 'Two-Factor Auth', slug: 'two-factor-auth', category: 'transactional', description: '2FA verification code' },
-  { name: 'Contact Form Reply', slug: 'contact-form-reply', category: 'transactional', description: 'Auto-reply to contact form' },
-  // Marketing
-  { name: 'Newsletter — Single', slug: 'newsletter-single', category: 'marketing', description: 'Hero article with CTA' },
-  { name: 'Newsletter — Multi', slug: 'newsletter-multi-story', category: 'marketing', description: 'Digest with article cards' },
-  { name: 'Product Launch', slug: 'product-launch', category: 'marketing', description: 'New product announcement' },
-  { name: 'Product Update', slug: 'product-update', category: 'marketing', description: 'Changelog / what is new' },
-  { name: 'Sale', slug: 'promotional-sale', category: 'marketing', description: 'Discount with bold CTA' },
-  { name: 'Coupon', slug: 'promotional-coupon', category: 'marketing', description: 'Coupon code with expiry' },
-  { name: 'Event Invitation', slug: 'event-invitation', category: 'marketing', description: 'Event with RSVP button' },
-  { name: 'Event Reminder', slug: 'event-reminder', category: 'marketing', description: 'Follow-up reminder' },
-  { name: 'Re-engagement', slug: 're-engagement', category: 'marketing', description: 'Win-back email' },
-  { name: 'Referral', slug: 'referral', category: 'marketing', description: 'Refer-a-friend with reward' },
-  { name: 'Milestone', slug: 'milestone', category: 'marketing', description: 'Usage milestone celebration' },
-  { name: 'Survey', slug: 'survey', category: 'marketing', description: 'Short survey request' },
-  { name: 'Case Study', slug: 'case-study', category: 'marketing', description: 'Customer success highlight' },
-  { name: 'Seasonal', slug: 'seasonal', category: 'marketing', description: 'Holiday greeting with CTA' },
-  { name: 'Black Friday', slug: 'black-friday', category: 'marketing', description: 'Flash sale promotion' },
-  // Patterns
-  { name: 'Hero — Image Left', slug: 'hero-image-left', category: 'patterns', description: 'Image + text side by side' },
-  { name: 'Hero — Full Width', slug: 'hero-full-width', category: 'patterns', description: 'Full-bleed image with text' },
-  { name: 'Feature Grid (2-col)', slug: 'feature-grid2-col', category: 'patterns', description: 'Two features side by side' },
-  { name: 'Feature Grid (3-col)', slug: 'feature-grid3-col', category: 'patterns', description: 'Three features in a row' },
-  { name: 'Feature List', slug: 'feature-list', category: 'patterns', description: 'Vertical list with accents' },
-  { name: 'Pricing (2-col)', slug: 'pricing-table2-col', category: 'patterns', description: 'Two-plan comparison' },
-  { name: 'Pricing (3-col)', slug: 'pricing-table3-col', category: 'patterns', description: 'Three-plan comparison' },
-  { name: 'Testimonial', slug: 'testimonial-single', category: 'patterns', description: 'Quote with attribution' },
-  { name: 'Testimonial Carousel', slug: 'testimonial-carousel', category: 'patterns', description: 'Multiple quotes side by side' },
-  { name: 'Social Proof', slug: 'social-proof-bar', category: 'patterns', description: 'Company logo strip' },
-  { name: 'Stats Row', slug: 'stats-row', category: 'patterns', description: 'Big numbers with labels' },
-  { name: 'CTA Banner', slug: 'cta-banner', category: 'patterns', description: 'Full-width colored banner' },
-  { name: 'Footer — Minimal', slug: 'footer-minimal', category: 'patterns', description: 'Simple unsubscribe footer' },
-  { name: 'Footer — Full', slug: 'footer-full', category: 'patterns', description: 'Links, social, legal' },
-  { name: 'Header', slug: 'header-logo-nav', category: 'patterns', description: 'Logo + navigation links' },
-]
+type Category = 'all' | TemplateInfo['category']
 
 const activeCategory = ref<Category>('all')
+const selected = ref<TemplateInfo | null>(null)
 const previewHtml = ref<string | null>(null)
-const previewName = ref('')
 
 const filteredTemplates = computed(() => {
   if (activeCategory.value === 'all') return templates
@@ -117,30 +61,25 @@ function toggleFaq(index: number) {
 
 
 async function openPreview(template: TemplateInfo) {
+  selected.value = template
+  previewHtml.value = null
+  // Paid templates show their thumbnail only; their HTML isn't published.
+  if (!isFree(template)) return
   try {
     const response = await fetch(`/html/${template.category}/${template.slug}.html`)
-    if (!response.ok) {
-      previewHtml.value = `<html><body style="font-family: sans-serif; padding: 40px; text-align: center; color: #666;"><p>Preview not available for this template.</p></body></html>`
-    } else {
-      previewHtml.value = await response.text()
-    }
+    if (!response.ok) throw new Error(String(response.status))
+    const html = await response.text()
+    if (selected.value?.slug === template.slug) previewHtml.value = html
   } catch {
-    previewHtml.value = `<html><body style="font-family: sans-serif; padding: 40px; text-align: center; color: #666;"><p>Preview not available.</p></body></html>`
+    if (selected.value?.slug === template.slug) {
+      previewHtml.value = `<html><body style="font-family: sans-serif; padding: 40px; text-align: center; color: #666;"><p>Preview not available.</p></body></html>`
+    }
   }
-  previewName.value = template.name
 }
 
 function closePreview() {
+  selected.value = null
   previewHtml.value = null
-  previewName.value = ''
-}
-
-function thumbnailPath(template: TemplateInfo) {
-  return `/thumbnails/${template.category}/${template.slug}.png`
-}
-
-function isCompleteTier(category: string) {
-  return category === 'marketing' || category === 'patterns'
 }
 </script>
 
@@ -182,6 +121,7 @@ function isCompleteTier(category: string) {
         <div class="pricing__card">
           <div class="pricing__card-header">
             <h3 class="pricing__card-name">Essentials</h3>
+            <p class="pricing__price">{{ TIERS.essentials.price }}</p>
             <p class="pricing__card-desc">Everything you need for transactional emails</p>
           </div>
           <ul class="pricing__features">
@@ -192,8 +132,8 @@ function isCompleteTier(category: string) {
             <li>Dark mode variants</li>
             <li>Lifetime updates</li>
           </ul>
-          <a href="/go/essentials" class="pricing__cta">
-            Get Essentials
+          <a :href="TIERS.essentials.href" class="pricing__cta">
+            Get Essentials — {{ TIERS.essentials.price }}
           </a>
         </div>
 
@@ -202,6 +142,7 @@ function isCompleteTier(category: string) {
           <div class="pricing__card-badge">Most Popular</div>
           <div class="pricing__card-header">
             <h3 class="pricing__card-name">Complete</h3>
+            <p class="pricing__price">{{ TIERS.complete.price }}</p>
             <p class="pricing__card-desc">The full collection for any email you'll ever need</p>
           </div>
           <ul class="pricing__features">
@@ -212,8 +153,8 @@ function isCompleteTier(category: string) {
             <li>Priority support</li>
             <li>Lifetime updates</li>
           </ul>
-          <a href="/go/complete" class="pricing__cta pricing__cta--featured">
-            Get Complete
+          <a :href="TIERS.complete.href" class="pricing__cta pricing__cta--featured">
+            Get Complete — {{ TIERS.complete.price }}
           </a>
         </div>
       </div>
@@ -241,6 +182,7 @@ function isCompleteTier(category: string) {
         <div
           v-for="template in filteredTemplates"
           :key="template.slug"
+          :id="template.slug"
           class="gallery__card"
           @click="openPreview(template)"
         >
@@ -263,7 +205,10 @@ function isCompleteTier(category: string) {
               >
                 {{ template.category }}
               </span>
-              <span v-if="isCompleteTier(template.category)" class="gallery__tier-badge">
+              <span v-if="isFree(template)" class="gallery__tier-badge gallery__tier-badge--free">
+                Free
+              </span>
+              <span v-else-if="tierOf(template) === 'complete'" class="gallery__tier-badge">
                 Complete
               </span>
               <span v-else class="gallery__tier-badge gallery__tier-badge--essentials">
@@ -311,14 +256,23 @@ function isCompleteTier(category: string) {
 
     <!-- Preview modal -->
     <Teleport to="body">
-      <div v-if="previewHtml" class="gallery__overlay" @click.self="closePreview">
+      <div v-if="selected" class="gallery__overlay" @click.self="closePreview">
         <div class="gallery__modal">
           <div class="gallery__modal-header">
-            <h3>{{ previewName }}</h3>
+            <h3>{{ selected.name }}</h3>
+            <a :href="TIERS[tierOf(selected)].href" class="gallery__modal-cta">
+              {{ tierOf(selected) === 'essentials' ? 'In Essentials & Complete' : 'In Complete' }} — from {{ TIERS[tierOf(selected)].price }}
+            </a>
             <button class="gallery__modal-close" @click="closePreview">&times;</button>
           </div>
           <div class="gallery__modal-body">
-            <EmailPreview :html="previewHtml" />
+            <EmailPreview v-if="previewHtml" :html="previewHtml" />
+            <img
+              v-else-if="!isFree(selected)"
+              class="gallery__modal-image"
+              :src="thumbnailPath(selected)"
+              :alt="selected.name"
+            />
           </div>
         </div>
       </div>
@@ -505,6 +459,13 @@ function isCompleteTier(category: string) {
   font-weight: 700;
   color: var(--vp-c-text-1);
   margin: 0 0 4px;
+}
+
+.pricing__price {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--vp-c-text-1);
+  margin: 4px 0 8px;
 }
 
 .pricing__card-desc {
@@ -740,6 +701,11 @@ function isCompleteTier(category: string) {
   color: #6366f1;
 }
 
+.gallery__tier-badge--free {
+  background: rgba(0, 178, 173, 0.12);
+  color: var(--vp-c-brand-1);
+}
+
 .dark .gallery__tier-badge--essentials {
   background: rgba(99, 102, 241, 0.15);
   color: #818cf8;
@@ -863,10 +829,35 @@ function isCompleteTier(category: string) {
 }
 
 .gallery__modal-header h3 {
+  flex: 1;
   margin: 0;
   font-size: 16px;
   font-weight: 600;
   color: var(--vp-c-text-1);
+}
+
+.gallery__modal-cta {
+  margin-right: 12px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--vp-c-brand-1);
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.dark .gallery__modal-cta {
+  color: #0a0a0a;
+}
+
+.gallery__modal-image {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 8px;
 }
 
 .gallery__modal-close {
@@ -1042,6 +1033,18 @@ function isCompleteTier(category: string) {
 
   .gallery__modal-header {
     padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .gallery__modal-header h3 {
+    flex-basis: calc(100% - 48px);
+  }
+
+  .gallery__modal-cta {
+    order: 3;
+    margin: 0;
+    white-space: normal;
   }
 
   .gallery__modal-body {

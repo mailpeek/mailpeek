@@ -149,6 +149,7 @@ CLAUDE.md
 packages/templates/src/
 packages/templates/__tests__/
 packages/templates/scripts/
+packages/templates/prerendered/
 
 # Polar distribution files
 polar/
